@@ -1,0 +1,125 @@
+<header>
+    <div class="main">
+        <div class="main__item">
+            <div class="main__item--button">
+                <button>
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Quay lại</span>
+                </button>
+            </div>
+        </div>
+        <div class="main__item--link">
+            <a href="/login">Đăng nhập</a>
+        </div>
+    </div>
+</header>
+<section class="container__login">
+    <div class="container__login--top">
+        <img src="./assets/logo-duan-a.fish/Beige_Blue_Simple_Fishing_Store_Logo-removebg-preview.png" alt="">
+        <h1>Đăng kí</h1>
+        <p class="title__create--account">Bạn đã có tài khoản? <span><a href="/login">Đăng nhập</a></span></p>
+    </div>
+    <div class="forget__main">
+        <mat-stepper [linear]="isLinear" #stepper>
+            <!-- Email && số điện thoại -->
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>Email, số điện thoại</ng-template>
+                    <div class="controll__input">
+                        <label for="email">Email</label><br>
+                        <input type="email" id="email" placeholder="Nhập email của bạn" formControlName="firstCtrl"
+                            required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div class="controll__input">
+                        <label for="email">Số điện thoại</label><br>
+                        <input type="text" maxlength="10" id="email" placeholder="Nhập số điện thoại của bạn"
+                            formControlName="firstCtrl" required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div>
+                        <!-- <button mat-button matStepperNext>Next</button> -->
+                        <button matStepperNext>Tiếp tục</button>
+                    </div>
+                </form>
+                <button>Tiếp tục với google</button>
+            </mat-step>
+            <!-- Email && số điện thoại -->
+
+            <!-- Điền thông tin -->
+            <mat-step [stepControl]="secondFormGroup">
+                <form>
+                    <ng-template matStepLabel>Điền thông tin</ng-template>
+                    <div class="controll__input">
+                        <label for="email">Họ tên</label> <br>
+                        <input type="text" id="email" placeholder="Nhập họ tên" required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div class="controll__input">
+                        <label for="email">Địa chỉ</label> <br>
+                        <input type="text" id="email" placeholder="Nhập địa chỉ" required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div>
+                        <button matStepperNext>Tạo tên đăng nhập</button>
+                    </div>
+                </form>
+            </mat-step>
+            <!-- Điền thông tin -->
+
+            <!-- Tên đăng nhập -->
+            <mat-step [stepControl]="secondFormGroup" label="Tên đăng nhập">
+                <form [formGroup]="secondFormGroup">
+                    <!-- <mat-form-field>
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                    </mat-form-field> -->
+                    <div class="controll__input">
+                        <label for="email">Tên đăng nhập</label><br>
+                        <input type="text" id="email" placeholder="Nhập tên đăng nhập" formControlName="secondCtrl"
+                            required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <button matStepperNext>Tạo mật khẩu</button>
+                    <!-- <div class="flex-center">
+                        <button matStepperPrevious>Quay lại</button>
+                    </div> -->
+                </form>
+            </mat-step>
+            <!-- Tên đăng nhập -->
+
+            <!-- Mật khẩu -->
+            <mat-step [stepControl]="secondFormGroup">
+                <form>
+                    <ng-template matStepLabel>Tạo mật khẩu</ng-template>
+                    <div class="controll__input">
+                        <div class="main__label">
+                            <label for="email">Nhập mật khẩu mới</label>
+                            <div class="main__label--item">
+                                <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
+                            </div>
+                        </div>
+                        <input type="password" id="email" placeholder="Nhập mật khẩu mới" required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div class="controll__input">
+                        <div class="main__label">
+                            <label for="email">Nhập mật khẩu mới</label>
+                            <div class="main__label--item">
+                                <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
+                            </div>
+                        </div>
+                        <input type="password" id="email" placeholder="Xác nhận mật khẩu" required><br>
+                        <span>Bạn chưa nhập email</span>
+                    </div>
+                    <div>
+                        <button (click)="stepper.reset()">Thay đổi mật khẩu</button>
+                    </div>
+                </form>
+            </mat-step>
+            <!-- Mật khẩu -->
+        </mat-stepper>
+
+    </div>
+
+</section>

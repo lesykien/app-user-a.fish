@@ -1,0 +1,312 @@
+// khai báo biến
+$gray_666_80: #666666d8;
+$blue_black: #001e39;
+$gray_666: #666666;
+$bule_003: #003465;
+$red_EE1: #ee1d52;
+$bule_0D: #0d6dc8;
+// mixin
+@mixin button-come-back {
+    color: $gray_666;
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.25s linear;
+}
+@mixin button-login {
+    width: calc(100%);
+    padding: 14px 0px;
+    font-size: clamp(1.125rem, 1.0617rem + 0.2699vw, 1.375rem);
+    border: none;
+    color: white;
+    background-color: $bule_003;
+    border: 1px solid $blue_black;
+    border-radius: 16px;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: all 0.25s linear;
+    &:hover {
+        color: $bule_0D;
+        background-color: transparent;
+        border: 1px solid;
+    }
+}
+@mixin input-login {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-size: 16px;
+    padding: 15px 24px;
+    width: calc(100%);
+    border-radius: 12px;
+    border: 1px solid $gray_666_80;
+    &:focus {
+        outline: none;
+        border: 1px solid $bule_0D;
+    }
+}
+// animation form
+@keyframes animation_group_input {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes animation_group_button {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes animation_title_form {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+header {
+    padding: 24px 32px;
+    border-bottom: 1px solid $gray_666_80;
+    .main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__item--link {
+            a {
+                color: $blue_black;
+                text-decoration: none;
+                font-size: 18px;
+                position: relative;
+                transition: all 0.25s linear;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    transition: all 0.25s linear;
+                    height: 2px;
+                    background-color: $blue_black;
+                    bottom: 0px;
+                    left: 0px;
+                }
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+        &__item--button {
+            button {
+                @include button-come-back();
+                span {
+                    margin-left: 8px;
+                }
+                &:hover {
+                    color: $blue_black;
+                }
+            }
+        }
+    }
+}
+.container__login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    &--top {
+        text-align: center;
+        animation: animation_title_form 3s;
+        img {
+            width: 100px;
+        }
+        h1 {
+            font-size: clamp(1.875rem, 1.7169rem + 0.6748vw, 2.5rem);
+            color: $blue_black;
+            font-weight: 600;
+        }
+    }
+    &--forget {
+        text-align: center;
+        margin-top: 40px;
+        & a {
+            color: $blue_black;
+            font-size: clamp(1rem, 0.9559859154929577rem + 0.18779342723004694vw, 1.125rem);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            margin-right: 40px;
+            &::after {
+                transition: all 0.25s linear;
+                content: "";
+                position: absolute;
+                width: 0%;
+                height: 2px;
+                bottom: 0px;
+                left: 0px;
+                background-color: $blue_black;
+            }
+            &:hover::after {
+                width: 100%;
+            }
+        }
+    }
+    .container__login--group {
+        height: 451px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+    }
+    .group__input {
+        padding: 44px 64px;
+        width: 482px;
+        animation: animation_group_input 1s;
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .controll__input {
+            margin-top: 24px;
+            label {
+                font-size: 16px;
+                color: $gray_666;
+            }
+            input {
+                @include input-login();
+            }
+            span {
+                color: $red_EE1;
+                font-size: 16px;
+            }
+
+            // hiện thị mật khẩu
+            .main__label {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                &--item {
+                    button {
+                        background-color: transparent;
+                        color: $gray_666;
+                        cursor: pointer;
+                        padding: 3px 0px;
+                        font-size: 16px;
+                        width: auto;
+                        margin-top: 0px;
+                        border-radius: 0px;
+                        position: relative;
+                        transition: all 0.25s linear;
+                        border: none;
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            bottom: 0;
+                            left: 0px;
+                            width: 0%;
+                            height: 2px;
+                            background-color: $gray_666;
+                            transition: all 0.25s linear;
+                        }
+                        &:hover::after {
+                            width: 100%;
+                        }
+                    }
+                    & span {
+                        margin-left: 14px;
+                        color: $gray_666;
+                    }
+                }
+            }
+        }
+        button {
+            @include button-login();
+        }
+    }
+    .group__button {
+        display: grid;
+        padding: 64px;
+        animation: animation_group_button 1s;
+        button {
+            @include button-login();
+            text-align: left;
+            background-color: transparent;
+            padding: 14.5px 36.5px;
+            color: $blue_black;
+            border: 1px solid;
+            border-radius: 40px;
+            font-weight: 400;
+            &:hover {
+                color: $bule_0D;
+                background-color: transparent;
+            }
+            i {
+                margin-right: 16px;
+            }
+        }
+        &:hover > :not(:hover) {
+            opacity: 0.4;
+        }
+    }
+
+    .line__center {
+        height: 100%;
+        width: 2px;
+        background-color: $gray_666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            background-color: white;
+            padding: 10px 5px;
+        }
+    }
+}
+
+// responsevi
+@media screen and (max-width: 1000px) {
+    .container__login--group {
+        flex-direction: column;
+        height: auto !important;
+        margin-top: 10px !important;
+        .line__center {
+            display: none;
+        }
+        .group__input {
+            padding: 0px;
+            width: 70% !important;
+            h3 {
+                display: none;
+            }
+        }
+        .group__button {
+            width: 70% !important;
+            padding: 0px;
+            width: 100%;
+            button {
+                width: 100%;
+            }
+        }
+    }
+}
+@media screen and (max-width: 555px) {
+    .group__button {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        button {
+            text-align: center !important;
+            padding: 10px 20px !important;
+            span {
+                display: none;
+            }
+        }
+    }
+}
