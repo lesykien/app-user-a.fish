@@ -22,8 +22,8 @@
     <div class="forget__main">
         <mat-stepper [linear]="isLinear" #stepper>
             <!-- Email && số điện thoại -->
-            <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
+            <mat-step [stepControl]="email_phone">
+                <form [formGroup]="email_phone">
                     <ng-template matStepLabel>Email, số điện thoại</ng-template>
                     <div class="controll__input">
                         <label for="email">Email</label><br>
@@ -32,9 +32,9 @@
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div class="controll__input">
-                        <label for="email">Số điện thoại</label><br>
-                        <input type="text" maxlength="10" id="email" placeholder="Nhập số điện thoại của bạn"
-                            formControlName="firstCtrl" required><br>
+                        <label for="phone">Số điện thoại</label><br>
+                        <input type="text" maxlength="10" id="phone" placeholder="Nhập số điện thoại của bạn"
+                             required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div>
@@ -47,17 +47,17 @@
             <!-- Email && số điện thoại -->
 
             <!-- Điền thông tin -->
-            <mat-step [stepControl]="secondFormGroup">
-                <form>
+            <mat-step [stepControl]="full_name">
+                <form [formGroup]="full_name">
                     <ng-template matStepLabel>Điền thông tin</ng-template>
                     <div class="controll__input">
-                        <label for="email">Họ tên</label> <br>
-                        <input type="text" id="email" placeholder="Nhập họ tên" required><br>
+                        <label for="fullName">Họ tên</label> <br>
+                        <input formControlName="secondCtrl" type="text" id="fullName" placeholder="Nhập họ tên" required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div class="controll__input">
-                        <label for="email">Địa chỉ</label> <br>
-                        <input type="text" id="email" placeholder="Nhập địa chỉ" required><br>
+                        <label for="address">Địa chỉ</label> <br>
+                        <input type="text" id="address" placeholder="Nhập địa chỉ" required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div>
@@ -68,15 +68,15 @@
             <!-- Điền thông tin -->
 
             <!-- Tên đăng nhập -->
-            <mat-step [stepControl]="secondFormGroup" label="Tên đăng nhập">
-                <form [formGroup]="secondFormGroup">
+            <mat-step [stepControl]="userName" label="Tên đăng nhập">
+                <form [formGroup]="userName">
                     <!-- <mat-form-field>
                         <mat-label>Address</mat-label>
                         <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
                     </mat-form-field> -->
                     <div class="controll__input">
-                        <label for="email">Tên đăng nhập</label><br>
-                        <input type="text" id="email" placeholder="Nhập tên đăng nhập" formControlName="secondCtrl"
+                        <label for="userName">Tên đăng nhập</label><br>
+                        <input type="text" id="userName" placeholder="Nhập tên đăng nhập" formControlName="user"
                             required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
@@ -89,27 +89,27 @@
             <!-- Tên đăng nhập -->
 
             <!-- Mật khẩu -->
-            <mat-step [stepControl]="secondFormGroup">
+            <mat-step>
                 <form>
                     <ng-template matStepLabel>Tạo mật khẩu</ng-template>
                     <div class="controll__input">
                         <div class="main__label">
-                            <label for="email">Nhập mật khẩu mới</label>
+                            <label for="newPassword">Nhập mật khẩu</label>
                             <div class="main__label--item">
                                 <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
                             </div>
                         </div>
-                        <input type="password" id="email" placeholder="Nhập mật khẩu mới" required><br>
+                        <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div class="controll__input">
                         <div class="main__label">
-                            <label for="email">Nhập mật khẩu mới</label>
+                            <label for="confirmPassword">Nhập mật khẩu mới</label>
                             <div class="main__label--item">
                                 <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
                             </div>
                         </div>
-                        <input type="password" id="email" placeholder="Xác nhận mật khẩu" required><br>
+                        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div>

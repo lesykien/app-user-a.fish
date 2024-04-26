@@ -14,6 +14,7 @@ export class ForgetPasswordComponent implements OnInit {
     secondCtrl: ['', Validators.required],
   });
 
+
   isLinear = true;
   ngOnInit(): void {
 
