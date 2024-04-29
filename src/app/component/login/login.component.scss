@@ -31,6 +31,12 @@ $bule_0D: #0d6dc8;
         background-color: transparent;
         border: 1px solid;
     }
+    &:disabled,
+    &[disabled] {
+        opacity: 0.7;
+        cursor: default;
+        pointer-events: none;
+    }
 }
 @mixin input-login {
     margin-top: 12px;
@@ -132,6 +138,26 @@ header {
             color: $blue_black;
             font-weight: 600;
         }
+        & .title__create--account {
+            & a {
+                text-decoration: none;
+                position: relative;
+                color: $bule_0D;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 2px;
+                    width: 0;
+                    height: 2px;
+                    background-color: $bule_0D;
+                    transition: all 0.25s linear;
+                }
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
     }
     &--forget {
         text-align: center;
@@ -167,12 +193,12 @@ header {
     }
     .group__input {
         padding: 44px 64px;
-        width: 482px;
+        width: 492px;
         animation: animation_group_input 1s;
         h3 {
             font-size: 24px;
             font-weight: 400;
-            text-align: center;
+            // text-align: center;
         }
         .controll__input {
             margin-top: 24px;
@@ -251,9 +277,6 @@ header {
             i {
                 margin-right: 16px;
             }
-        }
-        &:hover > :not(:hover) {
-            opacity: 0.4;
         }
     }
 

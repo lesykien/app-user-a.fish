@@ -9,6 +9,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 export class SignUpComponent {
   constructor(private _formBuilder: FormBuilder) { }
   isLinear = true;
+
   email_phone = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
