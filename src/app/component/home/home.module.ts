@@ -7,7 +7,7 @@ import { ShopComponent } from './shop/shop.component';
 
 const _router: Routes = [
   { 
-    path: 'home', 
+    path: '', 
     component: HomeComponent,
     children : [
       {path : '' , component: MainHomeComponent},

@@ -255,6 +255,12 @@ header {
         }
         button {
             @include button-login();
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                margin-left: 15px;
+            }
         }
     }
     .group__button {

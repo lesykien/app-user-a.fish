@@ -47,7 +47,8 @@
                     <span *ngIf="LoginByEmail.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
                 </div>
                 <!-- password -->
-                <button (click)="Login()" [disabled]="LoginByEmail.invalid">Đăng nhập</button>
+                <button [disabled]="LoginByEmail.invalid">Đăng nhập <span><i
+                            class="fa-solid fa-arrow-right"></i></span></button>
             </form>
             <!-- login by email -->
 
@@ -74,7 +75,7 @@
                     <span *ngIf="LoginByPhone.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
                 </div>
                 <!-- password -->
-                <button (click)="Login()" [disabled]="LoginByPhone.invalid">Đăng nhập</button>
+                <button [disabled]="LoginByPhone.invalid">Đăng nhập</button>
             </form>
             <!-- login by phone -->
 
@@ -102,7 +103,7 @@
                     <span *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
                 </div>
                 <!-- password -->
-                <button (click)="Login()" [disabled]="LoginByUserName.invalid">Đăng nhập</button>
+                <button (click)="Sumbit_Form()" [disabled]="LoginByUserName.invalid">Đăng nhập</button>
             </form>
             <!-- login by user-name -->
         </div>

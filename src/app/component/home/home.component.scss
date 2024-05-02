@@ -1,0 +1,80 @@
+$colorTextMenu: #001e39;
+$colorTextHover: #0d6dc8;
+$colorGrayOpacity33: #666666c1;
+.container_home {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0px 16px;
+}
+.main {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__left--logo {
+        & img {
+            width: 63px;
+        }
+    }
+    &__left--menu {
+        margin-left: 50px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        & button {
+            text-decoration: none;
+            font-size: 16px;
+            color: $colorTextMenu;
+            font-weight: 500;
+            background-color: transparent;
+            border: none;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                font-weight: bolder;
+                color: $colorTextHover;
+            }
+            &.active {
+                font-weight: bolder;
+                color: $colorTextHover;
+            }
+        }
+    }
+    &__right {
+        display: flex;
+        gap: 26px;
+        align-items: center;
+        & .input__search {
+            overflow: hidden;
+            & input {
+                font-size: 16px;
+                padding: 5px 24px;
+                border-radius: 20px;
+                border: 1px solid $colorGrayOpacity33;
+                &:focus {
+                    outline: none;
+                    border: 1px solid $colorTextHover;
+                }
+            }
+        }
+        & button {
+            font-size: 20px;
+            background-color: transparent;
+            border: none;
+            color: $colorTextMenu;
+            transition: all 0.25s linear;
+            &:focus {
+                outline: none;
+            }
+            &:hover{
+                color: $colorTextHover;
+            }
+        }
+    }
+}

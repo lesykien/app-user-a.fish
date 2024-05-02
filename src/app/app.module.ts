@@ -15,6 +15,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeModule } from './component/home/home.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,6 +38,7 @@ import { HomeModule } from './component/home/home.module';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),

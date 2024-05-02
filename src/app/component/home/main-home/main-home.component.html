@@ -1,1 +1,11 @@
-<h1>Main home</h1>
+<div class="container__home">
+<div class="d-flex flex-wrap gap-5 justify-content-center">
+    <div class="card" style="width: 18rem;" *ngFor="let item of listProduct">
+        <img src="https://localhost:7272/api/get-images-cart/{{item.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"> {{item.name}} </h5>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>
+</div>
