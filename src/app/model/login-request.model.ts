@@ -1,6 +1,4 @@
-export class loginRequest {
-    constructor(
-        public userName: string,
-        public passWord: string,
-    ) { }
+export interface loginRequest {
+    username: string,
+    passWord: string,
 }

@@ -11,10 +11,10 @@ export class MainHomeComponent implements OnInit {
   listProduct!: product[];
   constructor(private productService: ProductService) { }
   ngOnInit(): void {
-    this.productService.getData().subscribe((response: product[]) => {
-      this.listProduct = response;
-      console.log(this.listProduct);
-    })
+    // this.productService.getData().subscribe((response: product[]) => {
+    //   this.listProduct = response;
+    //   console.log(this.listProduct);
+    // })
   }
 
 }

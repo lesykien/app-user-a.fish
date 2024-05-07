@@ -15,7 +15,7 @@
 </header>
 <section class="container__login">
     <div class="container__login--top">
-        <img src="./assets/logo-duan-a.fish/Beige_Blue_Simple_Fishing_Store_Logo-removebg-preview.png" alt="">
+        <!-- <img src="./assets/logo-duan-a.fish/Beige_Blue_Simple_Fishing_Store_Logo-removebg-preview.png" alt=""> -->
         <h1>Đăng kí</h1>
         <p class="title__create--account">Bạn đã có tài khoản? <span><a href="/login/email">Đăng nhập</a></span></p>
     </div>
@@ -27,19 +27,20 @@
                     <ng-template matStepLabel>Email, số điện thoại</ng-template>
                     <div class="controll__input">
                         <label for="email">Email</label><br>
-                        <input type="email" id="email" placeholder="Nhập email của bạn" formControlName="firstCtrl"
+                        <input type="email" id="email" placeholder="Nhập email của bạn" formControlName="email"
                             required><br>
-                        <span>Bạn chưa nhập email</span>
+                        <span *ngIf="email_phone.get('email')?.errors?.['required']">Bạn chưa nhập email</span>
+                        <span *ngIf="email_phone.get('email')?.errors?.['email']">Email không đúng định dạng</span>
                     </div>
                     <div class="controll__input">
                         <label for="phone">Số điện thoại</label><br>
                         <input type="text" maxlength="10" id="phone" placeholder="Nhập số điện thoại của bạn"
-                             required><br>
-                        <span>Bạn chưa nhập email</span>
+                            formControlName="phone" required><br>
+                        <span *ngIf="email_phone.get('phone')?.errors?.['required']">Bạn chưa nhập số điện thoại</span>
                     </div>
                     <div>
                         <!-- <button mat-button matStepperNext>Next</button> -->
-                        <button matStepperNext>Tiếp tục</button>
+                        <button matStepperNext [disabled]="email_phone.invalid">Tiếp tục</button>
                     </div>
                 </form>
                 <button>Tiếp tục với google</button>
@@ -52,12 +53,14 @@
                     <ng-template matStepLabel>Điền thông tin</ng-template>
                     <div class="controll__input">
                         <label for="fullName">Họ tên</label> <br>
-                        <input formControlName="secondCtrl" type="text" id="fullName" placeholder="Nhập họ tên" required><br>
+                        <input formControlName="fullname" type="text" id="fullName" placeholder="Nhập họ tên"
+                            required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div class="controll__input">
                         <label for="address">Địa chỉ</label> <br>
-                        <input type="text" id="address" placeholder="Nhập địa chỉ" required><br>
+                        <input type="text" id="address" placeholder="Nhập địa chỉ" required
+                            formControlName="address"><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div>
@@ -76,44 +79,54 @@
                     </mat-form-field> -->
                     <div class="controll__input">
                         <label for="userName">Tên đăng nhập</label><br>
-                        <input type="text" id="userName" placeholder="Nhập tên đăng nhập" formControlName="user"
+                        <input type="text" id="userName" placeholder="Nhập tên đăng nhập" formControlName="username"
                             required><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
-                    <button matStepperNext>Tạo mật khẩu</button>
-                    <!-- <div class="flex-center">
-                        <button matStepperPrevious>Quay lại</button>
-                    </div> -->
+                    <div class="flex-center">
+                        <button matStepperNext>Tạo mật khẩu</button>
+                        <button matStepperNext class="skip__create--username">Bỏ qua</button>
+                    </div>
                 </form>
             </mat-step>
             <!-- Tên đăng nhập -->
 
             <!-- Mật khẩu -->
             <mat-step>
-                <form>
+                <form [formGroup]="passWord">
                     <ng-template matStepLabel>Tạo mật khẩu</ng-template>
                     <div class="controll__input">
                         <div class="main__label">
                             <label for="newPassword">Nhập mật khẩu</label>
                             <div class="main__label--item">
-                                <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
+                                <button (click)="ShowPassWord()">
+                                    <i class="fa-regular"
+                                        [ngClass]="{'fa-eye-slash' : iconButotn , 'fa-eye' : !iconButotn}"></i>
+                                    <span> {{tileButtonShowPassword}} </span>
+                                </button>
                             </div>
                         </div>
-                        <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required><br>
+                        <input [type]="hasPassword ? 'text' : 'password'" id="newPassword"
+                            placeholder="Nhập mật khẩu mới" required formControlName="password"><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div class="controll__input">
                         <div class="main__label">
                             <label for="confirmPassword">Nhập mật khẩu mới</label>
                             <div class="main__label--item">
-                                <button><i class="fa-regular fa-eye"></i> <span>hiển thị mật khẩu</span></button>
+                                <button (click)="ShowConfirm()">
+                                    <i class="fa-regular"
+                                        [ngClass]="{'fa-eye-slash' : iconButotnConfirm , 'fa-eye' : !iconButotnConfirm}"></i>
+                                    <span> {{tileButtonShowConfirm}} </span>
+                                </button>
                             </div>
                         </div>
-                        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required><br>
+                        <input [type]="hasConfirmPass ? 'text' : 'password'" id="confirmPassword"
+                            placeholder="Xác nhận mật khẩu" required formControlName="confirmPass"><br>
                         <span>Bạn chưa nhập email</span>
                     </div>
                     <div>
-                        <button (click)="stepper.reset()">Thay đổi mật khẩu</button>
+                        <button (click)="SumbitForm()">Tạo tài khoản</button>
                     </div>
                 </form>
             </mat-step>

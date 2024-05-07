@@ -7,15 +7,19 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 })
 export class ForgetPasswordComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder) { }
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+  GetEmail = this._formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
   });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+  GetCodeOTP = this._formBuilder.group({
+    codeOTP: ['', Validators.required],
+  });
+  NewPassword = this._formBuilder.group({
+    newpassword: ['', Validators.required],
+    confirmpass: ['', Validators.required],
   });
 
 
-  isLinear = true;
+  isLinear = false;
   ngOnInit(): void {
 
   }
@@ -25,11 +29,4 @@ export class ForgetPasswordComponent implements OnInit {
     }
     return '';
   }
-
-  Step_Next() {
-    console.log(this.getValues_input(this.firstFormGroup));
-  }
-
-
-
 }

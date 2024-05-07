@@ -130,6 +130,15 @@ header {
         display: flex;
         align-items: center;
         gap: 20px;
+        & .skip__create--username {
+            background-color: transparent;
+            color: gray;
+            border: none;
+            transition: all 0.25s linear;
+            &:hover {
+                color: $blue_black;
+            }
+        }
     }
     button {
         @include button-login();
@@ -143,6 +152,12 @@ header {
     }
     input {
         width: 100%;
+    }
+    .flex-center {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-direction: column;
     }
 }
 @media screen and (max-width: 411px) {

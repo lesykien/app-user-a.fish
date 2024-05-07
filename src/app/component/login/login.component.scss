@@ -3,6 +3,7 @@ $gray_666_80: #666666d8;
 $blue_black: #001e39;
 $gray_666: #666666;
 $bule_003: #003465;
+$bule_125: #085297;
 $red_EE1: #ee1d52;
 $bule_0D: #0d6dc8;
 // mixin
@@ -27,9 +28,7 @@ $bule_0D: #0d6dc8;
     cursor: pointer;
     transition: all 0.25s linear;
     &:hover {
-        color: $bule_0D;
-        background-color: transparent;
-        border: 1px solid;
+        background-color: $bule_125;
     }
     &:disabled,
     &[disabled] {
@@ -258,8 +257,11 @@ header {
             display: flex;
             justify-content: center;
             align-items: center;
-            span{
+            span {
                 margin-left: 15px;
+            }
+            & .button__loading {
+                pointer-events: none;
             }
         }
     }
@@ -298,6 +300,29 @@ header {
             padding: 10px 5px;
         }
     }
+}
+
+// thông báo
+.alter {
+    position: absolute;
+    right: 10px;
+
+    border-radius: 10px;
+    background-color: rgba(211, 98, 98, 0.413);
+    transition: all 0.25s linear;
+    // transform: translateX(120%);
+    width: 0px;
+    overflow: hidden;
+}
+.content__alter {
+    font-size: 25px;
+    color: $red_EE1;
+    border: 1px solid;
+    padding: 13px 20px;
+    transition: all 0.25s linear;
+}
+.error-class {
+    width: auto;
 }
 
 // responsevi

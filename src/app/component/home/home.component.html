@@ -2,15 +2,17 @@
     <div class="container_home main">
         <div class="main__left">
             <div class="main__left--logo">
-                <img src="./assets/logo-duan-a.fish/Beige_Blue_Simple_Fishing_Store_Logo-removebg-preview.png" alt="">
+                <a [routerLink]="['/']">
+                    <img src="./assets/logo-duan-a.fish/log-a.fish.svg" alt="">
+                </a>
             </div>
             <div class="main__left--menu">
-                <button [routerLink]="['/']" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
+                <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
+                    chủ</button>
                 <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
                 <button href="" routerLinkActive="active">Danh mục sản phẩm</button>
                 <button href="" routerLinkActive="active">Bài viết</button>
-                <button href="" routerLinkActive="active">Liên hệ</button>  
+                <button href="" routerLinkActive="active">Liên hệ</button>
             </div>
         </div>
         <div class="main__right">
@@ -18,13 +20,44 @@
                 <input type="text" placeholder="Tìm kiếm....">
             </div>
             <button id="buttonSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button><i class="fa-solid fa-cart-shopping"></i></button>
-            <a href="login/email">
-                <button><i class="fa-solid fa-user"></i></button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                    class="fa-solid fa-cart-shopping"></i></button>
+            <a href="login/email" *ngIf="nameUser">
+                <!-- <button><i class="fa-solid fa-user"></i></button> -->
+                Xin chào {{nameUser}}
             </a>
+            <div class="" *ngIf="!nameUser">
+                <!-- button open model form login  -->
+                <button [routerLink]="['/login/email']" class="button__login">Đăng nhập</button>
+                <!-- button open model form login  -->
+                <a href="sign-up">
+                    <button class="button__login sigun_up">Đăng kí</button>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 <div class="container__home">
     <router-outlet></router-outlet>
+
+    <!-- Modal open list cart -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Giỏ hàng</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- body -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal open list cart -->
 </div>
