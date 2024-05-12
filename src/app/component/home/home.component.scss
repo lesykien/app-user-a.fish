@@ -1,8 +1,8 @@
-$colorTextMenu: #001e39;
-$colorTextHover: #0d6dc8;
 $colorGrayOpacity33: #666666c1;
-$trantion_025 : all 0.25s linear;
-.container_home {
+$colorBlack: rgb(0, 0, 0);
+$trantion_025: all 0.25s linear;
+$border_dashed: 2px dashed $colorBlack;
+.container__home {
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -19,33 +19,36 @@ $trantion_025 : all 0.25s linear;
     }
     &__left--logo {
         & img {
-            margin-top: 5px;
-            width: 82px;
-            fill: #001e39;
+            width: 90px;
+            border: 2px dashed transparent;
         }
+        margin-right: 64px;
     }
     &__left--menu {
         margin-left: 50px;
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
         & button {
             text-decoration: none;
-            font-size: 16px;
-            color: $colorTextMenu;
+            font-size: 14px;
             font-weight: 500;
             background-color: transparent;
             border: none;
+            padding: 0px 8px;
+            border: 2px dashed transparent;
+            border-radius: 20px;
+            color: $colorBlack;
             &:focus {
                 outline: none;
             }
             &:hover {
                 font-weight: bolder;
-                color: $colorTextHover;
+                border: 2px dashed $colorBlack;
             }
             &.active {
                 font-weight: bolder;
-                color: $colorTextHover;
+                border: 2px dashed $colorBlack;
             }
         }
     }
@@ -60,47 +63,117 @@ $trantion_025 : all 0.25s linear;
                 padding: 5px 24px;
                 border-radius: 20px;
                 border: 1px solid $colorGrayOpacity33;
-                transition: $trantion_025;
                 &:focus {
                     outline: none;
-                    border: 1px solid $colorTextHover;
+                    border: 2px dashed $colorBlack;
                 }
             }
         }
         & button {
-            font-size: 20px;
+            font-size: 18px;
             background-color: transparent;
             border: none;
-            color: $colorTextMenu;
-            transition: $trantion_025;
+            color: $colorBlack;
+            border: $border_dashed;
+            border-color: transparent;
+            padding: 0px 8px;
+            border-radius: 20px;
             &:focus {
                 outline: none;
             }
-            &:hover {
-                color: $colorTextHover;
-            }
         }
         & .button__login {
-            font-size: 15px;
+            font-size: 14px;
             border: 1px solid;
             padding: 2px 8px;
             border-radius: 20px;
-        }
-        & .sigun_up{
-            border: none;
-            position: relative;
-            &::after{
-                content: "";
-                height: 2px;
-                width: 0%;
-                background-color: $colorTextHover;
-                position: absolute;
-                bottom: 0px;
-                left: 0px;
-                transition: $trantion_025;
+            &:hover {
+                border: 1px solid $colorBlack;
+                background-color: $colorBlack;
+                color: white;
             }
-            &:hover::after{
-                width: 100%;
+        }
+        & .sigun_up {
+            border: $border_dashed;
+            border-color: transparent;
+            position: relative;
+            margin-left: 10px;
+            &:hover {
+                border: $border_dashed;
+                background-color: transparent;
+                color: $colorBlack;
+            }
+        }
+        & .btn__cart {
+            position: relative;
+            & span {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                min-width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                padding: 0 2px;
+                // background-color: #006bea;
+                background-color: #ef3434;
+                color: white;
+                font-size: 12px;
+                line-height: 14px;
+            }
+        }
+    }
+}
+//  footer
+.main__footer {
+    margin-top: 48px;
+    color: $colorBlack;
+    &--top {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        & .footer__top {
+            border: 1px solid $colorGrayOpacity33;
+            border-left: 0px;
+            &--title {
+                font-size: 18px;
+                color: $colorBlack;
+                padding: 16px;
+                margin: 0px;
+            }
+            &--item {
+                & ul {
+                    padding: 0px;
+                }
+                & li {
+                    list-style: none;
+                    margin-top: 18px;
+                    & a {
+                        padding: 6px 16px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    & .border__none {
+        border-right: 0px !important;
+    }
+    &--body {
+        padding: 20px 0px;
+        & .foorter__body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 16px;
+            & .about__bode {
+                line-height: 1;
+            }
+            & .about__logo {
+                img {
+                    width: 100px;
+                    height: 50px;
+                    object-fit: cover;
+                }
             }
         }
     }

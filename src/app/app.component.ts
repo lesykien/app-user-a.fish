@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'app-user';
+export class AppComponent implements OnInit {
+
+  ImageLogo : string = './assets/logo-duan-a.fish/SVG-Logo-S.mart.svg'
+  ngOnInit(): void {
+    
+  }
 }

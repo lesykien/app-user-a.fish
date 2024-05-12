@@ -1,0 +1,87 @@
+<form [formGroup]="addItem">
+    <!-- tên giá -->
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="nameproduct" class="form-label">Tên sản phẩm</label>
+            <input type="email" class="form-control" id="nameproduct" placeholder="Tên sản phẩm *"
+                formControlName="name">
+            <p class="text-danger">Bạn chưa nhập tên sản phẩm</p>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="nameproduct" class="form-label">Đơn giá</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="basic-url" placeholder="Đơn giá *" formControlName="price"
+                    aria-describedby="basic-addon3 basic-addon4">
+                <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
+            </div>
+            <p class="text-danger">Bạn chưa nhập giá</p>
+        </div>
+    </div>
+    <!-- tên giá -->
+
+    <!-- loại sản phẩm , giảm giá -->
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="nameproduct" class="form-label">Loại sản phẩm</label>
+            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
+            formControlName="category">
+            >
+                <option *ngFor="let item of options" [value]="item.id">
+                    {{item.name}}
+                </option>
+            </select>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="nameproduct" class="form-label">Giảm giá</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="basic-url" placeholder="Giảm giá" formControlName="voucher"
+                    aria-describedby="basic-addon3 basic-addon4">
+                <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
+            </div>
+        </div>
+    </div>
+    <!-- loại sản phẩm , giảm giá -->
+
+    <!-- hình ảnh, mô tả -->
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="mb-3 col-12">
+                    <label for="formFileMultiple" class="form-label">Hình ảnh</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple=""
+                        (change)="onFilesSelected($event)">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="nameproduct" class="form-label">Mô tả sản phẩm</label>
+                    <div class="input-group">
+                        <textarea class="form-control" placeholder="Mô tả sản phẩm" formControlName="description"
+                            style="height: 200px;   resize: none;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="privew__image d-flex gap-3 flex-lg-wrap">
+                <div class="privew__image--item p-3" *ngFor="let item of imageUrls; let i = index">
+                    <img [src]="item.url" alt="{{item.url}}">
+                    <a class="btn__remove btn btn-danger btn-sm text-light"
+                    style="color: white !important;"
+                    (click)="RemoveItem(i)">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- hình ảnh, mô tả -->
+
+    <!-- button thêm cửa hàng -->
+    <div class="row">
+        <div class="col-6">
+            <button class="form-control btn btn-primary" (click)="sumbitForm()">Thêm sản phẩm</button>
+        </div>
+    </div>
+    <!-- button thêm cửa hàng -->
+
+</form>

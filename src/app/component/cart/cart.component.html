@@ -1,0 +1,87 @@
+<section class="main__cart">
+    <div class="main__cart--left">
+        <div class="cart__item mt-5" *ngFor="let item of list">
+            <div class="left__image">
+                <img src="https://localhost:7041/api/Images/images-detal/vn-galaxy-s24-plus-sm-s926bzvcxxv-539318000.avif"
+                    alt="Hình điện thoại">
+            </div>
+            <div class="left__content">
+                <div class="left__content--name">
+                    <div class="name__cart">
+                        <a href="">
+                            Ốp lưng đứng kèm dây đeo Galaxy S24 Ultra
+                        </a>
+                    </div>
+                    <div class="bytes__card">
+                        <span></span>
+                        <button>2TB</button>
+                    </div>
+                    <div class="quantity__cart">
+                        <button class="btn__minus"> <i class="fa-solid fa-minus"></i> </button>
+                        <input type="text" min="1" max="6" value="1" class="text-center">
+                        <button> <i class="fa-solid fa-plus"></i> </button>
+                    </div>
+                </div>
+                <div class="left__content--price">
+                    <div class="price__cart text-lg-end">
+                        <a>20.000.000 đ</a>
+                        <p>21.000.000 đ</p>
+                    </div>
+                    <div class="remove__cart text-center">
+                        <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__cart--right">
+        <div class="mb-3">
+            <div class="tatol__order">
+                <p>Tạm tính:</p>
+                <strong>20.000.000</strong>
+            </div>
+            <!-- <div class="tatol__order">
+                <p>Giảm giá:</p>
+                <strong>10.000.000</strong>
+            </div> -->
+            <div class="tatol__order mt-3">
+                <p class="fs-6 fw-bold">Tổng tiền:</p>
+                <strong> <span class="fs-6"> 20.000.000 </span> </strong>
+            </div>
+        </div>
+
+        <div class="order__form">
+            <h5>Thông tin giao hàng:</h5>
+            <form>
+                <div class="form-password-toggle">
+                    <label class="form-label" for="fullname">Họ tên</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="fullname" placeholder="Nhập họ tên"
+                            aria-describedby="basic-default-password2" >
+                    </div>
+                    <p class="mt-1 text-danger">Bạn chưa nhập tên đăng nhập</p>
+                </div>
+                <div class="form-password-toggle">
+                    <label class="form-label" for="phone">Số điện thoại</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại"
+                            aria-describedby="basic-default-password2" >
+                    </div>
+                    <p class="mt-1 text-danger">Bạn chưa nhập tên đăng nhập</p>
+                </div>
+                <div class="form-password-toggle">
+                    <label class="form-label" for="address">Địa chỉ</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ"
+                            aria-describedby="basic-default-password2" >
+                    </div>
+                    <p class="mt-1 text-danger">Bạn chưa nhập tên đăng nhập</p>
+                </div>
+                <div class="button__ordering mt-4">
+                    <button>Đặt hàng</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

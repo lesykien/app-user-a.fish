@@ -17,5 +17,4 @@ export class LoginGeneral {
         }
     }
     // convert information form enter object login request
-
 }

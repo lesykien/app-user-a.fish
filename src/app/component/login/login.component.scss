@@ -1,3 +1,4 @@
+@import "../home/home.component.scss";
 // khai báo biến
 $gray_666_80: #666666d8;
 $blue_black: #001e39;
@@ -6,7 +7,12 @@ $bule_003: #003465;
 $bule_125: #085297;
 $red_EE1: #ee1d52;
 $bule_0D: #0d6dc8;
+$colorRed_ef3: #ef3434;
+$colorGray__d9: #d9d9d9;
 // mixin
+*{
+    color: black;
+}
 @mixin button-come-back {
     color: $gray_666;
     border: none;
@@ -79,288 +85,88 @@ $bule_0D: #0d6dc8;
         opacity: 1;
     }
 }
-header {
-    padding: 24px 32px;
-    border-bottom: 1px solid $gray_666_80;
-    .main {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        &__item--link {
-            a {
-                color: $blue_black;
-                text-decoration: none;
-                font-size: 18px;
-                position: relative;
-                transition: all 0.25s linear;
-                &::after {
-                    content: "";
-                    position: absolute;
-                    width: 0%;
-                    transition: all 0.25s linear;
-                    height: 2px;
-                    background-color: $blue_black;
-                    bottom: 0px;
-                    left: 0px;
-                }
-                &:hover::after {
-                    width: 100%;
-                }
-            }
-        }
-        &__item--button {
-            button {
-                @include button-come-back();
-                span {
-                    margin-left: 8px;
-                }
-                &:hover {
-                    color: $blue_black;
-                }
-            }
-        }
-    }
-}
-.container__login {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 50px;
-    &--top {
-        text-align: center;
-        animation: animation_title_form 3s;
-        img {
-            width: 100px;
-        }
-        h1 {
-            font-size: clamp(1.875rem, 1.7169rem + 0.6748vw, 2.5rem);
-            color: $blue_black;
-            font-weight: 600;
-        }
-        & .title__create--account {
-            & a {
-                text-decoration: none;
-                position: relative;
-                color: $bule_0D;
-                &::after {
-                    content: "";
-                    position: absolute;
-                    bottom: 0;
-                    left: 2px;
-                    width: 0;
-                    height: 2px;
-                    background-color: $bule_0D;
-                    transition: all 0.25s linear;
-                }
-                &:hover::after {
-                    width: 100%;
-                }
-            }
-        }
-    }
-    &--forget {
-        text-align: center;
-        margin-top: 40px;
-        & a {
-            color: $blue_black;
-            font-size: clamp(1rem, 0.9559859154929577rem + 0.18779342723004694vw, 1.125rem);
-            font-weight: 500;
-            text-decoration: none;
-            position: relative;
-            margin-right: 40px;
-            &::after {
-                transition: all 0.25s linear;
-                content: "";
-                position: absolute;
-                width: 0%;
-                height: 2px;
-                bottom: 0px;
-                left: 0px;
-                background-color: $blue_black;
-            }
-            &:hover::after {
-                width: 100%;
-            }
-        }
-    }
-    .container__login--group {
-        height: 451px;
+.login__container {
+    &--line {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 40px;
-    }
-    .group__input {
-        padding: 44px 64px;
-        width: 492px;
-        animation: animation_group_input 1s;
-        h3 {
-            font-size: 24px;
-            font-weight: 400;
-            // text-align: center;
-        }
-        .controll__input {
-            margin-top: 24px;
-            label {
-                font-size: 16px;
-                color: $gray_666;
-            }
-            input {
-                @include input-login();
-            }
-            span {
-                color: $red_EE1;
-                font-size: 16px;
-            }
-
-            // hiện thị mật khẩu
-            .main__label {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                &--item {
-                    button {
-                        background-color: transparent;
-                        color: $gray_666;
-                        cursor: pointer;
-                        padding: 3px 0px;
-                        font-size: 16px;
-                        width: auto;
-                        margin-top: 0px;
-                        border-radius: 0px;
-                        position: relative;
-                        transition: all 0.25s linear;
-                        border: none;
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            bottom: 0;
-                            left: 0px;
-                            width: 0%;
-                            height: 2px;
-                            background-color: $gray_666;
-                            transition: all 0.25s linear;
-                        }
-                        &:hover::after {
-                            width: 100%;
-                        }
-                    }
-                    & span {
-                        margin-left: 14px;
-                        color: $gray_666;
-                    }
-                }
-            }
-        }
-        button {
-            @include button-login();
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            span {
-                margin-left: 15px;
-            }
-            & .button__loading {
-                pointer-events: none;
-            }
-        }
-    }
-    .group__button {
-        display: grid;
-        padding: 64px;
-        animation: animation_group_button 1s;
-        button {
-            @include button-login();
-            text-align: left;
-            background-color: transparent;
-            padding: 14.5px 36.5px;
-            color: $blue_black;
-            border: 1px solid;
-            border-radius: 40px;
-            font-weight: 400;
-            &:hover {
-                color: $bule_0D;
-                background-color: transparent;
-            }
-            i {
-                margin-right: 16px;
-            }
-        }
-    }
-
-    .line__center {
-        height: 100%;
-        width: 2px;
-        background-color: $gray_666;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        span {
+        height: 1px;
+        background-color: $colorGray__d9;
+        margin-top: 20px;
+        & span {
             background-color: white;
-            padding: 10px 5px;
+            color: black;
+            padding: 0px 20px;
+            font-size: 12px;
         }
     }
-}
-
-// thông báo
-.alter {
-    position: absolute;
-    right: 10px;
-
-    border-radius: 10px;
-    background-color: rgba(211, 98, 98, 0.413);
-    transition: all 0.25s linear;
-    // transform: translateX(120%);
-    width: 0px;
-    overflow: hidden;
-}
-.content__alter {
-    font-size: 25px;
-    color: $red_EE1;
-    border: 1px solid;
-    padding: 13px 20px;
-    transition: all 0.25s linear;
-}
-.error-class {
-    width: auto;
-}
-
-// responsevi
-@media screen and (max-width: 1000px) {
-    .container__login--group {
-        flex-direction: column;
-        height: auto !important;
-        margin-top: 10px !important;
-        .line__center {
-            display: none;
+    &--form {
+        & .text-danger {
+            color: $colorRed_ef3 !important;
         }
-        .group__input {
-            padding: 0px;
-            width: 70% !important;
-            h3 {
-                display: none;
-            }
-        }
-        .group__button {
-            width: 70% !important;
-            padding: 0px;
-            width: 100%;
-            button {
-                width: 100%;
+        & .input-group{
+            & .form-control{
+                &:focus{
+                    outline: none;
+                    border: 1px dashed black;
+                }
             }
         }
     }
-}
-@media screen and (max-width: 555px) {
-    .group__button {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
+    &--button {
         button {
-            text-align: center !important;
-            padding: 10px 20px !important;
-            span {
-                display: none;
+            padding: 10px 24px;
+            color: white;
+            background-color: black;
+            border: 1px solid;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            width: 100%;
+            &:hover {
+                background-color: #2b2b2b;
             }
         }
     }
 }
+
+// // responsevi
+// @media screen and (max-width: 1000px) {
+//     .container__login--group {
+//         flex-direction: column;
+//         height: auto !important;
+//         margin-top: 10px !important;
+//         .line__center {
+//             display: none;
+//         }
+//         .group__input {
+//             padding: 0px;
+//             width: 70% !important;
+//             h3 {
+//                 display: none;
+//             }
+//         }
+//         .group__button {
+//             width: 70% !important;
+//             padding: 0px;
+//             width: 100%;
+//             button {
+//                 width: 100%;
+//             }
+//         }
+//     }
+// }
+// @media screen and (max-width: 555px) {
+//     .group__button {
+//         grid-template-columns: 1fr 1fr 1fr;
+//         gap: 20px;
+//         button {
+//             text-align: center !important;
+//             padding: 10px 20px !important;
+//             span {
+//                 display: none;
+//             }
+//         }
+//     }
+// }

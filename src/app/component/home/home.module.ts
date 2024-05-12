@@ -4,14 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainHomeComponent } from './main-home/main-home.component';
 import { HomeComponent } from './home.component';
 import { ShopComponent } from './shop/shop.component';
-
 const _router: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: HomeComponent,
-    children : [
-      {path : '' , component: MainHomeComponent},
-      {path : 'shop' , component: ShopComponent},
+    children: [
+      { path: '', component: MainHomeComponent },
+      { path: 'shop', component: ShopComponent },
     ]
   }
 ]
@@ -19,7 +18,7 @@ const _router: Routes = [
 @NgModule({
   declarations: [
     MainHomeComponent,
-    ShopComponent
+    ShopComponent,
   ],
   imports: [
     CommonModule,

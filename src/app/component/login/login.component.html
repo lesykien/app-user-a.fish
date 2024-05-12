@@ -1,177 +1,33 @@
-<!-- header -->
-<header>
-    <div class="main">
-        <div class="main__item">
-            <div class="main__item--button">
-                <button [routerLink]="['/']">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Quay lại</span>
-                </button>
+<section class="login__container">
+    <div class="login__container--google">
+        <div id="google-btn"></div>
+    </div>
+    <div class="login__container--line">
+        <span>Or</span>
+    </div>
+    <div class="login__container--form mt-4">
+        <form [formGroup]="LoginByUserName">
+            <div class="form-password-toggle">
+                <label class="form-label" for="UserName">Tên đăng nhập</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="UserName" placeholder="Tên đăng nhập"
+                        aria-describedby="basic-default-password2" formControlName="username">
+                </div>
+                <p class="mt-1 text-danger">Bạn chưa nhập tên đăng nhập</p>
             </div>
-        </div>
-        <div class="main__item--link">
-            <a href="/sign-up">Tạo tài khoản</a>
-        </div>
-    </div>
-</header>
-<!-- header -->
-
-<!-- thông báo -->
-<section class="alter" [class]="{'error-class': hasError}">
-    <div class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-            <use xlink:href="#exclamation-triangle-fill"></use>
-        </svg>
-        <div>
-            An example danger alert with an icon
-        </div>
+            <div class="form-password-toggle mt-3">
+                <label class="form-label" for="basic-default-password12">Mật khẩu</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="basic-default-password12" placeholder="Nhập mật khẩu"
+                        aria-describedby="basic-default-password2" formControlName="password">
+                    <span id="basic-default-password2" class="input-group-text cursor-pointer"><i
+                            class="bx bx-hide"></i></span>
+                </div>
+                <p class="mt-1 text-danger">Bạn chưa nhập mật khẩu</p>
+            </div>
+            <div class="login__container--button mt-4">
+                <button>Đăng nhập</button>
+            </div>
+        </form>
     </div>
 </section>
-<!-- thông báo -->
-
-<!-- content -->
-<section class="container__login">
-    <div class="container__login--top">
-        <!-- <img src="./assets/logo-duan-a.fish/log-a.fish.svg" alt=""> -->
-        <h1>Đăng nhập</h1>
-        <p class="title__create--account">Bạn chưa có tài khoản? <span><a href="/sign-up">Tạo tài khoản</a></span></p>
-    </div>
-    <div class="container__login--group">
-        <div class="group__input">
-            <h3>Đăng nhập với {{type}} của bạn</h3>
-            <!-- login by email -->
-            <form [formGroup]="LoginByEmail" *ngIf="type == 'email'">
-                <!-- login by email -->
-                <div class="controll__input">
-                    <label for="email">Email</label><br>
-                    <input maxlength="50" type="email" id="email" name="email" formControlName="email"
-                        placeholder="Nhập email của bạn" required><br>
-                    <span *ngIf="LoginByEmail.get('email')?.errors?.['required']">Bạn chưa nhập email</span>
-                    <span *ngIf="LoginByEmail.get('email')?.errors?.['email']">Emai không đúng định dạng</span>
-                </div>
-                <!-- login by email -->
-
-                <!-- password -->
-                <div class="controll__input">
-                    <div class="main__label">
-                        <label for="password">Mật khẩu</label>
-                        <div class="main__label--item">
-                            <button id="showPassword" (click)="ShowPassWord()">
-                                <i class="fa-regular"
-                                    [ngClass]="{'fa-eye-slash' : iconButotn , 'fa-eye' : !iconButotn}"></i>
-                                <span> {{tileButtonShowPassword}} </span>
-                            </button>
-                        </div>
-                    </div>
-                    <input [type]="hasPassword ? 'text' : 'password'" formControlName="password" id="password"
-                        placeholder="Nhập mật khẩu"><br>
-                    <span *ngIf="LoginByEmail.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
-                </div>
-                <!-- password -->
-                <button [disabled]="LoginByEmail.invalid" *ngIf="buttonLoading == true">Đăng nhập <span><i
-                            class="fa-solid fa-arrow-right"></i></span></button>
-                <button class="button__loading" *ngIf="buttonLoading == false">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </button>
-
-            </form>
-            <!-- login by email -->
-
-            <!-- login by phone -->
-            <form [formGroup]="LoginByPhone" *ngIf="type == 'phone'">
-                <!-- login by phone -->
-                <div class="controll__input">
-                    <label for="phone">Số điện thoại</label><br>
-                    <input maxlength="10" type="text" id="phone" name="phone" formControlName="phone"
-                        placeholder="Nhập số điện thoại của bạn" required><br>
-                    <span *ngIf="LoginByPhone.get('phone')?.errors?.['required']">Bạn chưa nhập số điện thoại</span>
-                </div>
-                <!-- login by phone -->
-
-                <!-- password -->
-                <div class="controll__input">
-                    <div class="main__label">
-                        <label for="password">Mật khẩu</label>
-                        <div class="main__label--item">
-                            <button id="showPassword" (click)="ShowPassWord()">
-                                <i class="fa-regular"
-                                    [ngClass]="{'fa-eye-slash' : iconButotn , 'fa-eye' : !iconButotn}"></i>
-                                <span> {{tileButtonShowPassword}} </span>
-                            </button>
-                        </div>
-                    </div>
-                    <input [type]="hasPassword ? 'text' : 'password'" formControlName="password" id="password"
-                    placeholder="Nhập mật khẩu"><br>
-                    <span *ngIf="LoginByPhone.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
-                </div>
-                <!-- password -->
-                <button [disabled]="LoginByPhone.invalid">Đăng nhập</button>
-            </form>
-            <!-- login by phone -->
-
-            <!-- login by user-name -->
-            <form [formGroup]="LoginByUserName" *ngIf="type == 'user-name'">
-                <!-- login by user-name -->
-                <div class="controll__input" *ngIf="type == 'user-name'">
-                    <label for="user-name">Tên đăng nghập</label><br>
-                    <input maxlength="50" type="text" id="user-name" name="user-name" formControlName="userName"
-                        placeholder="Nhập tên đăng nhập của bạn" required><br>
-                    <span *ngIf="LoginByUserName.get('userName')?.errors?.['required']">Bạn chưa nhập tên đăng
-                        nhập</span>
-                </div>
-                <!-- login by user-name -->
-
-                <!-- password -->
-                <div class="controll__input">
-                    <div class="main__label">
-                        <label for="password">Mật khẩu</label>
-                        <div class="main__label--item">
-                            <button id="showPassword" (click)="ShowPassWord()">
-                                <i class="fa-regular"
-                                    [ngClass]="{'fa-eye-slash' : iconButotn , 'fa-eye' : !iconButotn}"></i>
-                                <span> {{tileButtonShowPassword}} </span>
-                            </button>
-                        </div>
-                    </div>
-                    <input [type]="hasPassword ? 'text' : 'password'" formControlName="password" id="password"
-                        placeholder="Nhập mật khẩu"><br>
-                    <span *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập mật khẩu</span>
-                </div>
-                <!-- password -->
-                <button (click)="Sumbit_Form()" [disabled]="LoginByUserName.invalid" *ngIf="buttonLoading == true">Đăng
-                    nhập</button>
-                <button class="button__loading" *ngIf="buttonLoading == false">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </button>
-            </form>
-            <!-- login by user-name -->
-        </div>
-        <div class="line__center">
-            <span>OR</span>
-        </div>
-        <div class="group__button">
-            <div id="google-btn"></div>
-            <button (click)="LoginWthGoogle()"> Đăng nhập bằng google</button>
-            <a href="/login/user-name">
-                <button *ngIf="type != 'user-name'"><i class="fa-solid fa-user"></i> <span>Đăng nhập với tên tài
-                        khoản</span> </button>
-            </a>
-            <a href="/login/phone">
-                <button *ngIf="type != 'phone'"><i class="fa-solid fa-square-phone"></i><span>Đăng nhập với số điện
-                        thoại</span> </button>
-            </a>
-            <a href="/login/email">
-                <button *ngIf="type != 'email'"><i class="fa-solid fa-envelope"></i> <span>Đăng nhập với email</span>
-                </button>
-            </a>
-        </div>
-    </div>
-    <div class="container__login--forget">
-        <a href="/forget-password">Quên mật khẩu</a>
-    </div>
-</section>
-<!-- content -->

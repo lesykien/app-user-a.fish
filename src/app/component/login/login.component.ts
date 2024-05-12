@@ -19,28 +19,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone
   ) { }
-  // login by email 
-  LoginByEmail = this._formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required]
-  })
-  // login by email 
-
-  // login by phone 
-  LoginByPhone = this._formBuilder.group({
-    phone: ['',
-      [
-        Validators.required,
-        Validators.maxLength(10),
-      ]
-    ],
-    password: ['', Validators.required]
-  })
-  // login by phone 
-
   // login by user-name 
   LoginByUserName = this._formBuilder.group({
-    userName: ['', Validators.required],
+    username: ['', Validators.required],
     password: ['', Validators.required]
   })
   // login by user-name
@@ -63,23 +44,13 @@ export class LoginComponent implements OnInit {
     google.accounts.id.renderButton(document.getElementById('google-btn'), {
       theme: 'outline',
       size: 'large',
-      shape: 'pill',
+      shape: 'rectangular',
       width: 400,
       height : 200,
       logo_alignment: 'center',
       longtitle: true, 
       text : 'continue_with'
     });
-  }
-  // show pass word
-  ShowPassWord() {
-    this.hasPassword = !this.hasPassword;
-    this.iconButotn = !this.iconButotn;
-    if (this.tileButtonShowPassword == 'Hiển thị mật khẩu') {
-      this.tileButtonShowPassword = 'Ẩn mật khẩu';
-      return;
-    }
-    this.tileButtonShowPassword = 'Hiển thị mật khẩu'
   }
   Sumbit_Form() {
     this.buttonLoading = false;
@@ -104,6 +75,7 @@ export class LoginComponent implements OnInit {
     //   }
     // )
   }
+  // login with google
   private decodeToken(token: any) {
     return JSON.parse(atob(token.split('.')[1]));
   }
@@ -118,9 +90,10 @@ export class LoginComponent implements OnInit {
     if (!response) return;
     // using ngZone when change page 
     this.ngZone.run(() => {
-      const payLoad = this.decodeToken(response.credential);
-      sessionStorage.setItem('tokenLogin', JSON.stringify(payLoad));
-      this.router.navigate(['/']);
     });
+    const payLoad = this.decodeToken(response.credential);
+    sessionStorage.setItem('tokenLogin', JSON.stringify(payLoad));
+    // this.router.navigate(['/']);
+    window.location.reload();
   }
 }

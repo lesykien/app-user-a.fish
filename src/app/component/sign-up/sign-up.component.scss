@@ -145,6 +145,240 @@ header {
         margin-top: 32px;
     }
 }
+header {
+    padding: 24px 32px;
+    border-bottom: 1px solid $gray_666_80;
+    .main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__item--link {
+            a {
+                color: $blue_black;
+                text-decoration: none;
+                font-size: 18px;
+                position: relative;
+                transition: all 0.25s linear;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    transition: all 0.25s linear;
+                    height: 2px;
+                    background-color: $blue_black;
+                    bottom: 0px;
+                    left: 0px;
+                }
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+        &__item--button {
+            button {
+                @include button-come-back();
+                span {
+                    margin-left: 8px;
+                }
+                &:hover {
+                    color: $blue_black;
+                }
+            }
+        }
+    }
+}
+.container__login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    &--top {
+        text-align: center;
+        img {
+            width: 100px;
+        }
+        h1 {
+            font-size: clamp(1.875rem, 1.7169rem + 0.6748vw, 2.5rem);
+            color: $blue_black;
+            font-weight: 600;
+        }
+        & .title__create--account {
+            & a {
+                text-decoration: none;
+                position: relative;
+                color: $bule_0D;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 2px;
+                    width: 0;
+                    height: 2px;
+                    background-color: $bule_0D;
+                    transition: all 0.25s linear;
+                }
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &--forget {
+        text-align: center;
+        margin-top: 40px;
+        & a {
+            color: $blue_black;
+            font-size: clamp(1rem, 0.9559859154929577rem + 0.18779342723004694vw, 1.125rem);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            margin-right: 40px;
+            &::after {
+                transition: all 0.25s linear;
+                content: "";
+                position: absolute;
+                width: 0%;
+                height: 2px;
+                bottom: 0px;
+                left: 0px;
+                background-color: $blue_black;
+            }
+            &:hover::after {
+                width: 100%;
+            }
+        }
+    }
+    .group__input {
+        padding: 44px 64px;
+        width: 492px;
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            // text-align: center;
+        }
+        .controll__input {
+            margin-top: 24px;
+            label {
+                font-size: 16px;
+                color: $gray_666;
+            }
+            input {
+                @include input-login();
+            }
+            span {
+                color: $red_EE1;
+                font-size: 16px;
+            }
+
+            // hiện thị mật khẩu
+            .main__label {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                &--item {
+                    button {
+                        background-color: transparent;
+                        color: $gray_666;
+                        cursor: pointer;
+                        padding: 3px 0px;
+                        font-size: 16px;
+                        width: auto;
+                        margin-top: 0px;
+                        border-radius: 0px;
+                        position: relative;
+                        transition: all 0.25s linear;
+                        border: none;
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            bottom: 0;
+                            left: 0px;
+                            width: 0%;
+                            height: 2px;
+                            background-color: $gray_666;
+                            transition: all 0.25s linear;
+                        }
+                        &:hover::after {
+                            width: 100%;
+                        }
+                    }
+                    & span {
+                        margin-left: 14px;
+                        color: $gray_666;
+                    }
+                }
+            }
+        }
+        button {
+            @include button-login();
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+                margin-left: 15px;
+            }
+            & .button__loading {
+                pointer-events: none;
+            }
+        }
+    }
+    .group__button {
+        display: grid;
+        padding: 64px;
+        button {
+            @include button-login();
+            text-align: left;
+            background-color: transparent;
+            padding: 14.5px 36.5px;
+            color: $blue_black;
+            border: 1px solid;
+            border-radius: 40px;
+            font-weight: 400;
+            &:hover {
+                color: $bule_0D;
+                background-color: transparent;
+            }
+            i {
+                margin-right: 16px;
+            }
+        }
+    }
+
+    .line__center {
+        height: 100%;
+        width: 2px;
+        background-color: $gray_666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            background-color: white;
+            padding: 10px 5px;
+        }
+    }
+}
+
+// thông báo
+.alter {
+    position: absolute;
+    right: 10px;
+
+    border-radius: 10px;
+    background-color: rgba(211, 98, 98, 0.413);
+    transition: all 0.25s linear;
+    width: 0px;
+    overflow: hidden;
+}
+.content__alter {
+    font-size: 25px;
+    color: $red_EE1;
+    border: 1px solid;
+    padding: 13px 20px;
+    transition: all 0.25s linear;
+}
+.error-class {
+    width: auto;
+}
 @media screen and (max-width: 760px) {
     .forget__main {
         width: 100% !important;

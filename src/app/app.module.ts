@@ -16,6 +16,9 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 import { HomeComponent } from './component/home/home.component';
 import { HomeModule } from './component/home/home.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppAdminComponent } from './component/app-admin/app-admin.component';
+import { AppAdminModule } from './component/app-admin/app-admin.module';
+import { CartComponent } from './component/cart/cart.component';
 
 
 
@@ -25,11 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     SignUpComponent,
     ForgetPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    AppAdminComponent, 
+    CartComponent,
   ],
   imports: [
     BrowserModule,
     HomeModule,
+    AppAdminModule,
     AppRoutingModule,
     MatSlideToggleModule,
     MatButtonModule,
@@ -38,7 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(),

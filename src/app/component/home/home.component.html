@@ -1,9 +1,9 @@
 <nav>
-    <div class="container_home main">
+    <div class="container__home main">
         <div class="main__left">
             <div class="main__left--logo">
                 <a [routerLink]="['/']">
-                    <img src="./assets/logo-duan-a.fish/log-a.fish.svg" alt="">
+                    <img [src]="ImageLogo" alt="">
                 </a>
             </div>
             <div class="main__left--menu">
@@ -19,16 +19,21 @@
             <div class="input__search">
                 <input type="text" placeholder="Tìm kiếm....">
             </div>
-            <button id="buttonSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                    class="fa-solid fa-cart-shopping"></i></button>
+            <button id="buttonSearch"><i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="btn__cart">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                        class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <span class="text-center">1</span>
+            </div>
             <a href="login/email" *ngIf="nameUser">
                 <!-- <button><i class="fa-solid fa-user"></i></button> -->
                 Xin chào {{nameUser}}
             </a>
             <div class="" *ngIf="!nameUser">
                 <!-- button open model form login  -->
-                <button [routerLink]="['/login/email']" class="button__login">Đăng nhập</button>
+                <button class="button__login" data-bs-toggle="modal" data-bs-target="#basicModal">Đăng nhập</button>
                 <!-- button open model form login  -->
                 <a href="sign-up">
                     <button class="button__login sigun_up">Đăng kí</button>
@@ -39,25 +44,138 @@
 </nav>
 <div class="container__home">
     <router-outlet></router-outlet>
-
-    <!-- Modal open list cart -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Giỏ hàng</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<footer>
+    <section class="main__footer container__home">
+        <div class="main__footer--top">
+            <div class="footer__top">
+                <h3 class="footer__top--title">
+                    Sản Phẩm & Dịch Vụ
+                </h3>
+                <div class="footer__top--item">
+                    <ul>
+                        <li><a>Điện thoại thông minh</a></li>
+                        <li><a>Máy tính bảng</a></li>
+                        <li><a>Thiết bị âm thanh</a></li>
+                        <li><a>Thiết bị đeo</a></li>
+                        <li><a>Phụ kiện</a></li>
+                        <li><a>Điện thoại thông minh</a></li>
+                    </ul>
                 </div>
-                <div class="modal-body">
-                    <!-- body -->
+            </div>
+            <div class="footer__top">
+                <h3 class="footer__top--title">
+                    Sản Phẩm & Dịch Vụ
+                </h3>
+                <div class="footer__top--item">
+                    <ul>
+                        <li><a>Điện thoại thông minh</a></li>
+                        <li><a>Máy tính bảng</a></li>
+                        <li><a>Thiết bị âm thanh</a></li>
+                        <li><a>Thiết bị đeo</a></li>
+                        <li><a>Phụ kiện</a></li>
+                        <li><a>Điện thoại thông minh</a></li>
+                    </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+            <div class="footer__top">
+                <h3 class="footer__top--title">
+                    Sản Phẩm & Dịch Vụ
+                </h3>
+                <div class="footer__top--item">
+                    <ul>
+                        <li><a>Điện thoại thông minh</a></li>
+                        <li><a>Máy tính bảng</a></li>
+                        <li><a>Thiết bị âm thanh</a></li>
+                        <li><a>Thiết bị đeo</a></li>
+                        <li><a>Phụ kiện</a></li>
+                        <li><a>Điện thoại thông minh</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__top">
+                <h3 class="footer__top--title">
+                    Sản Phẩm & Dịch Vụ
+                </h3>
+                <div class="footer__top--item">
+                    <ul>
+                        <li><a>Điện thoại thông minh</a></li>
+                        <li><a>Máy tính bảng</a></li>
+                        <li><a>Thiết bị âm thanh</a></li>
+                        <li><a>Thiết bị đeo</a></li>
+                        <li><a>Phụ kiện</a></li>
+                        <li><a>Điện thoại thông minh</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__top border__none">
+                <h3 class="footer__top--title">
+                    Sản Phẩm & Dịch Vụ
+                </h3>
+                <div class="footer__top--item">
+                    <ul>
+                        <li><a>Điện thoại thông minh</a></li>
+                        <li><a>Máy tính bảng</a></li>
+                        <li><a>Thiết bị âm thanh</a></li>
+                        <li><a>Thiết bị đeo</a></li>
+                        <li><a>Phụ kiện</a></li>
+                        <li><a>Điện thoại thông minh</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
+        <div class="main__footer--body">
+            <div class="foorter__body">
+                <div class="about__bode">
+                    <p>By: Lê Sỹ Kiên</p>
+                    <p>Phone: 098765431</p>
+                    <p>Địa chỉ: Hà huy tập, Tp.Buôn Ma Thuột</p>
+                </div>
+                <div class="about__logo">
+                    <img [src]="ImageLogo" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+</footer>
+
+<!-- Modal open list cart -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1440px; margin: 6rem auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
+                    Giỏ hàng của bạn <span class="fs-6">(1 sản phẩm)</span>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-cart></app-cart>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
+        </div>
     </div>
-    <!-- Modal open list cart -->
 </div>
+<!-- Modal open list cart -->
+
+<!-- modal open form login -->
+<div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="margin: 8rem auto; max-width: 28rem !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-login></app-login>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal open form login -->
