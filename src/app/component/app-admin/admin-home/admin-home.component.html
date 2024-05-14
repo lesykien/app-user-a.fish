@@ -15,8 +15,8 @@
                     <th class="text-light">Hình ảnh</th>
                     <th class="text-light">Tên sản phẩm</th>
                     <th class="text-light">Giá</th>
-                    <th class="text-light">Trạng thái</th>
                     <th class="text-light">Giảm giá</th>
+                    <th class="text-light">Trạng thái</th>
                     <th class="text-light">
                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalToggle"
                             (click)="openPopup('add')">
@@ -30,9 +30,9 @@
                     <td><img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="" class="avatar">
                     </td>
                     <td class="text-capitalize"> {{item.name}} </td>
-                    <td> {{item.price | currency:'VND':'symbol':'1.0-0'}} đ</td>
+                    <td> {{item.price | currency:' ':'symbol':'1.0-0'}}.000 đ</td>
+                    <td> {{item.voucher| currency:' ':'symbol':'1.0-0'}}.000 đ</td>
                     <td> {{item.status}} </td>
-                    <td> {{item.voucher}} đ</td>
                     <td>
                         <!-- <button class="btn btn-sm btn-dark me-3"><i class="fa-solid fa-bars"></i></button> -->
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalToggle"

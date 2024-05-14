@@ -45,7 +45,6 @@ export class AddProductComponent implements OnInit {
         window.location.reload();
       }
     })
-
   }
   // Lấy thông tin hình ảnh
   onFilesSelected(event: any) {

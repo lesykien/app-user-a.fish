@@ -1,16 +1,17 @@
-<form action="">
+<form [formGroup]="updateItem">
     <!-- tên giá -->
     <div class="row">
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Tên sản phẩm</label>
-            <input type="email" class="form-control" id="nameproduct" placeholder="Tên sản phẩm *">
+            <input type="email" class="form-control" id="nameproduct" placeholder="Tên sản phẩm *"
+                formControlName="name">
             <p class="text-danger">Bạn chưa nhập tên sản phẩm</p>
         </div>
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Đơn giá</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="basic-url" placeholder="Đơn giá *"
-                    aria-describedby="basic-addon3 basic-addon4">
+                    aria-describedby="basic-addon3 basic-addon4" formControlName="price">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
             <p class="text-danger">Bạn chưa nhập giá</p>
@@ -22,17 +23,18 @@
     <div class="row">
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Loại sản phẩm</label>
-            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                <option selected="">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
+                formControlName="category">
+                <option *ngFor="let item of options" [value]="item.id">
+                    {{item.name}}
+                </option>
             </select>
         </div>
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Giảm giá</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="basic-url" placeholder="Giảm giá"
-                    aria-describedby="basic-addon3 basic-addon4">
+                    aria-describedby="basic-addon3 basic-addon4" formControlName="voucher">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
         </div>
@@ -45,13 +47,14 @@
             <div class="row">
                 <div class="mb-3 col-12">
                     <label for="formFileMultiple" class="form-label">Hình ảnh</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple="">
+                    <input class="form-control" type="file" id="formFileMultiple" multiple=""
+                        (change)="onFilesSelected($event)">
                 </div>
                 <div class="mb-3 col-12">
                     <label for="nameproduct" class="form-label">Mô tả sản phẩm</label>
                     <div class="input-group">
                         <textarea class="form-control" placeholder="Mô tả sản phẩm"
-                            style="height: 200px;   resize: none;"></textarea>
+                            style="height: 200px;   resize: none;" formControlName="description"></textarea>
                     </div>
                 </div>
             </div>
@@ -64,6 +67,13 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
+
+                <div class="privew__image--item item__new p-3" *ngFor="let item of imageUrls; let i = index">
+                    <img [src]="item.url" alt="{{item.url}}">
+                    <button class="btn__remove btn btn-danger btn-sm" (click)="RemoveItem(i)">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -73,7 +83,7 @@
     <!-- button thêm cửa hàng -->
     <div class="row">
         <div class="col-6">
-            <button class="form-control btn btn-primary">Cập nhật thông tin sản phẩm</button>
+            <button (click)="sumbitForm()" class="form-control btn btn-primary">Cập nhật thông tin sản phẩm</button>
         </div>
     </div>
     <!-- button thêm cửa hàng -->

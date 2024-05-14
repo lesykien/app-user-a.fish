@@ -1,5 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { loginRequest } from "../model/login-request.model";
+import { productRequest } from "../model/product.model/product.request";
 
 export class productGeneral {
     constructor() { }
@@ -20,4 +21,16 @@ export class productGeneral {
         return form;
     }
     // convert information form enter object login request
+
+    static convertDataUpdate(name: string, price: string, voucher: string, description: string, category: any, images: File[], id: string | null): productRequest {
+        return {
+            id: id,
+            name: name,
+            price: price,
+            voucher: voucher,
+            idCategory: category,
+            images: images,
+            description : description
+        }
+    }
 }

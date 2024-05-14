@@ -1,10 +1,9 @@
-export interface product {
+export interface productRequest {
+    id: string | null,
     name: string,
-    price: number,
-    image: string,
-    status: string,
-    idCategory: number,
-    brands: string,
-    stock: number,
-    description: string
+    price: string,
+    images: File[],
+    idCategory: any,
+    description: string, 
+    voucher : string
 }

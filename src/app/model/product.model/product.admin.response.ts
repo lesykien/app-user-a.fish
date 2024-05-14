@@ -6,6 +6,7 @@ export interface productAdminResponse {
     price: number,
     images: ImagesResponse[],
     status: boolean,
-    voucher: number,
-    description : string 
+    vourcher: number,
+    description : string , 
+    idCategory : number
 }

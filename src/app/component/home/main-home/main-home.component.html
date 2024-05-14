@@ -329,28 +329,17 @@
             <div class="product__cart" *ngFor="let item of listProduct">
                 <div class="product__cart--top">
                     <a href="">
-                        <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
-                            alt="">
+                        <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
                     </a>
                 </div>
                 <div class="product__cart--body">
                     <div class="name__product">
                         <p class="text-center fw-bold mt-2"> {{item.name}} </p>
                     </div>
-                    <div class="list__color">
-                        <button class="list__color--box" style="background-color: #ef3434;"></button>
-                        <button class="list__color--box"></button>
-                        <button class="list__color--box" style="background-color: #ef3434;"></button>
-                    </div>
-                    <div class="bytes__product">
-                        <button class="btn__bytes active__bytes">2TB</button>
-                        <button class="btn__bytes">64TB</button>
-                        <button class="btn__bytes">2TB</button>
-                    </div>
                     <div class="price__product">
                         <p class="text-center fw-bold">
-                            {{item.price - item.voucher}} đ<br>
-                            <span> {{item.price}} đ</span>
+                            {{item.price - item.voucher | currency:' ':'symbol':'1.0-0'}}.000 đ<br>
+                            <span> {{item.price | currency:' ':'symbol':'1.0-0'}}.000 đ</span>
                         </p>
                     </div>
                     <div class="button__product">

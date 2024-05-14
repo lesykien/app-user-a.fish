@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { product } from '../model/product.model/products.model';
 import { involvement } from '../involvement/api.involvement';
 import { productAdminResponse } from '../model/product.model/product.admin.response';
+import { productRequest } from '../model/product.model/product.request';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,5 +23,7 @@ export class ProductService {
     return this.http.post<any>(`${involvement.api}/api/Product/add-item`, form)
   }
 
-
+  updateItem(form: FormData): Observable<any> {
+    return this.http.post<any>(`${involvement.api}/api/Product/update-item`, form)
+  }
 }
