@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -15,7 +15,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeModule } from './component/home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AppAdminComponent } from './component/app-admin/app-admin.component';
 import { AppAdminModule } from './component/app-admin/app-admin.module';
 import { CartComponent } from './component/cart/cart.component';
@@ -48,7 +48,8 @@ import { CartComponent } from './component/cart/cart.component';
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(), 
+    importProvidersFrom(HttpClientModule),
   ],
   bootstrap: [AppComponent]
 })

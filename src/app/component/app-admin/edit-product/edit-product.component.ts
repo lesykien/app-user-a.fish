@@ -52,8 +52,7 @@ export class EditProductComponent implements OnInit {
     const id: string | null = sessionStorage.getItem('keyId');
     this.productService.getDataByIdAdmin(id).subscribe(response => {
       this.images = response.images
-      console.log(response);
-      
+
       this.updateItem.get('id')!.setValue(response.id.toString());
       this.updateItem.get('category')!.setValue(response.idCategory.toString());
       this.updateItem.get('name')!.setValue(response.name.toString());
@@ -90,7 +89,13 @@ export class EditProductComponent implements OnInit {
   sumbitForm() {
     const request = this.GetDataForm();
     this.productSevice.updateItem(request).subscribe(response => {
-      console.log(response);
+      if (response.code == 200) {
+        alert('Cập nhật sản phẩm thành công'); 
+        window.location.reload();
+        return;
+
+      }
+      alert('Cập nhật sản phẩm thất bại');
     })
   }
   // Lấy thông tin hình ảnh

@@ -339,11 +339,11 @@
                     <div class="price__product">
                         <p class="text-center fw-bold">
                             {{item.price - item.voucher | currency:' ':'symbol':'1.0-0'}}.000 đ<br>
-                            <span> {{item.price | currency:' ':'symbol':'1.0-0'}}.000 đ</span>
+                            <span *ngIf="item.voucher > 0"> {{item.price | currency:' ':'symbol':'1.0-0'}}.000 đ</span>
                         </p>
                     </div>
                     <div class="button__product">
-                        <button class="btn__add">Thêm vào giỏ hàng</button>
+                        <button class="btn__add" (click)="AddToCart(item.id)">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
                 <div class="product__cart--bottom"></div>

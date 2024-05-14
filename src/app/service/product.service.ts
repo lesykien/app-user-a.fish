@@ -5,6 +5,8 @@ import { product } from '../model/product.model/products.model';
 import { involvement } from '../involvement/api.involvement';
 import { productAdminResponse } from '../model/product.model/product.admin.response';
 import { productRequest } from '../model/product.model/product.request';
+import { productsUserShop } from '../model/product.model/product.user.shop';
+import { get } from 'http';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +15,10 @@ export class ProductService {
 
   getData(): Observable<product[]> {
     return this.http.get<product[]>(`${involvement.api}/api/Product/get-all-item`)
+  }
+
+  getDataUserShop(): Observable<productsUserShop[]> {
+    return this.http.get<productsUserShop[]>(`${involvement.api}/api/Product/get-item-user-shop`)
   }
 
   getDataByIdAdmin(id: string | null): Observable<productAdminResponse> {

@@ -145,6 +145,14 @@ $colorGray__d9: #d9d9d9;
                 margin: 0px;
             }
         }
+        & .voucher{
+            & p{
+                color: #006bea;
+            }
+            & strong{
+                color: #006bea;
+            }
+        }
         & .order__form {
             border-top: 2px dashed $colorGray__d9;
             padding-top: 24px;

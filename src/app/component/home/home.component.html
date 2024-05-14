@@ -25,7 +25,7 @@
                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
                         class="fa-solid fa-cart-shopping"></i>
                 </button>
-                <span class="text-center">1</span>
+                <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>
             <a href="login/email" *ngIf="nameUser">
                 <!-- <button><i class="fa-solid fa-user"></i></button> -->
@@ -147,12 +147,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
-                    Giỏ hàng của bạn <span class="fs-6">(1 sản phẩm)</span>
+                    Giỏ hàng của bạn <span class="fs-6">({{countItem}} sản phẩm)</span>
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <app-cart></app-cart>
+                <div class="fs-5 fw-bold" *ngIf="countItem == 0">
+                    Tiếp tục mua sắm
+                </div>
+                <app-cart *ngIf="countItem > 0"></app-cart>
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
