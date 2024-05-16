@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
-import { loginRequest } from "../model/login-request.model";
-import { productRequest } from "../model/product.model/product.request";
+import { loginRequest } from "../model/login.model";
+import { productRequest } from "../model/products.model";
 
 export class productGeneral {
     constructor() { }
@@ -30,7 +30,7 @@ export class productGeneral {
             voucher: voucher,
             idCategory: category,
             images: images,
-            description : description
+            description: description
         }
     }
 }

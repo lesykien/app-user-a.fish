@@ -13,20 +13,23 @@
                     <input type="text" class="form-control" id="UserName" placeholder="Tên đăng nhập"
                         aria-describedby="basic-default-password2" formControlName="username">
                 </div>
-                <p class="mt-1 text-danger">Bạn chưa nhập tên đăng nhập</p>
+                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('username')?.errors?.['required']">Bạn chưa nhập
+                    tên đăng nhập</p>
             </div>
             <div class="form-password-toggle mt-3">
                 <label class="form-label" for="basic-default-password12">Mật khẩu</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="basic-default-password12" placeholder="Nhập mật khẩu"
-                        aria-describedby="basic-default-password2" formControlName="password">
+                    <input type="password" class="form-control" id="basic-default-password12"
+                        placeholder="Nhập mật khẩu" aria-describedby="basic-default-password2"
+                        formControlName="password">
                     <span id="basic-default-password2" class="input-group-text cursor-pointer"><i
                             class="bx bx-hide"></i></span>
                 </div>
-                <p class="mt-1 text-danger">Bạn chưa nhập mật khẩu</p>
+                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập
+                    mật khẩu</p>
             </div>
             <div class="login__container--button mt-4">
-                <button>Đăng nhập</button>
+                <button (click)="Sumbit_Form()" [disabled]="LoginByUserName.invalid">Đăng nhập</button>
             </div>
         </form>
     </div>

@@ -27,11 +27,13 @@
                 </button>
                 <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>
-            <a href="login/email" *ngIf="nameUser">
-                <!-- <button><i class="fa-solid fa-user"></i></button> -->
-                Xin chào {{nameUser}}
-            </a>
-            <div class="" *ngIf="!nameUser">
+            <!-- Example single danger button -->
+            <div class="btn__infomation">
+                <button *ngIf="infomation" (click)="Logout()">
+                    {{infomation.fullName}}
+                </button>
+            </div>
+            <div class="" *ngIf="!infomation">
                 <!-- button open model form login  -->
                 <button class="button__login" data-bs-toggle="modal" data-bs-target="#basicModal">Đăng nhập</button>
                 <!-- button open model form login  -->

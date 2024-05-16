@@ -1,5 +1,5 @@
 import { FormGroup } from "@angular/forms";
-import { loginRequest } from "../model/login-request.model";
+import { loginRequest } from "../model/login.model";
 
 export class LoginGeneral {
     constructor() { }

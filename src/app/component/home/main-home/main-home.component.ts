@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { product } from '../../../model/product.model/products.model';
+import { product } from '../../../model/products.model';
 import { ProductService } from '../../../service/product.service';
 import { CartService } from '../../../service/cart.service';
-import { cartRequest } from '../../../model/cart.model/cart.request';
+import { cartRequest } from '../../../model/cart.model';
+import { _cart } from '../../../involvement/cart.involvement';
 
 @Component({
   selector: 'app-main-home',
@@ -21,16 +22,27 @@ export class MainHomeComponent implements OnInit {
     })
   }
   AddToCart(id: string) {
+    let idToken: number = Number(sessionStorage.getItem('idUser'));
     const request: cartRequest = {
       idProduct: id,
-      idUser: 0
+      idUser: idToken
     }
     this.cartService.addCart(request).subscribe(response => {
-      alert('Thêm sản phẩm thành công');
       if (response.code == 200) {
-        sessionStorage.setItem('loading', '1');
+        alert('Thêm sản phẩm thành công');
       }
     })
   }
+
+  // thêm sản phẩm vào giỏ hàng khi chưa đăng nhập
+  AddToCartWhenNotLogin(item: product) {
+    let idUser: number = Number(sessionStorage.getItem('idUser'));
+    if (!idUser) {
+      _cart.SetCartLocal(item, `cart`);
+      return;
+    }
+    _cart.SetCartLocal(item, `cart${idUser}`);
+  }
+  // thêm sản phẩm vào giỏ hàng khi chưa đăng nhập
 
 }

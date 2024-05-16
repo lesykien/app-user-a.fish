@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { productAdminResponse } from '../../../model/product.model/product.admin.response';
+import { productAdminResponse } from '../../../model/products.model';
 import { ProductService } from '../../../service/product.service';
 import { stringify } from 'querystring';
 import { log } from 'console';
-import { ImagesResponse } from '../../../model/images.model/image.response';
+import { ImagesResponse } from '../../../model/image.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../service/category.service';
-import { category } from '../../../model/category.model/category.model';
+import { category } from '../../../model/category.model';
 import { productGeneral } from '../../../involvement/product.involvement';
-import { productRequest } from '../../../model/product.model/product.request';
+import { productRequest } from '../../../model/products.model';
 
 @Component({
   selector: 'app-edit-product',
@@ -90,7 +90,7 @@ export class EditProductComponent implements OnInit {
     const request = this.GetDataForm();
     this.productSevice.updateItem(request).subscribe(response => {
       if (response.code == 200) {
-        alert('Cập nhật sản phẩm thành công'); 
+        alert('Cập nhật sản phẩm thành công');
         window.location.reload();
         return;
 

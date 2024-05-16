@@ -2,9 +2,13 @@ declare var google: any;
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { loginRequest } from '../../model/login-request.model';
+import { loginRequest } from '../../model/login.model';
 import { LoginService } from '../../service/login.service';
 import { LoginGeneral } from '../../involvement/login.involvement';
+import { JsonPipe } from '@angular/common';
+import { CartService } from '../../service/cart.service';
+import { cartLocal } from '../../model/cart.model';
+import { _cart } from '../../involvement/cart.involvement';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +21,8 @@ export class LoginComponent implements OnInit {
     private _router: ActivatedRoute,
     private loginService: LoginService,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cartService: CartService
   ) { }
   // login by user-name 
   LoginByUserName = this._formBuilder.group({
@@ -46,54 +51,60 @@ export class LoginComponent implements OnInit {
       size: 'large',
       shape: 'rectangular',
       width: 400,
-      height : 200,
+      height: 200,
       logo_alignment: 'center',
-      longtitle: true, 
-      text : 'continue_with'
+      longtitle: true,
+      text: 'continue_with'
     });
   }
   Sumbit_Form() {
     this.buttonLoading = false;
-    const userName: string = LoginGeneral.getFormValue(this.LoginByUserName, 'userName');
-    const passWord: string = LoginGeneral.getFormValue(this.LoginByUserName, 'password');
-    const request: loginRequest = LoginGeneral.getLoginRequest(userName, passWord);
+    const request: loginRequest = this.LoginByUserName.value as loginRequest;
 
-    console.log(request);
-    // this.loginService.loginWithUserName(request).subscribe(
-    //   response => {
-    //     console.log(response);
-    //     // this.router.navigate(["/"]);
-    //   },
-    //   error => {
-    //     if (error != null) {
-    //       this.buttonLoading = true;
-    //       this.hasError = true;
-    //       setTimeout(() => {
-    //         this.hasError = false;
-    //       }, 2000)
-    //     }
-    //   }
-    // )
+    this.loginService.loginWithUserName(request).subscribe(
+      (response) => {
+        let id: string = response.code.toString();
+        sessionStorage.setItem('idUser', id)
+        this.AddIdUser(response.code);
+      }
+    )
   }
+
+  // add id khi login xong
+
+  AddIdUser(id: number) {
+    const local = localStorage.getItem('cart');
+    if (!local) {
+      return;
+    }
+    let listItem: cartLocal[] = JSON.parse(local);
+
+    const localById = localStorage.getItem(`cart${id}`);
+    if (!localById) {
+      localStorage.setItem(`cart${id}`, JSON.stringify(listItem));
+    }
+    else {
+      let listItemById: cartLocal[] = JSON.parse(localById);
+      if (listItemById.length == 0) {
+        localStorage.setItem(`cart${id}`, JSON.stringify(listItem));
+      }
+    }
+  }
+  // add id khi login xong
+
+
   // login with google
   private decodeToken(token: any) {
     return JSON.parse(atob(token.split('.')[1]));
   }
-  LoginWthGoogle(){
-    console.log(1);
-    google.accounts.id.initialize({
-      client_id: '466166882774-7tso04lmusd37v562kgcccjdmt1schra.apps.googleusercontent.com',
-      callback: (resp: any) => this.handleLogin(resp)
-    });
-  }
   handleLogin(response: any) {
     if (!response) return;
     // using ngZone when change page 
-    this.ngZone.run(() => {
-    });
+    // this.ngZone.run(() => {
+    // });
     const payLoad = this.decodeToken(response.credential);
     sessionStorage.setItem('tokenLogin', JSON.stringify(payLoad));
     // this.router.navigate(['/']);
-    window.location.reload();
+    // window.location.reload();
   }
 }

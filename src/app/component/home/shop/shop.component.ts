@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
-import { product } from '../../../model/product.model/products.model';
-import { productsUserShop } from '../../../model/product.model/product.user.shop';
-import { productAdminResponse } from '../../../model/product.model/product.admin.response';
-import { ImagesResponse } from '../../../model/images.model/image.response';
-import { cartRequest } from '../../../model/cart.model/cart.request';
+import { product } from '../../../model/products.model';
+import { productsUserShop } from '../../../model/products.model';
+import { productAdminResponse } from '../../../model/products.model';
+import { ImagesResponse } from '../../../model/image.model';
+import { cartRequest } from '../../../model/cart.model';
 import { CartService } from '../../../service/cart.service';
+import { _cart } from '../../../involvement/cart.involvement';
 
 @Component({
   selector: 'app-shop',
@@ -14,8 +15,8 @@ import { CartService } from '../../../service/cart.service';
 })
 export class ShopComponent implements OnInit {
   constructor(
-    private productService: ProductService, 
-    private cartService : CartService
+    private productService: ProductService,
+    private cartService: CartService
   ) { }
 
   detalProduct!: productAdminResponse;
@@ -24,7 +25,7 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getDataUserShop().subscribe(response => {
-      this.listProduct = response;      
+      this.listProduct = response;
     })
     this.detalProduct = {
       id: '',
@@ -40,6 +41,7 @@ export class ShopComponent implements OnInit {
   DetalItem(id: string) {
     this.GetInformationItem(id)
   }
+
   GetInformationItem(id: string) {
     this.productService.getDataByIdAdmin(id).subscribe(response => {
       this.detalProduct = response;
@@ -49,15 +51,17 @@ export class ShopComponent implements OnInit {
 
   // add to cart
   AddToCart(id: string) {
-    const request: cartRequest = {
-      idProduct: id,
-      idUser: 0
-    }
-    this.cartService.addCart(request).subscribe(response => {
-      alert('Thêm sản phẩm thành công');
-      if (response.code == 200) {
-        sessionStorage.setItem('loading', '1');
-      }
+    this.cartService.getItemUsingCart(id).subscribe((response) => {
+      this.AddToCartNotUser(response);
     })
+  }
+
+  AddToCartNotUser(item: product) {
+    let idUser: number = Number(sessionStorage.getItem('idUser'));
+    if (!idUser) {
+      _cart.SetCartLocal(item, `cart`);
+      return;
+    }
+    _cart.SetCartLocal(item, `cart${idUser}`);
   }
 }

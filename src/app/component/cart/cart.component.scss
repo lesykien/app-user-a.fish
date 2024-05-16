@@ -156,6 +156,17 @@ $colorGray__d9: #d9d9d9;
         & .order__form {
             border-top: 2px dashed $colorGray__d9;
             padding-top: 24px;
+            height: 24rem;
+            overflow: hidden;
+            overflow-y: auto;
+            padding-right: 12px;
+            &::-webkit-scrollbar {
+                width: 2px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $colorGrayOpacity33;
+                border-radius: 10px;
+            }
             & form {
                 & .text-danger {
                     color: $colorRed_ef3 !important;
@@ -180,6 +191,9 @@ $colorGray__d9: #d9d9d9;
                         width: 100%;
                         &:hover {
                             border:  1px dashed white;
+                        }
+                        &:disabled{
+                            background-color: #4c6c92;
                         }
                     }
                 }

@@ -127,6 +127,9 @@ $colorGray__d9: #d9d9d9;
             &:hover {
                 background-color: #2b2b2b;
             }
+            &:disabled{
+                background-color: rgb(63, 63, 63);
+            }
         }
     }
 }

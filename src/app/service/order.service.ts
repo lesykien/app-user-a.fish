@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { category } from '../model/category.model';
+import { order } from '../model/cart.model';
 import { involvement } from '../involvement/api.involvement';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class OrderService {
+
   constructor(private http: HttpClient) { }
-  getData(): Observable<category[]> {
-    return this.http.get<category[]>(`${involvement.api}/api/Categoty/get-item`)
+
+  create(order: order) {
+    return this.http.post<any>(`${involvement.api}/api/Order`, order);
   }
 }

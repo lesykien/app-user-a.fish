@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../service/product.service';
-import { product } from '../../../model/product.model/products.model';
+import { product } from '../../../model/products.model';
 
 @Component({
   selector: 'app-admin-home',
@@ -36,7 +36,7 @@ export class AdminHomeComponent implements OnInit {
 
     }
   }
-  Isreload(){
+  Isreload() {
     this.isTypePopup = true;
   }
 

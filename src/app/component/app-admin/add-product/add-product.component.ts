@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { productGeneral } from '../../../involvement/product.involvement';
 import { ProductService } from '../../../service/product.service';
 import { CategoryService } from '../../../service/category.service';
-import { category } from '../../../model/category.model/category.model';
+import { category } from '../../../model/category.model';
 
 @Component({
   selector: 'app-add-product',
@@ -41,7 +41,7 @@ export class AddProductComponent implements OnInit {
       form.append('files', item.file);
     }
     this.productSevice.addItem(form).subscribe(response => {
-      if ( response.code == 200){
+      if (response.code == 200) {
         window.location.reload();
       }
     })
