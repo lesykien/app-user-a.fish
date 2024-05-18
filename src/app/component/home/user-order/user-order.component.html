@@ -1,0 +1,304 @@
+<div class="container__home">
+    <nav class="hearder__top">
+        <section class="menu__category">
+            <button [class.active__category]="isBtn == 1" (click)="LoadingPage(1)">
+                Chờ xác nhận
+            </button>
+            <button [class.active__category]="isBtn == 2" (click)="LoadingPage(2)">
+                Đang giao
+            </button>
+            <button [class.active__category]="isBtn == 3" (click)="LoadingPage(3)">Lịch sử</button>
+        </section>
+        <div class="result">
+            {{listOder.length}} kết quả
+        </div>
+    </nav>
+    <article class="d-flex gap-4 main__oder" *ngIf="listOder.length > 0">
+        <section class="order__list">
+            <button class="order__list--item mb-4" [class.active_item]="id == item.id" *ngFor="let item of listOder"
+                (click)="GetDataId(item.id, item.delivery)">
+                <h4>Mã đơn hàng: {{item.id}} </h4>
+                <p class="small__text"> {{item.data}} </p>
+                <p class="amount">Tổng tiền: <strong>{{item.tatol | currency:'
+                        ':'symbol':'1.0-0'}}.000đ</strong></p>
+
+                <p class="btn btn-sm btn-primary mt-4 text-capitalize"
+                    [class.status__cancel]="item.delivery == 4 || item.delivery == 5"
+                    [class.status]="item.delivery != 4 && item.delivery != 5">
+                    <i class="fa-solid " [class.fa-xmark]="item.delivery == 4 || item.delivery == 5"
+                        [class.fa-check]="item.delivery != 4 && item.delivery != 5"></i>
+                    <span *ngIf="item.delivery == 1">Đơn hàng chờ xác nhận</span>
+                    <span *ngIf="item.delivery == 2">Đơn hàng đang giao</span>
+                    <span *ngIf="item.delivery == 3">Đơn hàng đã nhận</span>
+                    <span *ngIf="item.delivery == 4">Đơn hàng không xác nhận</span>
+                    <span *ngIf="item.delivery == 5">Đơn hàng không giao được</span>
+                </p>
+            </button>
+        </section>
+
+        <section class="order__item">
+            <div class="title__oder">
+                <h2 class="text-uppercase">Mã đơn hàng: #{{itemOder.id}}</h2>
+                <span class="btn btn-sm btn-primary mt-4 status text-capitalize"
+                    [class.status__cancel]="status == 4 || status == 5" [class.status]="status != 4 && status != 4">
+                    <i class="fa-solid " [class.fa-xmark]="status == 4 || status == 5"
+                        [class.fa-check]="status != 4 && status != 5"></i>
+                    {{title}}
+                </span>
+            </div>
+            <p class="date">Ngày: {{itemOder.date}}</p>
+
+            <div class="list__item">
+                <div class="list__item--product justify-content-between" *ngFor="let item of itemOder.products">
+                    <div class="name--img d-flex gap-3 align-items-center">
+                        <div class="img__item">
+                            <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                        </div>
+                        <h5 class="text-capitalize">
+                            {{item.name}}
+                        </h5>
+                    </div>
+                    <div class="item--text d-flex gap-5 align-items-center">
+                        <p>{{item.quantity}}x</p>
+                        <p>{{(item.price - item.voucher) * item.quantity
+                            | currency:'
+                            ':'symbol':'1.0-0'
+                            }}.000đ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="is_address">
+                <div class="title">
+                    <p>Thông tin nhận hàng: {{itemOder.fullName}}</p>
+                </div>
+                <div class="information d-flex align-items-center justify-content-between">
+                    <div class="information__item">
+                        <p>Địa chỉ: {{itemOder.address}}</p>
+                        <p>Số điện thoại: {{itemOder.phone}}</p>
+                    </div>
+                    <div class="information__button" *ngIf="status == 1">
+                        <button data-bs-toggle="modal" data-bs-target="#basicModal">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title__amount">
+                <div class="d-flex align-items-center justify-content-between px-2">
+                    <strong>Tạm tính</strong>
+                    <p>20.000.000đ</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between px-2">
+                    <strong>Giảm giá</strong>
+                    <p class="item-voucher">-20.000.000đ</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between px-2 item__amount">
+                    <strong>Tổng tiền</strong>
+                    <p>{{itemOder.tatol | currency:'
+                        ':'symbol':'1.0-0'}}.000đ</p>
+                </div>
+            </div>
+
+            <div class="button__errer d-flex justify-content-lg-end mt-4" *ngIf="status == 1">
+                <button data-bs-toggle="modal" data-bs-target="#modalTop">Hủy đơn hàng</button>
+            </div>
+        </section>
+
+        <section class="main__tree">
+            <!--chờ duyệt -->
+            <div class="tree__order" *ngIf="status == 1">
+                <div class="tree__order--item d-flex align-items-center tree__active">
+                    <p class="m-0">Xác nhận</p>
+                    <span>1</span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            ">
+                    <p class="m-0">Giao hàng</p>
+                    <span>2</span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            ">
+                    <p class="m-0">Nhận hàng</p>
+                    <span>3</span>
+                </div>
+            </div>
+            <!--chờ duyệt -->
+
+            <!--đang giao -->
+            <div class="tree__order" *ngIf="status == 2">
+                <div class="tree__order--item d-flex align-items-center tree__active--affter">
+                    <p class="m-0">Xác nhận</p>
+                    <span><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            tree__active
+            ">
+                    <p class="m-0">Giao hàng</p>
+                    <span>2</span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+                    ">
+                    <p class="m-0">Nhận hàng</p>
+                    <span>3</span>
+                </div>
+            </div>
+            <!--đang giao -->
+
+            <!-- Xác nhận không thành công -->
+            <div class="tree__order" *ngIf="status == 4">
+                <div class="tree__order--item d-flex align-items-center tree__errer">
+                    <p class="m-0 tree__errer-why">Xác nhận</p>
+                    <span><i class="fa-solid fa-xmark"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            ">
+                    <p class="m-0">Giao hàng</p>
+                    <span>2</span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            ">
+                    <p class="m-0">Nhận hàng</p>
+                    <span>3</span>
+                </div>
+            </div>
+            <!-- Xác nhận không thành công -->
+
+            <!-- không giao hàng được -->
+            <div class="tree__order" *ngIf="status == 5">
+                <div class="tree__order--item d-flex align-items-center tree__errer tree__active--affter">
+                    <p class="m-0">Xác nhận</p>
+                    <span><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            tree__errer
+            ">
+                    <p class="m-0">Giao hàng</p>
+                    <span><i class="fa-solid fa-xmark"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            ">
+                    <p class="m-0">Nhận hàng</p>
+                    <span>3</span>
+                </div>
+            </div>
+            <!-- không giao hàng được -->
+
+            <!-- giao hàng thành công -->
+            <div class="tree__order" *ngIf="status == 3">
+                <div class="tree__order--item d-flex align-items-center
+            tree__active--affter
+            ">
+                    <p class="m-0">Xác nhận</p>
+                    <span><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            tree__active--affter
+            ">
+                    <p class="m-0">Giao hàng</p>
+                    <span><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="tree__order--item d-flex align-items-center
+            tree__active
+            ">
+                    <p class="m-0">Nhận hàng</p>
+                    <span><i class="fa-solid fa-check"></i></span>
+                </div>
+            </div>
+            <!-- giao hàng thành công -->
+        </section>
+    </article>
+
+    <div class="mt-5" style="padding-bottom: 20rem;" *ngIf="listOder.length == 0">
+        <h2>Không có đơn hàng nào</h2>
+    </div>
+
+    <!-- Modal hủy đơn hàng  -->
+    <div class="modal modal-top fade" id="modalTop" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" style="margin: 8rem auto;">
+            <form class="modal-content" [formGroup]="CancelOrder">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTopTitle">
+                        Bạn có muốn hủy đơn hàng ngày không
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="nameSlideTop" class="form-label">
+                                Lý do hủy</label>
+                            <input type="text" id="nameSlideTop" class="form-control" placeholder="Tại sao....."
+                                formControlName="why">
+
+                            <p class="mt-1 text-danger" *ngIf="CancelOrder.get('why')?.errors?.['required']">Bạn chưa
+                                nhập
+                                lý do</p>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-0">
+                            <label for="emailSlideTop" class="form-label">
+                                Mã đơn hàng
+                            </label>
+                            <input type="text" id="emailSlideTop" class="form-control text-uppercase"
+                                placeholder="ewewe" [value]="itemOder.id" disabled>
+
+                        </div>
+                        <div class="col mb-0">
+                            <label for="dobSlideTop" class="form-label">
+                                Tổng tiền
+                            </label>
+                            <input type="text" id="dobSlideTop" class="form-control" [value]="itemOder.tatol" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn__errer" [disabled]="CancelOrder.invalid"
+                        (click)="CancelClick(itemOder.id)">
+                        Hủy đơn hàng
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <!-- Modal -->
+        <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="nameBasic" class="form-label">Name</label>
+                                <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-0">
+                                <label for="emailBasic" class="form-label">Email</label>
+                                <input type="text" id="emailBasic" class="form-control" placeholder="xxxx@xxx.xx">
+                            </div>
+                            <div class="col mb-0">
+                                <label for="dobBasic" class="form-label">DOB</label>
+                                <input type="text" id="dobBasic" class="form-control" placeholder="DD / MM / YY">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

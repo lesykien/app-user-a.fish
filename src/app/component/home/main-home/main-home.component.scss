@@ -170,7 +170,9 @@ $colorRed_ef3: #ef3434;
                     bottom: 0px;
                     margin-top: 5px;
                     & .name__product {
+                        text-transform: capitalize;
                         font-size: 24px;
+                        height: 52px;
                         width: 400px;
                         margin: 0 auto;
                         color: $colorGray;
@@ -247,6 +249,8 @@ $colorRed_ef3: #ef3434;
                     bottom: 0px;
                     margin-top: 5px;
                     & .name__product {
+                        text-transform: capitalize;
+                        height: 52px;
                         font-size: 18px;
                         width: 300px;
                         margin: 0 auto;
@@ -323,6 +327,7 @@ $colorRed_ef3: #ef3434;
             display: flex;
             flex-direction: column;
             & .name__product {
+                text-transform: capitalize;
                 margin-bottom: 20px;
                 height: 50px;
                 overflow: hidden;
@@ -394,4 +399,3 @@ $colorRed_ef3: #ef3434;
     }
 }
 // product
-

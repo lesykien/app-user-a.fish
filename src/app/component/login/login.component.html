@@ -15,6 +15,9 @@
                 </div>
                 <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('username')?.errors?.['required']">Bạn chưa nhập
                     tên đăng nhập</p>
+                <p class="mt-1 text-danger" *ngIf="isUserName">
+                    Kiểm tra lại tên đăng nhập
+                </p>
             </div>
             <div class="form-password-toggle mt-3">
                 <label class="form-label" for="basic-default-password12">Mật khẩu</label>
@@ -27,6 +30,9 @@
                 </div>
                 <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập
                     mật khẩu</p>
+                <p class="mt-1 text-danger" *ngIf="isPassword">
+                    Kiểm tra lại mật khẩu
+                </p>
             </div>
             <div class="login__container--button mt-4">
                 <button (click)="Sumbit_Form()" [disabled]="LoginByUserName.invalid">Đăng nhập</button>

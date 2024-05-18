@@ -5,11 +5,15 @@ $colorGray_F2: #f2f2f2;
     padding: 0px 16px;
     display: flex;
 }
+.main_w{
+    width: 100%;
+
+}
 .hearder__top {
-    padding: 0px 16px;
     border: 1px solid $colorGray;
     border-left: 0px;
     border-right: 0px;
+    padding: 0px 16px;
     height: 56px;
     display: flex;
     justify-content: space-between;

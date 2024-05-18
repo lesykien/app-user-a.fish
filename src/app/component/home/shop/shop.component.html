@@ -1,193 +1,200 @@
-<nav class="hearder__top">
-    <div class="result">
-        19 kết quả
-    </div>
-    <section class="menu__category">
-        <button class="active__category">Điện thoại</button>
-        <button>Phụ Kiện</button>
-        <button>Tai nghe</button>
-        <button>Tivi</button>
-    </section>
-</nav>
-<article class="p-main">
-    <section class="menu__shop">
-        <div class="col-md mb-4 mb-md-0" style="position: sticky;
-        top: 20px">
-            <div class="accordion mt-3" id="accordionExample">
-                <div class="card accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
-                            Sản phẩm chính hãng
-                        </button>
-                    </h2>
-                    <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Hoàn trả nếu sản phẩm sản phẩm không phải là hàng chính hãng
-                        </div>
-                    </div>
-                </div>
-                <div class="card accordion-item active">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button type="button" class="accordion-button" data-bs-toggle="collapse"
-                            data-bs-target="#accordionTwo" aria-expanded="true" aria-controls="accordionTwo">
-                            Giao hàng tận nơi
-                        </button>
-                    </h2>
-                    <div id="accordionTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Hỗ trợ giao hàng tận nơi <br>
-                            Yên tâm về quá trình giao hàng, đảm bảo sản phẩm tới tay khách hàng
-                        </div>
-                    </div>
-                </div>
-                <div class="card accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
-                            Giá cả hợp lý
-                        </button>
-                    </h2>
-                    <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Giá cả chính xác với hãng
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="main_w">
+    <nav class="hearder__top container__home">
+        <div class="result">
+            19 kết quả
         </div>
-    </section>
-    <section class="list__product">
-        <div class="main__cart" *ngFor="let item of listProduct">
-            <div class="main__cart--left">
-                <div class="left__image">
-                    <div class="left__image--item">
-                        <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
-                    </div>
-                    <div class="left__image--button">
-                        <button data-bs-toggle="modal" data-bs-target="#modalToggle" (click)="DetalItem(item.id)">Tổng
-                            quan</button>
-                    </div>
-                </div>
-                <div class="left__content">
-                    <div class="left__content--name">
-                        <p class="text-capitalize"> {{item.name}} </p>
-                    </div>
-                    <div class="left__content--des">
-                        {{item.description}}
-                    </div>
-                </div>
-            </div>
-            <div class="main__cart--right">
-                <div class="right__top">
-                    <div class="right__top--price">
-                        <div class="d-flex align-items-center gap-2 mb-3">
-                            <p class="price m-0"> {{item.price - item.voucher| currency:' ':'symbol':'1.0-0'}}.000đ</p>
-                            <span *ngIf="item.voucher > 0" class="text-decoration-line-through fw-bold fs-6"
-                                style="color: #006bea;">
-                                {{item.price | currency:'
-                                ':'symbol':'1.0-0'}}.000đ </span>
-                        </div>
-                        <p><i class="fa-solid fa-check"></i> còn hàng</p>
-                        <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
-                        <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
-                        <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
-                    </div>
-                </div>
-                <div class="right__bottom">
-                    <button>Mua ngay</button>
-                    <button class="btn__add--cart" (click)="AddToCart(item.id)">Thêm vào giỏ hàng</button>
-                </div>
-            </div>
-        </div>
-    </section>
-</article>
-
-<!-- model -->
-<div class="mt-3">
-    <!-- Modal 1-->
-    <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1" style="display: none;"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="height: 763px;">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalToggleLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal__body--content">
-                        <div class="content__left">
-                            <div class="content__left--image">
-                                <div class="main__slider">
-                                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item" *ngFor="let item of listUrls"
-                                                [ngClass]="{'active':item.avatar}">
-                                                <img class="d-block w-100"
-                                                    src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
-                                                    alt="Second slide">
-                                            </div>
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExample" role="button"
-                                            data-bs-slide="prev">
-                                            <button class="text-center">
-                                                <i class="fa-solid fa-chevron-left"></i>
-                                            </button>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExample" role="button"
-                                            data-bs-slide="next">
-                                            <button class="text-center">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content__right">
-                            <div class="content__right--top">
-                                <div class="content__right--name">
-                                    <p class="text-capitalize">
-                                        {{detalProduct.name}}
-                                    </p>
-                                </div>
-                                <div class="content__right--price">
-                                    <div class="d-flex align-items-center gap-2 ">
-                                        <p class="m-0"> {{detalProduct.price - detalProduct.vourcher| currency:'
-                                            ':'symbol':'1.0-0'}}.000đ</p>
-                                        <span *ngIf="detalProduct.vourcher > 0"
-                                            class="text-decoration-line-through fw-bold fs-6" style="color: #006bea;">
-                                            {{detalProduct.price | currency:' ':'symbol':'1.0-0'}}.000đ </span>
-                                    </div>
-                                </div>
-                                <!-- <div class="content__right--color">
-                                    <button class="list__color--box" style="background-color: #ef3434;"></button>
-                                    <button class="list__color--box"></button>
-                                    <button class="list__color--box" style="background-color: #C1D0BE;"></button>
-                                </div>
-                                <div class="content__right--bytes">
-                                    <button class="btn__bytes active__bytes">2TB</button>
-                                    <button class="btn__bytes">64TB</button>
-                                    <button class="btn__bytes">2TB</button>
-                                </div> -->
-                                <div class="content__right--des">
-                                    {{detalProduct.description}}
-                                </div>
-                            </div>
-                            <div class="content__right--bottom">
-                                <button class="btn__add--cart" (click)="AddToCart(detalProduct.id)">Thêm vào giỏ
-                                    hàng</button>
-                                <button>Mua ngay</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
+        <section class="menu__category">
+            <button class="active__category">Điện thoại</button>
+            <button>Phụ Kiện</button>
+            <button>Tai nghe</button>
+            <button>Tivi</button>
+        </section>
+    </nav>
 </div>
-<!-- model -->
+<div class="container__home">
+    <article class="p-main">
+        <section class="menu__shop">
+            <div class="col-md mb-4 mb-md-0" style="position: sticky;
+            top: 20px">
+                <div class="accordion mt-3" id="accordionExample">
+                    <div class="card accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
+                                Sản phẩm chính hãng
+                            </button>
+                        </h2>
+                        <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Hoàn trả nếu sản phẩm sản phẩm không phải là hàng chính hãng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card accordion-item active">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                data-bs-target="#accordionTwo" aria-expanded="true" aria-controls="accordionTwo">
+                                Giao hàng tận nơi
+                            </button>
+                        </h2>
+                        <div id="accordionTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Hỗ trợ giao hàng tận nơi <br>
+                                Yên tâm về quá trình giao hàng, đảm bảo sản phẩm tới tay khách hàng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
+                                Giá cả hợp lý
+                            </button>
+                        </h2>
+                        <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Giá cả chính xác với hãng
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="list__product">
+            <div class="main__cart" *ngFor="let item of listProduct">
+                <div class="main__cart--left">
+                    <div class="left__image">
+                        <div class="left__image--item">
+                            <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                        </div>
+                        <div class="left__image--button">
+                            <button data-bs-toggle="modal" data-bs-target="#modalToggle"
+                                (click)="DetalItem(item.id)">Tổng
+                                quan</button>
+                        </div>
+                    </div>
+                    <div class="left__content">
+                        <div class="left__content--name">
+                            <p class="text-capitalize"> {{item.name}} </p>
+                        </div>
+                        <div class="left__content--des">
+                            {{item.description}}
+                        </div>
+                    </div>
+                </div>
+                <div class="main__cart--right">
+                    <div class="right__top">
+                        <div class="right__top--price">
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <p class="price m-0"> {{item.price - item.voucher| currency:' ':'symbol':'1.0-0'}}.000đ
+                                </p>
+                                <span *ngIf="item.voucher > 0" class="text-decoration-line-through fw-bold fs-6"
+                                    style="color: #006bea;">
+                                    {{item.price | currency:'
+                                    ':'symbol':'1.0-0'}}.000đ </span>
+                            </div>
+                            <p><i class="fa-solid fa-check"></i> còn hàng</p>
+                            <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
+                            <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
+                            <p>Mở ra kỷ nguyên điện thoại mới với quyền năng Galaxy AI</p>
+                        </div>
+                    </div>
+                    <div class="right__bottom">
+                        <button>Mua ngay</button>
+                        <button class="btn__add--cart" (click)="AddToCart(item.id)">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <!-- model -->
+    <div class="mt-3">
+        <!-- Modal 1-->
+        <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1" style="display: none;"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="height: 763px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalToggleLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal__body--content">
+                            <div class="content__left">
+                                <div class="content__left--image">
+                                    <div class="main__slider">
+                                        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item" *ngFor="let item of listUrls"
+                                                    [ngClass]="{'active':item.avatar}">
+                                                    <img class="d-block w-100"
+                                                        src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
+                                                        alt="Second slide">
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExample" role="button"
+                                                data-bs-slide="prev">
+                                                <button class="text-center">
+                                                    <i class="fa-solid fa-chevron-left"></i>
+                                                </button>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExample" role="button"
+                                                data-bs-slide="next">
+                                                <button class="text-center">
+                                                    <i class="fa-solid fa-chevron-right"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content__right">
+                                <div class="content__right--top">
+                                    <div class="content__right--name">
+                                        <p class="text-capitalize">
+                                            {{detalProduct.name}}
+                                        </p>
+                                    </div>
+                                    <div class="content__right--price">
+                                        <div class="d-flex align-items-center gap-2 ">
+                                            <p class="m-0"> {{detalProduct.price - detalProduct.vourcher| currency:'
+                                                ':'symbol':'1.0-0'}}.000đ</p>
+                                            <span *ngIf="detalProduct.vourcher > 0"
+                                                class="text-decoration-line-through fw-bold fs-6"
+                                                style="color: #006bea;">
+                                                {{detalProduct.price | currency:' ':'symbol':'1.0-0'}}.000đ </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="content__right--color">
+                                        <button class="list__color--box" style="background-color: #ef3434;"></button>
+                                        <button class="list__color--box"></button>
+                                        <button class="list__color--box" style="background-color: #C1D0BE;"></button>
+                                    </div>
+                                    <div class="content__right--bytes">
+                                        <button class="btn__bytes active__bytes">2TB</button>
+                                        <button class="btn__bytes">64TB</button>
+                                        <button class="btn__bytes">2TB</button>
+                                    </div> -->
+                                    <div class="content__right--des">
+                                        {{detalProduct.description}}
+                                    </div>
+                                </div>
+                                <div class="content__right--bottom">
+                                    <button class="btn__add--cart" (click)="AddToCart(detalProduct.id)">Thêm vào giỏ
+                                        hàng</button>
+                                    <button>Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- model -->
+</div>

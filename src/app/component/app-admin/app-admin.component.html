@@ -40,7 +40,7 @@
                         </li>
                         <li class="menu-item" routerLinkActive="active">
                             <a [routerLink]="['/admin/delivery']"class="menu-link">
-                                <div data-i18n="Without navbar">Đăng giao</div>
+                                <div data-i18n="Without navbar">Đang giao</div>
                             </a>
                         </li>
                         <li class="menu-item" routerLinkActive="active">
@@ -83,7 +83,9 @@
                         <!-- Place this tag where you want the button to render. -->
 
                         <!-- User -->
-                        <button class="btn btn-outline-primary">Đăng xuất</button>
+                        <button class="btn btn-outline-primary"
+                        (click)="Logout()"
+                        >Đăng xuất</button>
                         <!--/ User -->
                         <!-- [style.background-color]="'#' + color" -->
                     </ul>

@@ -9,11 +9,12 @@ import { JsonPipe } from '@angular/common';
 import { CartService } from '../../service/cart.service';
 import { cartLocal } from '../../model/cart.model';
 import { _cart } from '../../involvement/cart.involvement';
+import { AccountService } from '../../service/account.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   constructor(
@@ -21,30 +22,29 @@ export class LoginComponent implements OnInit {
     private _router: ActivatedRoute,
     private loginService: LoginService,
     private router: Router,
+    private accountService: AccountService,
     private ngZone: NgZone,
     private cartService: CartService
-  ) { }
-  // login by user-name 
+  ) {}
+  // login by user-name
   LoginByUserName = this._formBuilder.group({
     username: ['', Validators.required],
-    password: ['', Validators.required]
-  })
+    password: ['', Validators.required],
+  });
+
+  isUserName: boolean = false;
+  isPassword: boolean = false;
   // login by user-name
 
-  // show button loading
-  buttonLoading: any = true
-  // alter error on view html
-  hasError: boolean = false
-  type!: string;
-  // show password
-  hasPassword: boolean = false;
-  iconButotn: boolean = false;
-  tileButtonShowPassword: string = 'Hiển thị mật khẩu';
   ngOnInit(): void {
-    this.type = this._router.snapshot.params['type'];
+    this.LoginByGoogle();
+  }
+
+  LoginByGoogle() {
     google.accounts.id.initialize({
-      client_id: '466166882774-7tso04lmusd37v562kgcccjdmt1schra.apps.googleusercontent.com',
-      callback: (resp: any) => this.handleLogin(resp)
+      client_id:
+        '466166882774-7tso04lmusd37v562kgcccjdmt1schra.apps.googleusercontent.com',
+      callback: (resp: any) => this.handleLogin(resp),
     });
     google.accounts.id.renderButton(document.getElementById('google-btn'), {
       theme: 'outline',
@@ -54,44 +54,33 @@ export class LoginComponent implements OnInit {
       height: 200,
       logo_alignment: 'center',
       longtitle: true,
-      text: 'continue_with'
+      text: 'continue_with',
     });
   }
+
   Sumbit_Form() {
-    this.buttonLoading = false;
     const request: loginRequest = this.LoginByUserName.value as loginRequest;
-
-    this.loginService.loginWithUserName(request).subscribe(
-      (response) => {
-        let id: string = response.code.toString();
-        sessionStorage.setItem('idUser', id)
-        this.AddIdUser(response.code);
+    this.loginService.loginWithUserName(request).subscribe((response) => {
+      let id: string = response.code.toString();
+      if (response.code == 500) {
+        this.isUserName = true;
+        return;
       }
-    )
-  }
 
-  // add id khi login xong
-
-  AddIdUser(id: number) {
-    const local = localStorage.getItem('cart');
-    if (!local) {
-      return;
-    }
-    let listItem: cartLocal[] = JSON.parse(local);
-
-    const localById = localStorage.getItem(`cart${id}`);
-    if (!localById) {
-      localStorage.setItem(`cart${id}`, JSON.stringify(listItem));
-    }
-    else {
-      let listItemById: cartLocal[] = JSON.parse(localById);
-      if (listItemById.length == 0) {
-        localStorage.setItem(`cart${id}`, JSON.stringify(listItem));
+      if (response.code == 501) {
+        this.isUserName = false;
+        this.isPassword = true;
+        return;
       }
-    }
-  }
-  // add id khi login xong
 
+      sessionStorage.setItem('idUser', id);
+      if (Boolean(response.message) == true) {
+        window.location.reload();
+        return;
+      }
+      window.location.reload();
+    });
+  }
 
   // login with google
   private decodeToken(token: any) {
@@ -99,12 +88,8 @@ export class LoginComponent implements OnInit {
   }
   handleLogin(response: any) {
     if (!response) return;
-    // using ngZone when change page 
-    // this.ngZone.run(() => {
-    // });
     const payLoad = this.decodeToken(response.credential);
     sessionStorage.setItem('tokenLogin', JSON.stringify(payLoad));
-    // this.router.navigate(['/']);
-    // window.location.reload();
+    window.location.reload();
   }
 }

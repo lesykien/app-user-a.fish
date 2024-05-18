@@ -10,20 +10,27 @@
                 <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
                     chủ</button>
                 <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
-                <button href="" routerLinkActive="active">Danh mục sản phẩm</button>
+                <button [routerLink]="['user-order']" routerLinkActive="active">Danh mục sản phẩm</button>
                 <button href="" routerLinkActive="active">Bài viết</button>
                 <button href="" routerLinkActive="active">Liên hệ</button>
             </div>
         </div>
         <div class="main__right">
             <div class="input__search">
-                <input type="text" placeholder="Tìm kiếm....">
+                <form class="d-flex align-items-center justify-content-between">
+                    <input type="text" placeholder="Tìm kiếm...." [formControl]="inputControl" (blur)="onBlur($event)">
+                    <div class="list__search" *ngIf=" 0 > 1">
+                        kiên
+                    </div>
+                    <button id="buttonSearch" (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
-            <button id="buttonSearch"><i class="fa-solid fa-magnifying-glass"></i>
-            </button>
             <div class="btn__cart">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                        class="fa-solid fa-cart-shopping"></i>
+                        class="fa-solid fa-cart-shopping"
+                        (click)="ClosePopup(openCart)"
+                        ></i>
                 </button>
                 <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>
@@ -44,9 +51,8 @@
         </div>
     </div>
 </nav>
-<div class="container__home">
-    <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
+
 <footer>
     <section class="main__footer container__home">
         <div class="main__footer--top">
@@ -151,13 +157,14 @@
                 <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
                     Giỏ hàng của bạn <span class="fs-6">({{countItem}} sản phẩm)</span>
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ClosePopup(openCart)"></button>
             </div>
             <div class="modal-body">
-                <div class="fs-5 fw-bold" *ngIf="countItem == 0">
+                <div class="fs-5 fw-bold" *ngIf="countItem == 0 ">
                     Tiếp tục mua sắm
                 </div>
-                <app-cart *ngIf="countItem > 0"></app-cart>
+                <app-cart 
+                *ngIf="countItem > 0 && openCart == true"></app-cart>
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

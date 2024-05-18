@@ -1,4 +1,4 @@
-<div class="card p-2">
+<div class="card p-2" *ngIf="order.length > 0">
     <div class="input-group input-group-merge">
         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
         <input type="text" class="form-control" placeholder="Search..." aria-label="Search..."
@@ -19,18 +19,146 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr>
-                    <td>HD-0-0-01</td>
-                    <td> 20/02/2023</td>
-                    <td>0987654321</td>
-                    <td>20.000.000 đ</td>
-                    <td class="d-flex gap-3">
-                        <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-xmark"></i></button>
-                        <button class="btn btn-sm btn-secondary"><i class="fa-solid fa-list"></i></button>
-                        <button class="btn btn-sm btn-success"><i class="fa-solid fa-check"></i></button>
+                <tr *ngFor="let item of order">
+                    <td class="text-uppercase"> {{item.id}} </td>
+                    <td> {{item.data}} </td>
+                    <td> {{item.phone}} </td>
+                    <td>
+                        {{item.tatol | currency :' ':'symbol':'1.0-0'}}.000 đ
+                    </td>
+                    <td class="d-flex gap-3" style="width: 100px;">
+                        <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" (click)="GetOrderById(item.id , 1)"><i
+                                class="fa-solid fa-xmark"></i></button>
+                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            (click)="GetOrderById(item.id , 2)" data-bs-target="#staticBackdrop"><i
+                                class="fa-solid fa-list"></i></button>
+                        <button class="btn btn-sm btn-primary" (click)="IsHandleOrder(item.id)"><i
+                                class="fa-solid fa-check"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<div class="" *ngIf="order.length == 0">
+    <h2>Không có đơn hàng nào cần chờ duyệt</h2>
+</div>
+
+<!-- Modal open list cart -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1440px; margin: 6rem auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
+                    Chi tiết đơn hàng
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="main__cart">
+                    <div class="main__cart--left">
+                        <div class="cart__item mt-5" *ngFor="let item of orderItem.products">
+                            <div class="left__image">
+                                <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
+                                    alt="Hình điện thoại">
+                            </div>
+                            <div class="left__content">
+                                <div class="left__content--name">
+                                    <div class="name__cart">
+                                        <a href="" class="text-capitalize">
+                                            {{ item.name }}
+                                        </a>
+                                    </div>
+                                    <div class="bytes__card" style="opacity: 0;">
+                                        <span></span>
+                                        <button>2TB</button>
+                                    </div>
+                                    <div class="quantity__cart">
+                                        <input type="text" min="1" max="6" class="text-center" [value]="item.quantity">
+                                    </div>
+                                </div>
+                                <div class="left__content--price">
+                                    <div class="price__cart text-lg-end">
+                                        <a> {{ item.price - item.voucher| currency:'
+                                            ':'symbol':'1.0-0'}}.000đ </a>
+                                        <p> {{item.price| currency:' ':'symbol':'1.0-0'}}.000đ </p>
+                                    </div>
+                                    <div class="remove__cart text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main__cart--right">
+                        <div class="mb-3">
+                            <div class="tatol__order mt-3">
+                                <p class="fs-6 fw-bold">Tổng tiền:</p>
+                                <strong>
+                                    <span class="fs-6">
+                                        {{orderItem.tatol| currency:' ':'symbol':'1.0-0'}}.000đ
+                                    </span>
+                                </strong>
+                            </div>
+                            <form [formGroup]="CancelOrder" *ngIf="isVisibilityForm">
+                                <div class="mt-3 form-password-toggle">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fullname" formControlName="why"
+                                            placeholder="Nhập lý do hủy">
+                                    </div>
+                                    <p class="m-0 mt-1 text-danger" *ngIf="CancelOrder.get('why')?.errors?.['required']">
+                                        Bạn chưa nhập lý do hủy đơn hàng</p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="order__form">
+                            <h5>Thông tin giao hàng:</h5>
+                            <form>
+                                <div class="mt-3 form-password-toggle">
+                                    <label class="form-label" for="fullname">Họ tên</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fullname" placeholder="Nhập họ tên"
+                                            [value]="orderItem.fullName" disabled>
+                                    </div>
+                                </div>
+                                <div class="mt-3 form-password-toggle">
+                                    <label class="form-label" for="phone">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="phone" [value]="orderItem.phone"
+                                            placeholder="Nhập số điện thoại" disabled>
+                                    </div>
+                                </div>
+                                <div class="mt-3 form-password-toggle">
+                                    <label class="form-label" for="address">Địa chỉ</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" [value]="orderItem.address" id="address"
+                                            placeholder="Nhập địa chỉ" disabled>
+                                    </div>
+                                </div>
+                                <div class="mt-3 form-password-toggle">
+                                    <label class="form-label">Ghi chú</label>
+                                    <div class="input-group">
+                                        <textarea class="form-control" id="note" disabled>
+                                            {{orderItem.note}}
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" *ngIf="isVisibilityForm" (click)="CancelClick(orderItem.id)">Hủy đơn hàng</button>
+                <button type="button" class="btn btn-primary" (click)="IsHandleOrder(orderItem.id)">
+                    Xác nhận đơn hàng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal open list cart -->

@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { loginRequest } from "../model/login.model";
-import { productRequest } from "../model/products.model";
+import { product, productRequest } from "../model/products.model";
 
 export class productGeneral {
     constructor() { }
@@ -32,5 +32,24 @@ export class productGeneral {
             images: images,
             description: description
         }
+    }
+
+    static HandleStar(): product {
+        return {
+            id: '',
+            name: '',
+            price: 0,
+            image: '',
+            status: false,
+            voucher: 0
+        }
+    }
+
+    static RemoveFistItme(response: product[]): product[] {
+        let list: product[] = [];
+        for (let i = 1; i < response.length; i++) {
+            list.push(response[i]);
+        }
+        return list;
     }
 }

@@ -32,4 +32,12 @@ export class ProductService {
   updateItem(form: FormData): Observable<any> {
     return this.http.post<any>(`${involvement.api}/api/Product/update-item`, form)
   }
+
+  getUsingHome(): Observable<product[]> {
+    return this.http.get<product[]>(`${involvement.api}/api/Product/get-home`)
+  }
+
+  getWithVoucher(): Observable<product[]> {
+    return this.http.get<product[]>(`${involvement.api}/api/Product/get-voucher`)
+  }
 }
