@@ -8,6 +8,7 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
+                    <th class="text-light">STT</th>
                     <th class="text-light">Mã đơn hàng</th>
                     <th class="text-light">Ngày tháng</th>
                     <th class="text-light">Số điện thoại</th>
@@ -16,8 +17,9 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr *ngFor="let item of order">
-                    <td class="text-uppercase"> {{item.id}} </td>
+                <tr *ngFor="let item of order; let i = index">
+                    <td class="text-uppercase"> {{i+1}} </td>
+                    <td class="text-uppercase"> #{{item.id}} </td>
                     <td> {{item.data}} </td>
                     <td> {{item.phone}} </td>
                     <td>

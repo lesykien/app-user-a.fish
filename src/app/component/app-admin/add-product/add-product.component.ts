@@ -18,7 +18,7 @@ export class AddProductComponent implements OnInit {
   ) {}
   imageUrls: { url: string; index: number; file: File }[] = [];
   // create form add item
-  test1 : string = '';
+  test1: string = '';
   addItem = this.formBuilder.group({
     name: [
       '',
@@ -36,33 +36,30 @@ export class AddProductComponent implements OnInit {
         Validators.maxLength(7),
       ],
     ],
-    voucher: [
-      '0',
-      Validators.pattern('^[0-9]+$'),
-    ],
+    voucher: ['0', Validators.pattern('^[0-9]+$')],
     description: [' '],
     category: ['', Validators.required],
   });
 
   options: category[] = [];
   selectedOption: any;
-  
+
   get isVoucherGreaterThanPrice(): boolean {
     const voucherControl = this.addItem.get('voucher');
-  const priceControl = this.addItem.get('price');
+    const priceControl = this.addItem.get('price');
 
-  if (!voucherControl || !priceControl) {
-    return false;
-  }
+    if (!voucherControl || !priceControl) {
+      return false;
+    }
 
-  const voucherValue = Number(voucherControl.value);
-  const priceValue = Number(priceControl.value);
-  
-  if (isNaN(voucherValue) || isNaN(priceValue)) {
-    return false;
-  }
+    const voucherValue = Number(voucherControl.value);
+    const priceValue = Number(priceControl.value);
 
-  return voucherValue >= priceValue;
+    if (isNaN(voucherValue) || isNaN(priceValue)) {
+      return false;
+    }
+
+    return voucherValue >= priceValue;
   }
   // create form add item
   sumbitForm() {
@@ -82,6 +79,10 @@ export class AddProductComponent implements OnInit {
       description,
       category
     );
+    if (this.imageUrls.length == 0) {
+      alert('Chưa thêm hình ảnh');
+      return;
+    }
     for (let item of this.imageUrls) {
       form.append('files', item.file);
     }

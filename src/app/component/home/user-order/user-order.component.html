@@ -88,11 +88,17 @@
             <div class="title__amount">
                 <div class="d-flex align-items-center justify-content-between px-2">
                     <strong>Tạm tính</strong>
-                    <p>20.000.000đ</p>
+                    <p class="fw-bold">
+                        {{price| currency:'
+                        ':'symbol':'1.0-0'}}.000đ
+                    </p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between px-2">
                     <strong>Giảm giá</strong>
-                    <p class="item-voucher">-20.000.000đ</p>
+                    <p class="item-voucher fw-bold text-decoration-none">-
+                        {{voucher | currency:'
+                        ':'symbol':'1.0-0'}}.000đ
+                    </p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between px-2 item__amount">
                     <strong>Tổng tiền</strong>

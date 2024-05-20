@@ -17,7 +17,13 @@ $colorRed_ef3: #ef3434;
         background-color: $colorBlack_2929;
     }
 }
-
+@mixin themeBtnAside {
+    border-radius: 50%;
+    background-color: #00000083;
+    &:hover {
+        background-color: black;
+    }
+}
 @mixin themeBox($color) {
     position: absolute;
     top: 20px;
@@ -39,11 +45,19 @@ $colorRed_ef3: #ef3434;
             object-fit: cover;
         }
     }
+    & .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        @include themeBtnAside();
+    }
+    & .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
     &--content {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        left: 80px;
+        left: 130px;
         h2 {
             font-size: 30px;
             font-weight: 700;

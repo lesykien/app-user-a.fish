@@ -15,6 +15,10 @@
                 </div>
                 <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('username')?.errors?.['required']">Bạn chưa nhập
                     tên đăng nhập</p>
+                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('username')?.errors?.['pattern'] || 
+                LoginByUserName.get('username')?.errors?.['maxlength']
+                ">
+                    Tên đăng nhập không hợp lệ</p>
                 <p class="mt-1 text-danger" *ngIf="isUserName">
                     Kiểm tra lại tên đăng nhập
                 </p>
@@ -30,6 +34,7 @@
                 </div>
                 <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập
                     mật khẩu</p>
+                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['maxlength']">Mật khẩu không hợp lệ</p>
                 <p class="mt-1 text-danger" *ngIf="isPassword">
                     Kiểm tra lại mật khẩu
                 </p>

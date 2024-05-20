@@ -1,13 +1,13 @@
 <div class="main_w">
     <nav class="hearder__top container__home">
         <div class="result">
-            19 kết quả
+            {{listProduct.length}} kết quả
         </div>
         <section class="menu__category">
-            <button class="active__category">Điện thoại</button>
-            <button>Phụ Kiện</button>
-            <button>Tai nghe</button>
-            <button>Tivi</button>
+            <button class="active__category" (click)="FilterCategory(0)" [class.active__category]="isActive == 0">Tất
+                cả</button>
+            <button *ngFor="let item of listCategorys" (click)="FilterCategory(item.id)"
+                [class.active__category]="isActive == item.id"> {{item.name}}</button>
         </section>
     </nav>
 </div>
@@ -62,6 +62,7 @@
                 </div>
             </div>
         </section>
+
         <section class="list__product">
             <div class="main__cart" *ngFor="let item of listProduct">
                 <div class="main__cart--left">
@@ -150,6 +151,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="services">
+                                    <div class="services--item">
+                                        <i class="fa-solid fa-truck-fast"></i>
+                                        <p>Miễn Phí Vận Chuyển Toàn Quốc</p>
+                                    </div>
+                                    <div class="services--item">
+                                        <i class="fa-solid fa-repeat"></i>
+                                        <p>Đổi trả trong 14 ngày nếu phát sinh lỗi của nhà sản xuất</p>
+                                    </div>
+                                    <div class="services--item">
+                                        <i class="fa-solid fa-mobile-screen"></i>
+                                        <p>Thu Cũ Đổi Mới Áp Dụng Cho Cả Thiết Bị Vỡ Màn Hình</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="content__right">
                                 <div class="content__right--top">
@@ -178,8 +193,7 @@
                                         <button class="btn__bytes">64TB</button>
                                         <button class="btn__bytes">2TB</button>
                                     </div> -->
-                                    <div class="content__right--des" 
-                                    [innerHTML]="detalProduct.description">
+                                    <div class="content__right--des" [innerHTML]="detalProduct.description">
                                     </div>
                                 </div>
                                 <div class="content__right--bottom">

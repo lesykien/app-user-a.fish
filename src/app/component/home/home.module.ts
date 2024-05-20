@@ -8,6 +8,7 @@ import { UserOrderComponent } from './user-order/user-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { AccountComponent } from './account/account.component';
 const _router: Routes = [
   {
     path: '',
@@ -16,6 +17,7 @@ const _router: Routes = [
       { path: '', component: MainHomeComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'user-order', component: UserOrderComponent },
+      { path: 'my-page', component: AccountComponent },
     ]
   }
 ]
@@ -25,6 +27,7 @@ const _router: Routes = [
     MainHomeComponent,
     ShopComponent,
     UserOrderComponent,
+    AccountComponent,
   ],
   imports: [
     CommonModule,

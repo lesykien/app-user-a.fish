@@ -27,18 +27,44 @@ export class CartComponent implements OnInit {
   voucher: number = 0;
   provisionnal: number = 0;
 
+  isRexgeFullName: string =
+    '^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$';
+
   informationDelivery = this._formBuilder.group({
-    fullname: ['', [Validators.required]],
-    phone: ['', [Validators.required, Validators.maxLength(10)]],
-    address: ['', [Validators.required]],
+    fullname: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.pattern(this.isRexgeFullName),
+      ],
+    ],
+    phone: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10),
+        Validators.pattern('^[0-9]+$'),
+      ],
+    ],
+    address: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[^@$#%^&*()\\-+={}\\[\\]|\\\\:;"\'<>.?~!]+$'),
+      ],
+    ],
     note: [''],
   });
 
   infomation: any = null;
 
   ngOnInit(): void {
-    this.GetInformation();
-    this.LoadCartNotUser();
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      this.GetInformation();
+      this.LoadCartNotUser();
+    }
   }
 
   // lấy thông tin giỏ hàng
@@ -47,7 +73,7 @@ export class CartComponent implements OnInit {
     if (!local) {
       return;
     } else {
-      let idUser: number = Number(sessionStorage.getItem('idUser'));
+      let idUser: number = Number(localStorage.getItem('idUser'));
       let listLast: cartLocal[] = [];
       if (!idUser) {
         listLast = this.GetLocalCart(`cart`);
@@ -72,10 +98,10 @@ export class CartComponent implements OnInit {
     if (!item) {
       return;
     }
-
-    let idUser: number = Number(sessionStorage.getItem('idUser'));
+    let idUser: number = Number(localStorage.getItem('idUser'));
     if (!idUser) {
       this.RemoveCartItemInList(`cart`, item);
+      this.LoadCartNotUser();
       return;
     }
     this.RemoveCartItemInList(`cart${idUser}`, item);
@@ -99,13 +125,13 @@ export class CartComponent implements OnInit {
     this.provisionnal = 0;
     this.listCart = response;
     for (let item of response) {
-      this.total = this.total + item.quantity * (item.price - item.voucher);
-      this.provisionnal = this.provisionnal + item.quantity * item.price;
-      this.voucher = this.voucher + item.voucher;
+      this.total += item.quantity * (item.price - item.voucher);
+      this.provisionnal += item.quantity * item.price;
+      this.voucher +=  item.voucher * item.quantity;
     }
   }
   GetInformation() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) return;
     this.accountService.getData(id).subscribe((response) => {
       this.infomation = response;
@@ -115,7 +141,7 @@ export class CartComponent implements OnInit {
     });
   }
   SumbitForm() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) {
       alert('Bạn phải đăng nhập mới có thể đặt hàng');
       return;

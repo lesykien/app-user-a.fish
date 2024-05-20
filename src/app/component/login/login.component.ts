@@ -28,8 +28,15 @@ export class LoginComponent implements OnInit {
   ) {}
   // login by user-name
   LoginByUserName = this._formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+    username: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[^@$#%^&*()\\-+={}\\[\\]|\\\\:;"\'<>./?~!]+$'),
+        Validators.maxLength(20),
+      ],
+    ],
+    password: ['', [Validators.required, Validators.maxLength(20)]],
   });
 
   isUserName: boolean = false;
@@ -37,7 +44,7 @@ export class LoginComponent implements OnInit {
   // login by user-name
 
   ngOnInit(): void {
-    this.LoginByGoogle();  
+    this.LoginByGoogle();
   }
 
   LoginByGoogle() {
@@ -73,7 +80,7 @@ export class LoginComponent implements OnInit {
         return;
       }
 
-      sessionStorage.setItem('idUser', id);
+      localStorage.setItem('idUser', id);
       if (Boolean(response.message) == true) {
         window.location.reload();
         return;

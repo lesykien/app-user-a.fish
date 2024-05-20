@@ -11,6 +11,7 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
+                    <th class="text-light">STT</th>
                     <th class="text-light">Mã</th>
                     <th class="text-light">Hình ảnh</th>
                     <th class="text-light">Tên sản phẩm</th>
@@ -25,14 +26,21 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr *ngFor="let item of productResponse;">
+                <tr *ngFor="let item of productResponse; let i = index">
+                    <td class="text-uppercase"> {{i + 1}} </td>
                     <td class="text-uppercase"> {{item.id}} </td>
                     <td><img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="" class="avatar">
                     </td>
                     <td class="text-capitalize"> {{item.name}} </td>
                     <td> {{item.price | currency:' ':'symbol':'1.0-0'}}.000 đ</td>
                     <td> {{item.voucher| currency:' ':'symbol':'1.0-0'}}.000 đ</td>
-                    <td> {{item.status}} </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input cursor-pointer" type="checkbox" id="flexSwitchCheckDefault"
+                                [checked]="item.status" (click)="UpdateStatus(item.id)">
+                            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                        </div>
+                    </td>
                     <td>
                         <!-- <button class="btn btn-sm btn-dark me-3"><i class="fa-solid fa-bars"></i></button> -->
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalToggle"

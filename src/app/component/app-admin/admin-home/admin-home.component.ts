@@ -4,6 +4,7 @@ import { ProductService } from '../../../service/product.service';
 import { product } from '../../../model/products.model';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { config } from 'process';
 
 @Component({
   selector: 'app-admin-home',
@@ -58,5 +59,20 @@ export class AdminHomeComponent implements OnInit {
   }
   Isreload() {
     this.isTypePopup = true;
+  }
+  UpdateStatus(id: string) {
+    const mes = confirm('Có chắc cập nhật sản phẩm không');
+    if (mes) {
+      this.productService.updateStatus(id).subscribe((response) => {
+        if (response.code == 500) {
+          alert('Cập nhật thất bại');
+          window.location.reload();
+          return;
+        }
+        window.location.reload();
+      });
+      return;
+    }
+    window.location.reload();
   }
 }

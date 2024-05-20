@@ -28,9 +28,7 @@
             </div>
             <div class="btn__cart">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                        class="fa-solid fa-cart-shopping"
-                        (click)="ClosePopup(openCart)"
-                        ></i>
+                        class="fa-solid fa-cart-shopping" (click)="ClosePopup(1)"></i>
                 </button>
                 <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>
@@ -41,8 +39,8 @@
                 </button>
                 <div class="group__user">
                     <div class="group__user--btn">
-                        <button>Thông tin tài khoản</button>
-                        <button [routerLink]="['user-order']" >Đơn hàng</button>
+                        <button [routerLink]="['my-page']">Thông tin tài khoản</button>
+                        <button [routerLink]="['user-order']">Đơn hàng</button>
                         <button (click)="Logout()">Đăng xuất</button>
                     </div>
                 </div>
@@ -164,14 +162,15 @@
                 <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
                     Giỏ hàng của bạn <span class="fs-6">({{countItem}} sản phẩm)</span>
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ClosePopup(openCart)"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="ClosePopup(2)"></button>
             </div>
             <div class="modal-body">
-                <div class="fs-5 fw-bold" *ngIf="countItem == 0 ">
+                <div class="fs-5 fw-bold" *ngIf="countItem == 0 
+                || openCart == false">
                     Tiếp tục mua sắm
                 </div>
-                <app-cart 
-                *ngIf="countItem > 0 && openCart == true"></app-cart>
+                <app-cart *ngIf="countItem > 0 && openCart == true"></app-cart>
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

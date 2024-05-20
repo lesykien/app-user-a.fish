@@ -38,7 +38,7 @@ export class MainHomeComponent implements OnInit {
   }
   // thêm sản phẩm vào giỏ hàng khi chưa đăng nhập
   AddToCartWhenNotLogin(item: product) {
-    let idUser: number = Number(sessionStorage.getItem('idUser'));
+    let idUser: number = Number(localStorage.getItem('idUser'));
     if (!idUser) {
       _cart.SetCartLocal(item, `cart`);
       return;

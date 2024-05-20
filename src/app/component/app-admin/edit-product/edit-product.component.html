@@ -5,7 +5,9 @@
             <label for="nameproduct" class="form-label">Tên sản phẩm</label>
             <input type="email" class="form-control" id="nameproduct" placeholder="Tên sản phẩm *"
                 formControlName="name">
-            <p class="text-danger">Bạn chưa nhập tên sản phẩm</p>
+                <p class="text-danger" *ngIf="updateItem.get('name')?.errors?.['required']">Bạn chưa nhập tên sản phẩm</p>
+                <p class="text-danger" *ngIf="updateItem.get('name')?.errors?.['maxlength']">Tên không quá 50 kí tự</p>
+                <p class="text-danger" *ngIf="updateItem.get('name')?.errors?.['pattern']">Tên không hợp lệ</p>
         </div>
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Đơn giá</label>
@@ -14,7 +16,9 @@
                     aria-describedby="basic-addon3 basic-addon4" formControlName="price">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
-            <p class="text-danger">Bạn chưa nhập giá</p>
+            <p class="text-danger" *ngIf="updateItem.get('price')?.errors?.['required']">Bạn chưa nhập giá</p>
+            <p class="text-danger" *ngIf="updateItem.get('price')?.errors?.['pattern'] || 
+            updateItem.get('price')?.errors?.['maxlength']">Giá bán không hợp lệ</p>
         </div>
     </div>
     <!-- tên giá -->
@@ -37,6 +41,9 @@
                     aria-describedby="basic-addon3 basic-addon4" formControlName="voucher">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
+            <p class="text-danger" *ngIf="updateItem.get('voucher')?.errors?.['pattern']">Giảm giá không hợp lệ</p>
+            <p class="text-danger" *ngIf="isVoucherGreaterThanPrice">
+                Giảm giá không được lớn hơn đơn giá</p>
         </div>
     </div>
     <!-- loại sản phẩm , giảm giá -->

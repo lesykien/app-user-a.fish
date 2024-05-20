@@ -1,0 +1,61 @@
+<div class="container__home">
+    <div class="main_w">
+        <nav class="hearder__top">
+            <div class="result">
+                Trang của bạn
+            </div>
+        </nav>
+        <nav class="nav--btn">
+            <button class="btn--active">Trang chủ của tôi</button>
+            <button (click)="Logout()">Đăng xuất</button>
+        </nav>
+    </div>
+    <section class="cart--infor">
+        <div class="cart--infor--main">
+            <div class="cart--infor--main--top">
+                <div class="cart--infor--main--top--img">
+                    <div class="cart--infor--main--top--img--avart">
+                        Blue
+                    </div>
+                </div>
+                <div class="cart--infor--main--top--account">
+                    <h3> {{userId.fullName}} </h3>
+                    <button>Chỉnh sửa hồ sơ <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="cart--infor--main--bottom">
+                <div class="cart--infor--main--bottom--cart">
+                    <h3>Đăng ký mua sản phẩm và trải nghiệm dịch vụ được cá nhân hóa cho riêng bạn</h3>
+                    <button [routerLink]="['/user-order']">
+                        Đơn hàng của tôi</button>
+                </div>
+                <div class="cart--infor--main--bottom--cart">
+                    <div class="cart--infor--main--bottom--cart--child">
+                        <button>Số lượng đơn hàng <i class="fa-solid fa-chevron-right"></i></button>
+                        <h3 class="text-center">{{countItem}} đơn</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h1 class="text-center mt-4">Được đề xuất cho bạn</h1>
+
+    <section class="product">
+        <h4>Sản phảm dành riêng cho bạn</h4>
+        <div class="product--list">
+            <button class="product--list--cart" *ngFor="let item of list">
+                <div class="product--list--cart--img">
+                    <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-galaxy-s24-s928-490234-sm-s928blbcxxv-thumb-539385752?$164_164_PNG$"
+                        alt="">
+                </div>
+                <div class="product--list--cart--body">
+                    <h4>Galaxy S24 Ultra (Online Exclusive)</h4>
+                    <p class="product--list--cart--body--price">200.000đ</p>
+                    <p class="product--list--cart--body--voucher">
+                        Giảm giá từ 200.000đ</p>
+                </div>
+            </button>
+        </div>
+    </section>
+</div>

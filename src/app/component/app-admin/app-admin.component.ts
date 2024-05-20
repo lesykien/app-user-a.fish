@@ -41,7 +41,7 @@ export class AppAdminComponent implements OnInit {
   }
 
   LoadingPage() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) {
       this.ngZone.run(() => {
         this.router.navigate(['/']);
@@ -61,11 +61,11 @@ export class AppAdminComponent implements OnInit {
     }
   }
   Logout() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) return;
     this.accountService.removeItemToken(id).subscribe((response) => {
       if (response.code == 200) {
-        sessionStorage.removeItem('idUser');
+        localStorage.removeItem('idUser');
         window.location.reload();
       }
     });

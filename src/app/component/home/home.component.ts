@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if ( typeof window !== 'undefined' && window.sessionStorage){
+    if (typeof window !== 'undefined' && window.localStorage) {
       this.CountItemInCart();
       this.GetInformation();
     }
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
 
   CountItemInCart() {
     try {
-      let idUser: number | null = Number(sessionStorage.getItem('idUser'));
+      let idUser: number | null = Number(localStorage.getItem('idUser'));
       let listLast: cartLocal[] = [];
       if (!idUser) {
         listLast = this.GetLocalCart(`cart`);
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
     });
   }
   GetInformation() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) return;
     this.accountService.getData(id).subscribe((response) => {
       this.infomation = response;
@@ -127,8 +127,12 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
 
-  ClosePopup(status: boolean) {
-    this.openCart = !status;
+  ClosePopup(status: number) {
+    if (status == 1) {
+      this.openCart = true;
+    } else if (status == 2) {
+      this.openCart = false;
+    }
   }
 
   IsRoles(role: boolean, id: number) {
@@ -145,11 +149,11 @@ export class HomeComponent implements OnInit {
   }
 
   Logout() {
-    let id: number = Number(sessionStorage.getItem('idUser'));
+    let id: number = Number(localStorage.getItem('idUser'));
     if (!id) return;
     this.accountService.removeItemToken(id).subscribe((response) => {
       if (response.code == 200) {
-        sessionStorage.removeItem('idUser');
+        localStorage.removeItem('idUser');
         window.location.reload();
       }
     });
