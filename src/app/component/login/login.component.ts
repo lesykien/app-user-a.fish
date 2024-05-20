@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   // login by user-name
 
   ngOnInit(): void {
-    this.LoginByGoogle();
+    this.LoginByGoogle();  
   }
 
   LoginByGoogle() {

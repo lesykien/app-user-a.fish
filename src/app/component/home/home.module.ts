@@ -7,6 +7,7 @@ import { ShopComponent } from './shop/shop.component';
 import { UserOrderComponent } from './user-order/user-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 const _router: Routes = [
   {
     path: '',
@@ -30,6 +31,7 @@ const _router: Routes = [
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forChild(_router)
   ]
 })

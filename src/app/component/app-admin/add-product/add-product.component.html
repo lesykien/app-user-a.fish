@@ -5,7 +5,9 @@
             <label for="nameproduct" class="form-label">Tên sản phẩm</label>
             <input type="email" class="form-control" id="nameproduct" placeholder="Tên sản phẩm *"
                 formControlName="name">
-            <p class="text-danger">Bạn chưa nhập tên sản phẩm</p>
+            <p class="text-danger" *ngIf="addItem.get('name')?.errors?.['required']">Bạn chưa nhập tên sản phẩm</p>
+            <p class="text-danger" *ngIf="addItem.get('name')?.errors?.['maxlength']">Tên không quá 50 kí tự</p>
+            <p class="text-danger" *ngIf="addItem.get('name')?.errors?.['pattern']">Tên không hợp lệ</p>
         </div>
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Đơn giá</label>
@@ -14,7 +16,9 @@
                     aria-describedby="basic-addon3 basic-addon4">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
-            <p class="text-danger">Bạn chưa nhập giá</p>
+            <p class="text-danger" *ngIf="addItem.get('price')?.errors?.['required']">Bạn chưa nhập giá</p>
+            <p class="text-danger" *ngIf="addItem.get('price')?.errors?.['pattern'] || 
+            addItem.get('price')?.errors?.['maxlength']">Giá bán không hợp lệ</p>
         </div>
     </div>
     <!-- tên giá -->
@@ -24,8 +28,8 @@
         <div class="mb-3 col-6">
             <label for="nameproduct" class="form-label">Loại sản phẩm</label>
             <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
-            formControlName="category">
-            >
+                formControlName="category">
+                >
                 <option *ngFor="let item of options" [value]="item.id">
                     {{item.name}}
                 </option>
@@ -38,6 +42,9 @@
                     aria-describedby="basic-addon3 basic-addon4">
                 <span class="input-group-text" id="basic-addon3">.000 VNĐ</span>
             </div>
+            <p class="text-danger" *ngIf="addItem.get('voucher')?.errors?.['pattern']">Giảm giá không hợp lệ</p>
+            <p class="text-danger" *ngIf="isVoucherGreaterThanPrice">
+                Giảm giá không được lớn hơn đơn giá</p>
         </div>
     </div>
     <!-- loại sản phẩm , giảm giá -->
@@ -54,8 +61,11 @@
                 <div class="mb-3 col-12">
                     <label for="nameproduct" class="form-label">Mô tả sản phẩm</label>
                     <div class="input-group">
-                        <textarea class="form-control" placeholder="Mô tả sản phẩm" formControlName="description"
-                            style="height: 200px;   resize: none;"></textarea>
+                        <editor formControlName="description"
+                        apiKey="0n6ijdg7hl4ie1ub4pkwl682mmhr0gr53tosh1u9609wu5ed" [init]="{
+                              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
+                              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                            }"></editor>
                     </div>
                 </div>
             </div>
@@ -64,9 +74,8 @@
             <div class="privew__image d-flex gap-3 flex-lg-wrap">
                 <div class="privew__image--item p-3" *ngFor="let item of imageUrls; let i = index">
                     <img [src]="item.url" alt="{{item.url}}">
-                    <a class="btn__remove btn btn-danger btn-sm text-light"
-                    style="color: white !important;"
-                    (click)="RemoveItem(i)">
+                    <a class="btn__remove btn btn-danger btn-sm text-light" style="color: white !important;"
+                        (click)="RemoveItem(i)">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                 </div>
@@ -79,9 +88,9 @@
     <!-- button thêm cửa hàng -->
     <div class="row">
         <div class="col-6">
-            <button class="form-control btn btn-primary" (click)="sumbitForm()">Thêm sản phẩm</button>
+            <button class="form-control btn btn-primary" (click)="sumbitForm()" [disabled]="addItem.invalid || isVoucherGreaterThanPrice">Thêm sản
+                phẩm</button>
         </div>
     </div>
     <!-- button thêm cửa hàng -->
-
 </form>

@@ -4,7 +4,9 @@ import { product } from '../../model/products.model';
 import { ProductService } from '../../service/product.service';
 import { response } from 'express';
 import { AccountService } from '../../service/account.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { admin } from '../../involvement/admin.involvement';
+import { NativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-app-admin',
@@ -20,8 +22,22 @@ export class AppAdminComponent implements OnInit {
   ) {}
   ImageLogo: string = involvement.logo;
 
+  titleMain: string = '';
+
   ngOnInit(): void {
     this.LoadingPage();
+    this.IsChangesTitle();
+  }
+
+  IsChangesTitle() {
+    this.titleMain = admin.FilterTitle(this.router.url);
+    
+    this.router.events.subscribe((envent) => {
+      if (envent instanceof NavigationEnd) {
+        this.titleMain = admin.FilterTitle(this.router.url);
+      }
+    });
+
   }
 
   LoadingPage() {

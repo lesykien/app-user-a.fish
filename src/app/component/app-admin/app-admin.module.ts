@@ -11,6 +11,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 const _router: Routes = [
   { 
@@ -34,13 +35,14 @@ const _router: Routes = [
     AdminCheckerOrderComponent,
     AdminShippingOrderComponent,
     AddProductComponent, 
-    EditProductComponent
+    EditProductComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    EditorModule,
     RouterModule.forChild(_router)
   ]
 })

@@ -57,6 +57,39 @@ $border_dashed: 2px dashed $colorBlack;
         gap: 26px;
         align-items: center;
         & .btn__infomation {
+            position: relative;
+            & .group__user {
+                position: absolute;
+                width: 175px;
+                display: none;
+                top: 32px;
+                left: -90px;
+                z-index: 99;
+                transition: all 0.25s linear;
+                & .group__user--btn {
+                    margin-top: 10px;
+                    border-radius: 20px;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: white;
+                    padding: 20px 12px;
+                    transition: all 0.25s linear;
+                    opacity: 0;
+                    & button {
+                        border-radius: 0px;
+                        border: none;
+                        text-align: left;
+                        font-weight: 400;
+                        padding: 8px;
+                        &:hover {
+                            color: $colorBlack;
+                            background-color: transparent;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
             & button {
                 font-size: 14px;
                 padding: 10px 24px;
@@ -68,9 +101,17 @@ $border_dashed: 2px dashed $colorBlack;
                 padding: 4px 15px;
                 background-color: transparent;
                 color: rgb(0, 0, 0);
-                transition: all 0.25s linear;
                 &:hover {
-                    border-radius: 20px 0px 0px 20px;
+                    color: white;
+                    background-color: $colorBlack;
+                }
+            }
+            &:hover {
+                & .group__user {
+                    & .group__user--btn {
+                        opacity: 1;
+                    }
+                    display: block;
                 }
             }
         }

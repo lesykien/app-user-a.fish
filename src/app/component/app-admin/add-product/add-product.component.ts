@@ -8,43 +8,88 @@ import { category } from '../../../model/category.model';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.scss'
+  styleUrl: './add-product.component.scss',
 })
 export class AddProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productSevice: ProductService,
     private categoryService: CategoryService
-  ) { }
-  imageUrls: { url: string, index: number, file: File }[] = [];
+  ) {}
+  imageUrls: { url: string; index: number; file: File }[] = [];
   // create form add item
+  test1 : string = '';
   addItem = this.formBuilder.group({
-    name: ['adsad1', Validators.required],
-    price: ['1', Validators.required],
-    voucher: ['1', Validators.required],
-    description: ['1', Validators.required],
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.pattern('^[^@$#%^&*\\-={}\\[\\]|\\\\:;"\'<>./?~!]+$'),
+      ],
+    ],
+    price: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[1-9][0-9]*$'),
+        Validators.maxLength(7),
+      ],
+    ],
+    voucher: [
+      '0',
+      Validators.pattern('^[0-9]+$'),
+    ],
+    description: [' '],
     category: ['', Validators.required],
   });
 
   options: category[] = [];
   selectedOption: any;
+  
+  get isVoucherGreaterThanPrice(): boolean {
+    const voucherControl = this.addItem.get('voucher');
+  const priceControl = this.addItem.get('price');
+
+  if (!voucherControl || !priceControl) {
+    return false;
+  }
+
+  const voucherValue = Number(voucherControl.value);
+  const priceValue = Number(priceControl.value);
+  
+  if (isNaN(voucherValue) || isNaN(priceValue)) {
+    return false;
+  }
+
+  return voucherValue >= priceValue;
+  }
   // create form add item
   sumbitForm() {
     const name = productGeneral.getFormValue(this.addItem, 'name');
     const price = productGeneral.getFormValue(this.addItem, 'price');
     const voucher = productGeneral.getFormValue(this.addItem, 'voucher');
-    const description = productGeneral.getFormValue(this.addItem, 'description');
+    const description = productGeneral.getFormValue(
+      this.addItem,
+      'description'
+    );
     const category = this.addItem.get('category')?.value; // lấy id category
 
-    let form = productGeneral.convertData(name, price, voucher, description, category);
+    let form = productGeneral.convertData(
+      name,
+      price,
+      voucher,
+      description,
+      category
+    );
     for (let item of this.imageUrls) {
       form.append('files', item.file);
     }
-    this.productSevice.addItem(form).subscribe(response => {
+    this.productSevice.addItem(form).subscribe((response) => {
       if (response.code == 200) {
         window.location.reload();
       }
-    })
+    });
   }
   // Lấy thông tin hình ảnh
   onFilesSelected(event: any) {
@@ -54,7 +99,11 @@ export class AddProductComponent implements OnInit {
       const file = files[i];
       const reader = new FileReader();
       reader.onload = () => {
-        this.imageUrls.push({ url: reader.result as string, index: i, file: file });
+        this.imageUrls.push({
+          url: reader.result as string,
+          index: i,
+          file: file,
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -64,10 +113,9 @@ export class AddProductComponent implements OnInit {
     this.imageUrls = this.imageUrls.filter((_, i) => i !== index);
   }
   ngOnInit(): void {
-    this.categoryService.getData().subscribe(response => {
+    this.categoryService.getData().subscribe((response) => {
       this.options = response;
       this.addItem.get('category')!.setValue(this.options[0]?.id.toString());
-    })
+    });
   }
-
 }

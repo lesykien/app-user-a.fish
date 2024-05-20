@@ -10,7 +10,7 @@
                 <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
                     chủ</button>
                 <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
-                <button [routerLink]="['user-order']" routerLinkActive="active">Danh mục sản phẩm</button>
+                <button routerLinkActive="active">Danh mục sản phẩm</button>
                 <button href="" routerLinkActive="active">Bài viết</button>
                 <button href="" routerLinkActive="active">Liên hệ</button>
             </div>
@@ -36,9 +36,16 @@
             </div>
             <!-- Example single danger button -->
             <div class="btn__infomation">
-                <button *ngIf="infomation" (click)="Logout()">
+                <button *ngIf="infomation">
                     {{infomation.fullName}}
                 </button>
+                <div class="group__user">
+                    <div class="group__user--btn">
+                        <button>Thông tin tài khoản</button>
+                        <button [routerLink]="['user-order']" >Đơn hàng</button>
+                        <button (click)="Logout()">Đăng xuất</button>
+                    </div>
+                </div>
             </div>
             <div class="" *ngIf="!infomation">
                 <!-- button open model form login  -->

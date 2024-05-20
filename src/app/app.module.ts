@@ -15,10 +15,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeModule } from './component/home/home.module';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppAdminComponent } from './component/app-admin/app-admin.component';
 import { AppAdminModule } from './component/app-admin/app-admin.module';
 import { CartComponent } from './component/cart/cart.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 
@@ -44,7 +45,7 @@ import { CartComponent } from './component/cart/cart.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule,
+    EditorModule
   ],
   providers: [
     provideClientHydration(),

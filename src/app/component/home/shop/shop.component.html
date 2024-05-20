@@ -79,8 +79,8 @@
                         <div class="left__content--name">
                             <p class="text-capitalize"> {{item.name}} </p>
                         </div>
-                        <div class="left__content--des">
-                            {{item.description}}
+                        <div class="left__content--des" [innerHTML]="item.description">
+                            <!-- {{item.description}} -->
                         </div>
                     </div>
                 </div>
@@ -178,8 +178,8 @@
                                         <button class="btn__bytes">64TB</button>
                                         <button class="btn__bytes">2TB</button>
                                     </div> -->
-                                    <div class="content__right--des">
-                                        {{detalProduct.description}}
+                                    <div class="content__right--des" 
+                                    [innerHTML]="detalProduct.description">
                                     </div>
                                 </div>
                                 <div class="content__right--bottom">

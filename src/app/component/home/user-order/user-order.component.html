@@ -15,7 +15,7 @@
     </nav>
     <article class="d-flex gap-4 main__oder" *ngIf="listOder.length > 0">
         <section class="order__list">
-            <button class="order__list--item mb-4" [class.active_item]="id == item.id" *ngFor="let item of listOder"
+            <button class="order__list--item mb-3" [class.active_item]="id == item.id" *ngFor="let item of listOder"
                 (click)="GetDataId(item.id, item.delivery)">
                 <h4>Mã đơn hàng: {{item.id}} </h4>
                 <p class="small__text"> {{item.data}} </p>
