@@ -59,4 +59,10 @@ export class ProductService {
       id
     );
   }
+
+  getAboutUser(id: string): Observable<product[]> {
+    return this.http.get<product[]>(
+      `${involvement.api}/api/Product/get-about/${id}`
+    );
+  }
 }

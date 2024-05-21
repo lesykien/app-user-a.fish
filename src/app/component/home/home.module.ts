@@ -9,6 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountComponent } from './account/account.component';
+
+
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UserComponent } from '../user/user.component';
+
 const _router: Routes = [
   {
     path: '',
@@ -28,6 +37,7 @@ const _router: Routes = [
     ShopComponent,
     UserOrderComponent,
     AccountComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +45,12 @@ const _router: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forChild(_router)
   ]
 })

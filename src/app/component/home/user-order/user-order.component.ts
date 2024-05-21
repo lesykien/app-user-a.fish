@@ -9,6 +9,7 @@ import {
 import { _order } from '../../../involvement/order.involvement';
 import { OrderService } from '../../../service/order.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-order',
@@ -18,7 +19,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class UserOrderComponent implements OnInit {
   constructor(
     private oderService: OrderService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private router: Router
   ) {}
   listOder: orderAdminDTOs[] = [];
   itemOder: orderAdminResponse = _order.handelNew();
@@ -42,6 +44,10 @@ export class UserOrderComponent implements OnInit {
   LoadingPage(status: number) {
     this.isBtn = status;
     const request: oderUser = _order.ConvertRequest(status);
+    if (request.idUser == 0) {
+      this.router.navigate(['/']);
+      return;
+    }
     this.oderService.getDataByIdUser(request).subscribe((response) => {
       this.listOder = response;
 

@@ -20,7 +20,8 @@
                 </div>
                 <div class="cart--infor--main--top--account">
                     <h3> {{userId.fullName}} </h3>
-                    <button>Chỉnh sửa hồ sơ <i class="fa-solid fa-chevron-right"></i></button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalTop">Chỉnh sửa hồ sơ
+                        <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
             <div class="cart--infor--main--bottom">
@@ -44,18 +45,38 @@
     <section class="product">
         <h4>Sản phảm dành riêng cho bạn</h4>
         <div class="product--list">
-            <button class="product--list--cart" *ngFor="let item of list">
+            <button class="product--list--cart" *ngFor="let item of listAbout">
                 <div class="product--list--cart--img">
-                    <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/2401/gallery/vn-galaxy-s24-s928-490234-sm-s928blbcxxv-thumb-539385752?$164_164_PNG$"
-                        alt="">
+                    <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
                 </div>
                 <div class="product--list--cart--body">
-                    <h4>Galaxy S24 Ultra (Online Exclusive)</h4>
-                    <p class="product--list--cart--body--price">200.000đ</p>
+                    <h4 class="text-capitalize">{{item.name}}</h4>
+                    <p class="product--list--cart--body--price"> {{item.price - item.voucher | currency:'
+                        ':'symbol':'1.0-0'}}.000đ</p>
                     <p class="product--list--cart--body--voucher">
-                        Giảm giá từ 200.000đ</p>
+                        Giảm giá từ {{item.price | currency:'
+                        ':'symbol':'1.0-0'}}.000đ</p>
                 </div>
             </button>
         </div>
     </section>
+</div>
+
+<!-- Modal hủy đơn hàng  -->
+<div class="modal modal-top fade" id="modalTop" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 8rem auto;">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTopTitle">
+                    Cập nhật thông tin tài khoản
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-user></app-user>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </form>
+    </div>
 </div>

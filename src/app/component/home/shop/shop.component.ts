@@ -11,6 +11,7 @@ import { category } from '../../../model/category.model';
 import { productGeneral } from '../../../involvement/product.involvement';
 import { CategoryService } from '../../../service/category.service';
 import { response } from 'express';
+import { _about } from '../../../model/about.model';
 
 @Component({
   selector: 'app-shop',
@@ -57,6 +58,7 @@ export class ShopComponent implements OnInit {
     this.productService.getDataByIdAdmin(id).subscribe((response) => {
       this.detalProduct = response;
       this.listUrls = response.images;
+      _about.SetItemLocal(response);
     });
   }
   // add to cart

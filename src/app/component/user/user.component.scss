@@ -1,0 +1,71 @@
+$colorGray_F2: #f2f2f2;
+$da: #dadada;
+$bule007: #007aff;
+$f7: #f7f7f7;
+$f1: #f1f6fe;
+
+.btn--next--step {
+    margin-top: 2.4rem;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    padding: 3px 0px;
+    &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: black;
+        bottom: 0px;
+        left: 0px;
+        transition: all 0.2s linear;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scale(0);
+        height: 2px;
+        background-color: black;
+        bottom: 0px;
+        left: 0px;
+        transition: all 0.2s linear 0.2s;
+    }
+    &:hover {
+        &::before {
+            transform: scale(1);
+        }
+        &::after {
+            transform: scale(0);
+        }
+    }
+}
+
+.btn--next--step--back {
+    margin-top: 2.4rem;
+    background-color: transparent;
+    border: 1px solid $da;
+    padding: 2px 24px;
+    border-radius: 20px;
+    &:hover {
+        background-color: $f7;
+    }
+}
+.main--otp {
+    width: 30rem;
+    margin: 2rem auto;
+    & .input--otp {
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid $da;
+        font-size: 18px;
+        &:focus{
+            outline: none;
+            border: 1px dashed;
+        }
+    }
+}

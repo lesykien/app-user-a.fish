@@ -213,6 +213,7 @@ $f1: #f1f6fe;
         width: 100%;
         overflow: hidden;
         &--cart {
+            width: calc(100% / 5 - 24px);
             background-color: $f7;
             border: 2px dashed transparent;
             padding: 24px;
@@ -253,5 +254,11 @@ $f1: #f1f6fe;
                 }
             }
         }
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 60rem;
     }
 }
