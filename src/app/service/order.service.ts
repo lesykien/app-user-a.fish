@@ -62,4 +62,11 @@ export class OrderService {
       `${involvement.api}/api/Order/count-order/${id}`
     );
   }
+
+  updateAddress(request: cancelRequest) {
+    return this.http.put<singleResponse>(
+      `${involvement.api}/api/Order/update-address`,
+      request
+    );
+  }
 }

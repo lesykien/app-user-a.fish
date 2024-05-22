@@ -65,4 +65,10 @@ export class ProductService {
       `${involvement.api}/api/Product/get-about/${id}`
     );
   }
+
+  getProductsHot(): Observable<product[]> {
+    return this.http.get<product[]>(
+      `${involvement.api}/api/Product/get-home-hot`
+    );
+  }
 }

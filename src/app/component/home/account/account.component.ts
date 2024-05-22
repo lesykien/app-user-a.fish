@@ -59,7 +59,6 @@ export class AccountComponent implements OnInit {
       this.GetUserById(id);
     }
   }
-
   GetUserById(id: number) {
     this.accountService.getData(id).subscribe((response) => {
       this.userId = response;
@@ -72,7 +71,6 @@ export class AccountComponent implements OnInit {
       return;
     }
     let about: itemAbout = JSON.parse(local);
-    console.log(about);
     this._product.getAboutUser(about.id).subscribe((response) => {
       if (response.length == 0) {
         return;

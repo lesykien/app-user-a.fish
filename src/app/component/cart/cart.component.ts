@@ -8,6 +8,7 @@ import { cartLocal } from '../../model/cart.model';
 import { product } from '../../model/products.model';
 import { _cart } from '../../involvement/cart.involvement';
 import { OrderService } from '../../service/order.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -127,7 +128,7 @@ export class CartComponent implements OnInit {
     for (let item of response) {
       this.total += item.quantity * (item.price - item.voucher);
       this.provisionnal += item.quantity * item.price;
-      this.voucher +=  item.voucher * item.quantity;
+      this.voucher += item.voucher * item.quantity;
     }
   }
   GetInformation() {
@@ -168,5 +169,48 @@ export class CartComponent implements OnInit {
     listLocal = JSON.parse(local);
     let listReturn: oderITem[] = _cart.ConvetOrderItem(listLocal);
     return listReturn;
+  }
+
+  IsChangeQuantity(status: boolean, id: string) {
+    let idUser: string | null = localStorage.getItem('idUser');
+    if (idUser) {
+      this.ChangeQuantity(`cart${idUser}`, id, status);
+    } else {
+      this.ChangeQuantity(`cart`, id, status);
+    }
+    this.LoadCartNotUser();
+  }
+
+  ChangeQuantity(key: string, id: string, status: boolean) {
+    let local = localStorage.getItem(key);
+    let list: cartLocal[] = [];
+    if (local) {
+      list = JSON.parse(local);
+      const item: cartLocal | undefined = list.find((a) => a.id == id);
+      if (item) {
+        let quantityBefore = item.quantity;
+        if (status) {
+          if (item.quantity < 9) {
+            item.quantity = quantityBefore + 1;
+            list = this.UpdateQuantiyt(item.quantity, id, list);
+            localStorage.setItem(key, JSON.stringify(list));
+          }
+        } else {
+          if (item.quantity > 1) {
+            item.quantity = quantityBefore - 1;
+            list = this.UpdateQuantiyt(item.quantity, id, list);
+            localStorage.setItem(key, JSON.stringify(list));
+          }
+        }
+      }
+    }
+  }
+  UpdateQuantiyt(quantity: number, id: string, list: cartLocal[]): cartLocal[] {
+    for (let i: number = 0; i < list.length; i++) {
+      if (id == list[i].id) {
+        list[i].quantity = quantity;
+      }
+    }
+    return list;
   }
 }

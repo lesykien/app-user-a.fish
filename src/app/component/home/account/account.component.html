@@ -53,7 +53,9 @@
                     <h4 class="text-capitalize">{{item.name}}</h4>
                     <p class="product--list--cart--body--price"> {{item.price - item.voucher | currency:'
                         ':'symbol':'1.0-0'}}.000đ</p>
-                    <p class="product--list--cart--body--voucher">
+                    <p class="product--list--cart--body--voucher"
+                    *ngIf="item.voucher > 0"
+                    >
                         Giảm giá từ {{item.price | currency:'
                         ':'symbol':'1.0-0'}}.000đ</p>
                 </div>
@@ -62,7 +64,7 @@
     </section>
 </div>
 
-<!-- Modal hủy đơn hàng  -->
+<!-- Modal cập nhật thông tin tài khoản -->
 <div class="modal modal-top fade" id="modalTop" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" style="margin: 8rem auto;">
         <form class="modal-content">

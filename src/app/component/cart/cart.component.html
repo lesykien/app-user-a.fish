@@ -16,15 +16,17 @@
                         <button>2TB</button>
                     </div>
                     <div class="quantity__cart">
-                        <button class="btn__minus"> <i class="fa-solid fa-minus"></i> </button>
-                        <input type="text" min="1" max="6" [value]="item.quantity" class="text-center">
-                        <button> <i class="fa-solid fa-plus"></i> </button>
+                        <button class="btn__minus"> <i class="fa-solid fa-minus" (click)="IsChangeQuantity(false, item.id)"></i>
+                        </button>
+                        <input type="text" min="1" max="9" [value]="item.quantity" class="text-center" maxlength="1" disabled>
+                        <button (click)="IsChangeQuantity(true, item.id)"> <i class="fa-solid fa-plus"></i> </button>
                     </div>
                 </div>
                 <div class="left__content--price">
                     <div class="price__cart text-lg-end">
                         <a> {{(item.price - item.voucher) * item.quantity | currency:' ':'symbol':'1.0-0'}}.000đ </a>
-                        <p> {{item.price * item.quantity | currency:' ':'symbol':'1.0-0'}}.000đ </p>
+                        <p *ngIf="item.voucher > 0"> {{item.price * item.quantity | currency:' ':'symbol':'1.0-0'}}.000đ
+                        </p>
                     </div>
                     <div class="remove__cart text-center">
                         <button (click)="RemoveItem(item.id)"><i class="fa-solid fa-trash"></i></button>

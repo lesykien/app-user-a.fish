@@ -25,6 +25,7 @@ const _router: Routes = [
     children: [
       { path: '', component: MainHomeComponent },
       { path: 'shop', component: ShopComponent },
+      { path: 'shop/:search', component: ShopComponent },
       { path: 'user-order', component: UserOrderComponent },
       { path: 'my-page', component: AccountComponent },
     ]

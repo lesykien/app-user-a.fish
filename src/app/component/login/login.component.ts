@@ -96,7 +96,18 @@ export class LoginComponent implements OnInit {
   handleLogin(response: any) {
     if (!response) return;
     const payLoad = this.decodeToken(response.credential);
-    sessionStorage.setItem('tokenLogin', JSON.stringify(payLoad));
-    window.location.reload();
+    let form = new FormData();
+    form.append('email', payLoad.email);
+    this.accountService.loginByGoogle(form).subscribe((response) => {
+      let id: string = response.code.toString();
+      if (response.code != 500) {
+        localStorage.setItem('idUser', id);
+        if (Boolean(response.message) == true) {
+          window.location.reload();
+          return;
+        }
+        window.location.reload();
+      }
+    });
   }
 }

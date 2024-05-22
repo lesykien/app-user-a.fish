@@ -98,85 +98,42 @@
                                     <div class="tab__artcle--left">
                                         <div class="artcle__cart">
                                             <div class="artcle__cart--img">
-                                                <img src="https://images.samsung.com/is/image/samsung/assets/vn/2307/pcd/PCD_Q5_Whats-new_330x330_pc_alt.png?$330_330_PNG$"
+                                                <img src="https://localhost:7041/api/Images/images-detal/{{hotItem.image}}"
                                                     alt="">
                                             </div>
                                             <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">65 Inch The Frame LS03D QLED 4K
-                                                    Smart
-                                                    TV (2024)
+                                                <h3 class="name__product text-center">
+                                                    {{hotItem.name}}
                                                 </h3>
-                                                <h4 class="price__product text-center">20,000.000 đ</h4>
+                                                <h4 class="price__product text-center">{{hotItem.price -
+                                                    hotItem.voucher| currency:' ':'symbol':'1.0-0'}}.000 đ</h4>
                                                 <div class="d-flex justify-content-center">
-                                                    <button class="button__add">Thêm vào giỏ hàng</button>
+                                                    <button class="button__add"
+                                                        (click)="AddToCartWhenNotLogin(newProduct)">Thêm vào giỏ
+                                                        hàng</button>
                                                 </div>
                                             </div>
                                             <div class="artcle__cart--box text-uppercase text-center">
-                                                Hấp dẫn</div>
+                                                Hot</div>
                                         </div>
                                     </div>
                                     <div class="tab__artcle--right">
-                                        <div class="artcle__cart">
+                                        <div class="artcle__cart" *ngFor="let item of listHot">
                                             <div class="artcle__cart--img">
-                                                <img src="https://images.samsung.com/is/image/samsung/assets/vn/2307/pcd/PCD_Q5_Whats-new_330x330_pc_alt.png?$330_330_PNG$"
+                                                <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
                                                     alt="">
                                             </div>
                                             <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">65 Inch The Frame LS03D QLED 4K
-                                                    Smart
-                                                    TV (2024)
+                                                <h3 class="name__product text-center">
+                                                    {{item.name}}
                                                 </h3>
-                                                <h4 class="price__product text-center">20,000.000 đ</h4>
+                                                <h4 class="price__product text-center">{{item.price -
+                                                    item.voucher| currency:' ':'symbol':'1.0-0'}}.000 đ</h4>
                                                 <div class="d-flex justify-content-center">
-                                                    <button class="button__add">Thêm vào giỏ hàng</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
-                                                <img src="https://images.samsung.com/is/image/samsung/assets/vn/smartphones/a55/pcd/Galaxy_A55_PCD_MD_Large_PC.png?$376_376_PNG$"
-                                                    alt="">
-                                            </div>
-                                            <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">65 Inch The Frame LS03D QLED 4K
-                                                    Smart
-                                                    TV (2024)
-                                                </h3>
-                                                <h4 class="price__product text-center">20,000.000 đ</h4>
-                                                <div class="d-flex justify-content-center">
-                                                    <button class="button__add">Thêm vào giỏ hàng</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
-                                                <img src="https://images.samsung.com/is/image/samsung/assets/vn/smartphones/a55/pcd/Galaxy_A55_PCD_MD_Large_PC.png?$376_376_PNG$"
-                                                    alt="">
-                                            </div>
-                                            <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">65 Inch The Frame LS03D QLED 4K
-                                                    Smart
-                                                    TV (2024)
-                                                </h3>
-                                                <h4 class="price__product text-center">20,000.000 đ</h4>
-                                                <div class="d-flex justify-content-center">
-                                                    <button class="button__add">Thêm vào giỏ hàng</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
-                                                <img src="https://images.samsung.com/is/image/samsung/assets/vn/2307/pcd/PCD_Q5_Whats-new_330x330_pc_alt.png?$330_330_PNG$"
-                                                    alt="">
-                                            </div>
-                                            <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">65 Inch The Frame LS03D QLED 4K
-                                                    Smart
-                                                    TV (2024)
-                                                </h3>
-                                                <h4 class="price__product text-center">20,000.000 đ</h4>
-                                                <div class="d-flex justify-content-center">
-                                                    <button class="button__add">Thêm vào giỏ hàng</button>
+                                                    <button class="button__add"
+                                                        (click)="AddToCartWhenNotLogin(item)">Thêm vào giỏ
+                                                        hàng
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

@@ -63,9 +63,153 @@ $f1: #f1f6fe;
         border-radius: 10px;
         border: 1px solid $da;
         font-size: 18px;
-        &:focus{
+        &:focus {
             outline: none;
             border: 1px dashed;
+        }
+    }
+}
+.sender--otp {
+    color: black;
+    position: relative;
+    padding: 10px 0px;
+    width: 24rem;
+    margin: 0 auto;
+    &::after {
+        content: "";
+        animation: sender--otp 50s linear;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        transform: scale(1);
+        width: 0;
+        height: 2px;
+        background-color: black;
+    }
+}
+@keyframes sender--otp {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+.otp--loaing {
+    color: black;
+    position: relative;
+    padding: 10px 0px;
+    width: 24rem;
+    margin: 0 auto;
+    &::after {
+        content: "";
+        animation: otp--loaing 2s infinite;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        transform: scale(1);
+        width: 100%;
+        height: 2px;
+        background-color: black;
+    }
+}
+
+@keyframes otp--loaing {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.not--animation{
+    color: black;
+    padding: 10px 0px;
+    width: 24rem;
+    margin: 0 auto;
+    & button {
+        margin-top: 2.4rem;
+        background-color: transparent;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative;
+        padding: 3px 0px;
+        margin: 0px 5px;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            bottom: 0px;
+            left: 0px;
+            transition: all 0.2s linear;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scale(0);
+            height: 2px;
+            background-color: black;
+            bottom: 0px;
+            left: 0px;
+            transition: all 0.2s linear 0.2s;
+        }
+        &:hover {
+            &::before {
+                transform: scale(1);
+            }
+            &::after {
+                transform: scale(0);
+            }
+        }
+    }
+}
+
+.bottom--model {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    & button {
+        margin-top: 2.4rem;
+        background-color: transparent;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative;
+        padding: 3px 0px;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            bottom: 0px;
+            left: 0px;
+            transition: all 0.2s linear;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scale(0);
+            height: 2px;
+            background-color: black;
+            bottom: 0px;
+            left: 0px;
+            transition: all 0.2s linear 0.2s;
+        }
+        &:hover {
+            &::before {
+                transform: scale(1);
+            }
+            &::after {
+                transform: scale(0);
+            }
         }
     }
 }

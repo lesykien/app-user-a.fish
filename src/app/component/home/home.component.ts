@@ -7,7 +7,6 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ProductService } from '../../service/product.service';
 import { product } from '../../model/products.model';
-import { log } from 'console';
 import { Router } from '@angular/router';
 import { _cart } from '../../involvement/cart.involvement';
 @Component({
@@ -65,7 +64,7 @@ export class HomeComponent implements OnInit {
     });
   }
   Search() {
-    console.log(1);
+    this.router.navigate([`/shop/${this.inputControl}`])
   }
   onBlur(event: FocusEvent) {
     this.isVisilible = false;

@@ -15,8 +15,7 @@
                         Địa chỉ
                     </label>
                     <input type="text" id="nameSlideTop" class="form-control" placeholder="Địa chỉ"
-                    [(ngModel)]="userId.adress"
-                    >
+                        [(ngModel)]="userId.adress">
                 </div>
             </div>
             <div class="row">
@@ -25,8 +24,7 @@
                         Số điện thoại
                     </label>
                     <input type="text" id="emailSlideTop" class="form-control" placeholder="Số điện thoại"
-                    [(ngModel)]="userId.phone"
-                    >
+                        [(ngModel)]="userId.phone">
 
                 </div>
                 <div class="col mb-0">
@@ -34,12 +32,12 @@
                         Email
                     </label>
                     <input type="text" id="dobSlideTop" class="form-control" placeholder="Email"
-                    [(ngModel)]="userId.email"
-                    >
+                        [(ngModel)]="userId.email">
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn--next--step" matStepperNext>Nhập mã OTP
+                <button class="btn--next--step" matStepperNext (click)="SendCodeOTP(userId.email , countSend)">Nhập mã
+                    OTP
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
@@ -48,32 +46,52 @@
 
     <mat-step [stepControl]="secondFormGroup" label="Nhập mã OTP">
         <div class="mt-3">
-            <h6 class="text-center">Mã OTP được gửi vào tin nhắn {{'kien@gmail.com'}}</h6>
+            <h6 class="text-center sender--otp" *ngIf="resOtp.code != 0 &&resOtp.code != 1">
+                Mã OTP được gửi vào tin nhắn {{userId.email}}
+            </h6>
+            <h6 class="text-center" *ngIf="resOtp.code == 0">
+                <div class="otp--loaing">
+                    Mã OTP đang gửi vào tin nhắn {{userId.email}}
+                </div>
+            </h6>
+            <h6 class="text-center" *ngIf="resOtp.code == 1">
+                <div class="not--animation">
+                    Mã OTP đã hết hạn <button (click)="SendCodeOTP(userId.email , countSend)">click vào đây gửi
+                        ({{countSend}}/3)</button>
+                    mã mới
+                </div>
+            </h6>
             <div class="row main--otp">
                 <div class="col">
-                    <input type="text" class="input--otp" maxlength="1" (input)="onInput($event , input2)">
+                    <input type="text" class="input--otp" maxlength="1" (input)="onInput($event , input2)"
+                        [(ngModel)]="otpForm.otp1">
                 </div>
                 <div class="col">
-                    <input #input2 type="text" class="input--otp" maxlength="1" (input)="onInput($event , input3)">
+                    <input #input2 type="text" class="input--otp" maxlength="1" (input)="onInput($event , input3)"
+                        [(ngModel)]="otpForm.otp2">
                 </div>
                 <div class="col">
-                    <input #input3 type="text" class="input--otp" maxlength="1" (input)="onInput($event, input4)">
+                    <input #input3 type="text" class="input--otp" maxlength="1" (input)="onInput($event, input4)"
+                        [(ngModel)]="otpForm.otp3">
                 </div>
                 <div class="col">
-                    <input #input4 type="text" class="input--otp" maxlength="1" (input)="onInput($event, input5)">
+                    <input #input4 type="text" class="input--otp" maxlength="1" (input)="onInput($event, input5)"
+                        [(ngModel)]="otpForm.otp4">
                 </div>
                 <div class="col">
-                    <input #input5 type="text" class="input--otp" maxlength="1" (input)="onInput($event , input6)">
+                    <input #input5 type="text" class="input--otp" maxlength="1" (input)="onInput($event , input6)"
+                        [(ngModel)]="otpForm.otp5">
                 </div>
                 <div class="col">
-                    <input #input6 type="text" class="input--otp" maxlength="1" (input)="onInput($event , null)">
+                    <input #input6 type="text" class="input--otp" maxlength="1" (input)="onInput($event , null)"
+                        [(ngModel)]="otpForm.otp6">
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-5 align-items-center">
-                <button class="btn--next--step--back" matStepperPrevious>
+                <button class="btn--next--step--back" matStepperPrevious (click)="ToBack()">
                     Quay lại
                 </button>
-                <button class="btn--next--step" matStepperNext>
+                <button class="btn--next--step" matStepperNext (click)="GetOTP(resOtp.message)">
                     Lưu thay đổi
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
@@ -83,10 +101,23 @@
 
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="d-grid justify-content-center align-items-center mt-3 gap-4" *ngIf="resOtp.code == 0">
+            <div class="spinner-border spinner-border-lg text-primary m-auto" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Đang cập nhật thông tin tài khoản</p>
+        </div>
+        <div class="d-grid justify-content-center align-items-center mt-3 gap-4" *ngIf="resOtp.code == 200">
+            <p>Cập nhật thông tin tài khoản thành công</p>
+        </div>
+        <div class="d-grid justify-content-center align-items-center mt-3 gap-4" *ngIf="resOtp.code == 500">
+            <p>Cập nhật thông tin tài khoản thất bại</p>
+        </div>
+
+        <div class="bottom--model">
+            <button matStepperPrevious *ngIf="resOtp.code == 500">Quay lại</button>
+            <button data-bs-dismiss="modal" *ngIf="resOtp.code == 200">Đóng</button>
+            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
         </div>
     </mat-step>
 </mat-stepper>

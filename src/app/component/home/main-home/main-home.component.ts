@@ -9,13 +9,13 @@ import { productGeneral } from '../../../involvement/product.involvement';
 @Component({
   selector: 'app-main-home',
   templateUrl: './main-home.component.html',
-  styleUrl: './main-home.component.scss'
+  styleUrl: './main-home.component.scss',
 })
 export class MainHomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService
-  ) { }
+  ) {}
 
   listProduct!: product[];
 
@@ -25,16 +25,20 @@ export class MainHomeComponent implements OnInit {
   listVoucher: product[] = [];
   voucherItem: product = productGeneral.HandleStar();
 
+  listHot: product[] = [];
+  hotItem: product = productGeneral.HandleStar();
+
   ngOnInit(): void {
     this.LoadPage();
     this.GetProductUsingHome();
     this.GetWithVoucher();
+    this.GetProductHot();
   }
 
   LoadPage() {
     this.productService.getData().subscribe((response: product[]) => {
       this.listProduct = response;
-    })
+    });
   }
   // thêm sản phẩm vào giỏ hàng khi chưa đăng nhập
   AddToCartWhenNotLogin(item: product) {
@@ -52,7 +56,7 @@ export class MainHomeComponent implements OnInit {
     this.productService.getUsingHome().subscribe((response) => {
       this.newProduct = response[0];
       this.listProductsNew = productGeneral.RemoveFistItme(response);
-    })
+    });
   }
   // lấy thông tin 5 sản phẩm mới nhât
 
@@ -61,8 +65,14 @@ export class MainHomeComponent implements OnInit {
     this.productService.getWithVoucher().subscribe((response) => {
       this.voucherItem = response[0];
       this.listVoucher = productGeneral.RemoveFistItme(response);
-    })
+    });
   }
   // lấy thông tin 5 sản phẩm mới nhât
 
+  GetProductHot() {
+    this.productService.getProductsHot().subscribe((response) => {
+      this.hotItem = response[0];
+      this.listHot = productGeneral.RemoveFistItme(response);
+    });
+  }
 }

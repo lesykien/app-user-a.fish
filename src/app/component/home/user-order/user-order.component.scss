@@ -427,3 +427,15 @@ $colorGray_8F: #8f8f8f;
         }
     }
 }
+.btn--update--address {
+    @include themeButton();
+    border-radius: 10px;
+    background-color: $colorBule_006;
+    &:hover {
+        background-color: transparent;
+        color: $colorBule_006;
+    }
+    &:disabled {
+        background-color: #8f8f8f;
+    }
+}
