@@ -71,4 +71,11 @@ export class ProductService {
       `${involvement.api}/api/Product/get-home-hot`
     );
   }
+
+  getProductSearch(form: FormData): Observable<productsUserShop[]> {
+    return this.http.post<productsUserShop[]>(
+      `${involvement.api}/api/Product/search-name`,
+      form
+    );
+  }
 }

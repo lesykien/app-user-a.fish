@@ -48,6 +48,12 @@
     <h2>Không có đơn hàng nào cần chờ duyệt</h2>
 </div>
 
+<div class="loading--page d-flex justify-content-center align-items-center" *ngIf="isLoading == 0">
+    <div class="spinner-border spinner-border-lg text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
 <!-- Modal open list cart -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -155,7 +161,14 @@
                 </section>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" *ngIf="isVisibilityForm" (click)="CancelClick(orderItem.id)">Hủy đơn hàng</button>
+                <button type="button" class="btn btn-outline-danger" *ngIf="isVisibilityForm" (click)="CancelClick(orderItem.id)"> 
+                    Xác nhân hủy đơn hàng</button>
+
+                <button type="button" class="btn btn-outline-danger"
+                *ngIf="!isVisibilityForm"
+                (click)="GetOrderById(orderItem.id , 1)"
+                >Hủy đơn hàng</button>
+
                 <button type="button" class="btn btn-primary" (click)="IsHandleOrder(orderItem.id)">
                     Xác nhận đơn hàng
                 </button>

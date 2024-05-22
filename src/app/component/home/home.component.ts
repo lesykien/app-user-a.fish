@@ -7,8 +7,10 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ProductService } from '../../service/product.service';
 import { product } from '../../model/products.model';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { _cart } from '../../involvement/cart.involvement';
+import { v5 as uuidv5 } from 'uuid';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,6 +25,10 @@ export class HomeComponent implements OnInit {
   inputControl = new FormControl();
   isVisilible: boolean = false;
   openCart: boolean = false;
+
+  uuidMap: { [key: string]: string } = {};
+
+  namespace: string = 'e7f63e04-3851-47f4-9ac8-13e7dbbde914';
 
   constructor(
     private cartService: CartService,
@@ -63,8 +69,22 @@ export class HomeComponent implements OnInit {
         });
     });
   }
+
+  generateUuidFromString(text: string): string {
+    return uuidv5(text, this.namespace);
+  }
+
   Search() {
-    this.router.navigate([`/shop/${this.inputControl}`])
+    this.IsChange();
+  }
+
+  IsChange() {
+    const urlSearch: string = this.generateUuidFromString(
+      this.inputControl.value
+    );
+    this.uuidMap[urlSearch] = this.inputControl.value;
+    localStorage.setItem('keySearch', JSON.stringify(this.uuidMap));
+    this.router.navigate([`/shop/${urlSearch}`]);
   }
   onBlur(event: FocusEvent) {
     this.isVisilible = false;

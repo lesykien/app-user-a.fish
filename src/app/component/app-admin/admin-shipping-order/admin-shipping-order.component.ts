@@ -21,6 +21,8 @@ export class AdminShippingOrderComponent implements OnInit {
 
   isVisibilityForm : boolean = false;
 
+  isLoading : number = 1;
+
   CancelOrder = this._formBuilder.group({
     why: ['', Validators.required],
   })
@@ -36,13 +38,16 @@ export class AdminShippingOrderComponent implements OnInit {
   }
 
   IsHandleOrder(id: string) {
+    this.isLoading = 0;
     this.orderService.UpdateStatus(id).subscribe((response) => {
       if (response.code == 200) {
-        alert('Xác nhận đơn hàng thành công');
+        this.isLoading = response.code ;
+        alert('Giao hàng thành công');
         this.LoadPage();
         return;
       }
-      alert('Xác nhận đơn hàng thất bại');
+      this.isLoading = 1;
+      alert('Giao hàng thất bại');
     })
   }
   // lấy thông tin đơn hàng 
@@ -64,14 +69,18 @@ export class AdminShippingOrderComponent implements OnInit {
       alert('bạn chưa nhập lý do hủy đơn hàng');
       return;
     }
+    this.isLoading = 0;
     const request: cancelRequest = _order.ConvertCancel(id, this.CancelOrder.value.why as string);
     this.orderService.cancelOder(request).subscribe((response) => {
       if (response.code == 200) {
+        this.isLoading == response.code
         alert('Hủy đơn hàng thành công');
         this.LoadPage();
         window.location.reload();
         return
       }
+      this.isLoading = 1;
+      alert("Hủy đơn thất bại");
     })
   }
 }

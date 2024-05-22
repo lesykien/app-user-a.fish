@@ -205,3 +205,13 @@ $border_dashed: 2px dashed $colorBlack;
         }
     }
 }
+
+.loading--page {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.61);
+    z-index: 9999;
+}
