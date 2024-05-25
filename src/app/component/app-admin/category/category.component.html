@@ -1,0 +1,47 @@
+<div class="table-responsive text-nowrap mt-4">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-light">STT</th>
+                <th class="text-light">Mã</th>
+                <th class="text-light">Tên sản phẩm</th>
+                <th class="text-light">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-sm btn-primary" (click)="isForm = true; isBtn = true; name = ''">
+                            <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            <tr *ngFor="let item of listCategorys; let i = index">
+                <td class="text-uppercase"> {{i + 1}} </td>
+                <td class="text-uppercase"> {{item.id}} </td>
+                <td class="text-capitalize"> {{item.name}} </td>
+                <td style="width: 2rem;">
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-sm btn-outline-danger" (click)="RemoveItem(item.id)">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button class="btn btn-sm btn-warning" (click)="isBtn = false; name = item.name; isForm = true; id = item.id">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<section class="form--categopry py-4" *ngIf="isForm">
+    <label for="nameproduct" class="form-label">Tên sản phẩm</label>
+    <input type="email" class="form-control" id="nameproduct" placeholder="Tên danh mục" [(ngModel)]="name">
+    <div class="mt-4 d-flex justify-content-end">
+        <button class="btn btn-primary" *ngIf="isBtn"
+        (click)="AddNewItem(name)"
+        >Thêm danh mục sản phẩm</button>
+        <button class="btn btn-outline-warning" *ngIf="!isBtn;"
+        (click)="UpdateItem()"
+        >Sửa danh mục sản phẩm</button>
+    </div>
+</section>

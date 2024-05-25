@@ -1,5 +1,6 @@
 import { cartLocal, oderITem, order, valueFormCart } from '../model/cart.model';
-import { product } from '../model/products.model';
+import { ImagesResponse } from '../model/image.model';
+import { product, productAdminResponse } from '../model/products.model';
 
 export class _cart {
   static convert(item: product): cartLocal {
@@ -11,6 +12,20 @@ export class _cart {
       voucher: item.voucher,
       image: item.image,
       idUser: 0,
+    };
+  }
+
+  static PostItem(item: productAdminResponse): product {
+    let image: ImagesResponse = item.images.find(
+      (a) => a.avatar == true
+    ) as ImagesResponse;
+    return {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      image: image.image,
+      status: item.status,
+      voucher: item.vourcher,
     };
   }
 
@@ -115,5 +130,7 @@ export class _cart {
         localStorage.setItem(`cart${id}`, JSON.stringify(listItem));
       }
     }
+
+    localStorage.removeItem('cart');
   }
 }

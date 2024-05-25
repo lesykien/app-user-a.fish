@@ -9,6 +9,7 @@ import { CategoryService } from '../../../service/category.service';
 import { category } from '../../../model/category.model';
 import { productGeneral } from '../../../involvement/product.involvement';
 import { productRequest } from '../../../model/products.model';
+import { response } from 'express';
 
 @Component({
   selector: 'app-edit-product',
@@ -161,5 +162,31 @@ export class EditProductComponent implements OnInit {
   // Lấy thông tin hình ảnh
   RemoveItem(index: number) {
     this.imageUrls = this.imageUrls.filter((_, i) => i !== index);
+  }
+
+  RemoveImage(id: number) {
+    let isChecker: boolean = confirm('Bạn có muốn xóa ảnh này không');
+    if (isChecker) {
+      this.productService.DeleteImage(id).subscribe((response) => {
+        if (response.code == 200) {
+          this.GetData();
+          return;
+        }
+      });
+    }
+  }
+
+  ChangeActive(id: number) {
+    let isChecker: boolean = confirm(
+      'Bạn có muốn đặt hình này làm avartar không'
+    );
+    if (isChecker) {
+      this.productService.ChangesImage(id).subscribe((response) => {
+        if (response.code == 200) {
+          this.GetData();
+          return;
+        }
+      });
+    }
   }
 }

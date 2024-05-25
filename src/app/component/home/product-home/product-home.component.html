@@ -1,0 +1,64 @@
+<header>
+    <div class="main--header">
+        <div class="main--header--top container__home">
+            <div class="main--header--top--name">
+                <h1> {{items.name}} </h1>
+            </div>
+            <div class="main--header--top--price">
+                <p>200.000đ</p>
+                <button
+                (click)="AddToCart(items)"
+                >Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+    <div class="main--header-bottom">
+        <div class="container__home">
+            <button>Giao hàng nhanh</button>
+            <button>Giá cả hợp lý</button>
+            <button>An tâm khi mua sắm</button>
+        </div>
+    </div>
+</header>
+<section class="body--page">
+    <div class="body--page--information">
+        <h1 class="name">
+            {{items.name}}
+        </h1>
+        <h3 class="price">
+            <span>Chiết khấu từ <br>({{items.price |
+                currency:' ':'symbol':'1.0-0'}}.000đ)</span>
+            {{items.price - items.vourcher | currency:' ':'symbol':'1.0-0'}}.000 đ
+        </h3>
+        <div class="body--page--information--button">
+            <button>Mua ngay</button>
+        </div>
+    </div>
+    <div class="body--page--images">
+        <div class="body--page--images--item">
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item" *ngFor="let item of items.images" [ngClass]="{'active':item.avatar}">
+                        <img class="d-block w-100" src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
+                            alt="Second slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                    <button class="text-center">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                    <button class="text-center">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<h2 class=" text-center mt-5">Chi tiết sản phẩm</h2>
+<section [innerHTML]="items.description" class="description--item container__home">
+
+</section>

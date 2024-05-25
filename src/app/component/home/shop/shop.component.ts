@@ -11,8 +11,8 @@ import { productGeneral } from '../../../involvement/product.involvement';
 import { CategoryService } from '../../../service/category.service';
 import { _about } from '../../../model/about.model';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import { v5 as uuidv5 } from 'uuid';
+import { involvement } from '../../../involvement/api.involvement';
 
 @Component({
   selector: 'app-shop',
@@ -117,5 +117,16 @@ export class ShopComponent implements OnInit {
       return;
     }
     _cart.SetCartLocal(item, `cart${idUser}`);
+  }
+
+  generateUuidFromString(id: string): string {
+    return uuidv5(id, involvement.namespace);
+  }
+  ProductHome(id: string) {
+    let encodingid: string = this.generateUuidFromString(id);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(encodingid, id);
+      this.router.navigate([`product-home/${encodingid}`]);
+    }
   }
 }

@@ -20,7 +20,7 @@
                 </div>
                 <div class="cart--infor--main--top--account">
                     <h3> {{userId.fullName}} </h3>
-                    <button data-bs-toggle="modal" data-bs-target="#modalTop">Chỉnh sửa hồ sơ
+                    <button (click)="openPopup()">Chỉnh sửa hồ sơ
                         <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
     <section class="product">
         <h4>Sản phảm dành riêng cho bạn</h4>
         <div class="product--list">
-            <button class="product--list--cart" *ngFor="let item of listAbout">
+            <button class="product--list--cart" *ngFor="let item of listAbout" (click)="ProductHome(item.id)">
                 <div class="product--list--cart--img">
                     <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
                 </div>
@@ -53,9 +53,7 @@
                     <h4 class="text-capitalize">{{item.name}}</h4>
                     <p class="product--list--cart--body--price"> {{item.price - item.voucher | currency:'
                         ':'symbol':'1.0-0'}}.000đ</p>
-                    <p class="product--list--cart--body--voucher"
-                    *ngIf="item.voucher > 0"
-                    >
+                    <p class="product--list--cart--body--voucher" *ngIf="item.voucher > 0">
                         Giảm giá từ {{item.price | currency:'
                         ':'symbol':'1.0-0'}}.000đ</p>
                 </div>
@@ -64,21 +62,14 @@
     </section>
 </div>
 
-<!-- Modal cập nhật thông tin tài khoản -->
-<div class="modal modal-top fade" id="modalTop" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog" style="margin: 8rem auto;">
-        <form class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTopTitle">
-                    Cập nhật thông tin tài khoản
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <app-user></app-user>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </form>
+<section class="main--popup" [class.open--popup]="isPopup">
+    <div class="main--popup--item">
+        <div class="main--popup--item--header">
+            <h5>Cập nhật thông tin sản phẩm</h5>
+            <button (click)="isPopup = false"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="main--popup--item--body">
+            <app-user></app-user>
+        </div>
     </div>
-</div>
+</section>

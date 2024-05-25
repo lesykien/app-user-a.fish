@@ -37,11 +37,45 @@ $app-user-theme: mat.define-light-theme(
 @include mat.all-component-themes($app-user-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "Samsung Sharp Sans";
+  src:
+    url("./assets/font/SamsungSharpSans-Bold.woff2") format("woff2"),
+    url("./assets/font/SamsungSharpSans-Bold.woff") format("woff"),
+    url("./assets/font/SamsungSharpSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SamsungOne 700";
+  src:
+    url("./assets/font/SamsungOne-700.woff2") format("woff2"),
+    url("./assets/font/SamsungOne-700.woff") format("woff"),
+    url("./assets/font/SamsungOne-700.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SamsungOne 400";
+  src:
+    url("./assets/font/SamsungOne-400.woff2") format("woff2"),
+    url("./assets/font/SamsungOne-400.woff") format("woff"),
+    url("./assets/font/SamsungOne-400.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "SamsungOne", arial, sans-serif;
   font-style: normal;
 }
 
@@ -53,5 +87,15 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family:
+    Samsung Sharp Sans,
+    "Helvetica Neue",
+    sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Samsung Sharp Sans", arial, sans-serif;
 }

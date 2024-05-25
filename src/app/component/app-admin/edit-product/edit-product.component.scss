@@ -1,6 +1,6 @@
 .privew__image {
     width: 100%;
-    height: 329px;
+    height: 230px;
     overflow: hidden;
     overflow-y: auto;
     padding: 24px;
@@ -9,6 +9,15 @@
         width: 100px;
         height: 100px;
         position: relative;
+        & .change--image{
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            border: none;
+            &:hover{
+                background-color: rgb(238, 238, 238);
+            }
+        }
         & img {
             width: 100%;
             height: 100%;
@@ -22,6 +31,18 @@
         }
     }
 }
+
+.active--image{
+    pointer-events: none;
+}
+
 .item__new{
     border: 1px solid;
+}
+
+
+
+.form--description{
+    width: 100% !important;
+    height: 90rem !important;
 }

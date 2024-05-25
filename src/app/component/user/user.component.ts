@@ -16,14 +16,43 @@ export class UserComponent implements OnInit {
     private form: FormBuilder,
     private accountService: AccountService
   ) {}
-  ngOnInit(): void {
-    this.LoadPage();
-  }
+  isRexgeFullName: string =
+    '^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$';
+
   firstFormGroup = this.form.group({
-    firstCtrl: ['', Validators.required],
+    adress: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[^@$#%^&*()\\-+={}\\[\\]|\\\\:;"\'<>.?~!]+$'),
+      ],
+    ],
+    email: ['', [Validators.required, Validators.email]],
+    fullName: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.pattern(this.isRexgeFullName),
+      ],
+    ],
+    phone: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10),
+        Validators.pattern('^[0-9]+$'),
+      ],
+    ],
   });
   secondFormGroup = this.form.group({
-    secondCtrl: ['', Validators.required],
+    otp1: ['', Validators.required],
+    otp2: ['', Validators.required],
+    otp3: ['', Validators.required],
+    otp4: ['', Validators.required],
+    otp5: ['', Validators.required],
+    otp6: ['', Validators.required],
   });
   isLinear = false;
 
@@ -37,21 +66,30 @@ export class UserComponent implements OnInit {
   userId: userModel = user.Convert();
   otpForm: otpCode = user.RenderNew();
 
+  ngOnInit(): void {
+    this.LoadPage();
+  }
+
   LoadPage() {
     if (typeof window !== 'undefined' && window.localStorage) {
       let id: number = Number(localStorage.getItem('idUser'));
       this.accountService.getData(id).subscribe((response) => {
-        this.userId = response;
+        this.RenderUser(response);
       });
     }
   }
 
-  SendCodeOTP(email: string, count: number) {
+  SendEmail(count: number) {
     this.AutoLogout(count);
     if (count === 3) {
       return;
     }
     this.countSend = count + 1;
+    this.userId = this.firstFormGroup.value as userModel;
+    this.SendCodeOTP(this.userId.email);
+  }
+
+  SendCodeOTP(email: string) {
     this.resOtp = {
       code: 0,
       message: '',
@@ -92,14 +130,7 @@ export class UserComponent implements OnInit {
   }
 
   GetOTP(otpData: string) {
-    this.otpForm = {
-      otp1: this.otpForm.otp1,
-      otp2: this.otpForm.otp2,
-      otp3: this.otpForm.otp3,
-      otp4: this.otpForm.otp4,
-      otp5: this.otpForm.otp5,
-      otp6: this.otpForm.otp6,
-    };
+    this.otpForm = this.secondFormGroup.value as otpCode;
     let otpItem: string = user.ConverString(this.otpForm);
     const otpHasMD5 = CryptoJS.MD5(otpItem).toString(CryptoJS.enc.Hex);
     if (otpData.trim() === otpHasMD5.trim()) {
@@ -117,11 +148,18 @@ export class UserComponent implements OnInit {
     this.accountService.updateUser(users).subscribe((response) => {
       this.resOtp = response;
       if (response.code == 200) {
-        window.location.reload();
         return;
       }
     });
   }
+
+  RenderUser(item: userModel) {
+    this.firstFormGroup.get('fullName')!.setValue(item.fullName);
+    this.firstFormGroup.get('phone')!.setValue(item.phone);
+    this.firstFormGroup.get('adress')!.setValue(item.adress);
+    this.firstFormGroup.get('email')!.setValue(item.email);
+  }
+
   onInput(event: Event, nextInput: HTMLInputElement | null) {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement.value;

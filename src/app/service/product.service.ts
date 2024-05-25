@@ -78,4 +78,23 @@ export class ProductService {
       form
     );
   }
+
+  DeleteImage(id: number) {
+    return this.http.delete<singleResponse>(
+      `${involvement.api}/api/Images/delete-img-${id}`
+    );
+  }
+
+  ChangesImage(id: number) {
+    return this.http.put<singleResponse>(
+      `${involvement.api}/api/Images/change-image-${id}`,
+      id
+    );
+  }
+
+  seeMoreItem(page: number): Observable<product[]> {
+    return this.http.get<product[]>(
+      `${involvement.api}/api/Product/more-item-${page}`
+    );
+  }
 }

@@ -1,0 +1,164 @@
+@import "../home.component.scss";
+@import "../main-home/main-home.component.scss";
+$colorGray_F2: #f2f2f2;
+$colorGray_8F: #8f8f8f;
+$c000: #000;
+$c1c: #1c1c1c;
+$c21: #2189ff;
+$c007: #007aff;
+
+@mixin button--blue {
+    font-family: "SamSungOne", arial, sans-serif;
+    padding: 10px 24px;
+    color: white;
+    background-color: $c21;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    height: 50px;
+    &:hover {
+        background-color: $c007;
+    }
+}
+header {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    z-index: 8;
+    & .main--header {
+        border-top: 1px solid $colorGray_F2;
+        border-bottom: 1px solid $colorGray_F2;
+        &--top {
+            padding: 0px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            & h1 {
+                font-family: "Samsung Sharp Sans", arial, sans-serif;
+                font-size: 18px;
+                margin: 0px;
+                font-weight: 700;
+            }
+            &--price {
+                font-family: "Samsung Sharp Sans", arial, sans-serif;
+                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                & p {
+                    margin: 0px;
+                    color: white;
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                & button {
+                    margin-left: 56px;
+                    @include button--blue();
+                }
+            }
+        }
+    }
+
+    & .main--header-bottom {
+        border-bottom: 1px solid $colorGray_F2;
+        & .container__home {
+            padding: 0px 16px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            & button {
+                font-size: 14px;
+                border: none;
+                background-color: transparent;
+                height: 35px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.body--page {
+    width: 100%;
+    height: calc(100vh - 168px);
+    display: flex;
+    justify-content: center;
+    background-color: rgb(244, 244, 244);
+    align-items: center;
+    gap: 30px;
+    &--information {
+        & .name {
+            font-size: 54px;
+            font-weight: 700;
+        }
+        & .price {
+            font-size: 27px;
+            & span {
+                display: inline-block;
+                font-size: 12px;
+                text-decoration: line-through;
+                color: $c007;
+                margin-right: 20px;
+            }
+        }
+        &--button {
+            margin-top: 40px;
+            & button {
+                font-size: 14px;
+                font-family: "SamSungOne", arial, sans-serif;
+                padding: 8px 22px;
+                border: 1px solid;
+                border-radius: 20px;
+                background-color: transparent;
+                font-weight: 700;
+            }
+        }
+    }
+
+    &--images {
+        &--item {
+            width: 590px;
+            height: 531px;
+            overflow: hidden;
+            & img {
+                transform: scale(1.2);
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            & .carousel-control-next {
+                & button {
+                    height: 40px;
+                    width: 40px;
+                    border: 1px dashed black;
+                    border-radius: 50%;
+                    background-color: transparent;
+                    font-size: 16px;
+                    &:hover {
+                        background-color: $colorGray_F2;
+                    }
+                }
+            }
+            & .carousel-control-prev {
+                & button {
+                    height: 40px;
+                    width: 40px;
+                    border: 1px dashed black;
+                    border-radius: 50%;
+                    background-color: transparent;
+                    font-size: 16px;
+                    &:hover {
+                        background-color: $colorGray_F2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.description--item {
+    text-align: center;
+    & .highlights-design-display__image-inner{
+        text-align: justify;
+    }
+}

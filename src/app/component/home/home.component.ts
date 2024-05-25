@@ -10,7 +10,6 @@ import { product } from '../../model/products.model';
 import { NavigationEnd, Router } from '@angular/router';
 import { _cart } from '../../involvement/cart.involvement';
 import { v5 as uuidv5 } from 'uuid';
-import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,6 +23,7 @@ export class HomeComponent implements OnInit {
   listProduct: product[] = [];
   inputControl = new FormControl();
   isVisilible: boolean = false;
+
   openCart: boolean = false;
 
   uuidMap: { [key: string]: string } = {};
@@ -146,17 +146,8 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
 
-  ClosePopup(status: number) {
-    if (status == 1) {
-      this.openCart = true;
-    } else if (status == 2) {
-      this.openCart = false;
-    }
-  }
-
   IsRoles(role: boolean, id: number) {
     if (!role) {
-      _cart.AddIdUser(id);
       return;
     }
     if (role) {

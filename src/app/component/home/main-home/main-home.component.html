@@ -97,10 +97,10 @@
                                 <div class="tab__article--main">
                                     <div class="tab__artcle--left">
                                         <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(hotItem.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{hotItem.image}}"
                                                     alt="">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{hotItem.name}}
@@ -119,10 +119,10 @@
                                     </div>
                                     <div class="tab__artcle--right">
                                         <div class="artcle__cart" *ngFor="let item of listHot">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(item.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
                                                     alt="">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{item.name}}
@@ -146,10 +146,10 @@
                                 <div class="tab__article--main">
                                     <div class="tab__artcle--left">
                                         <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(newProduct.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{newProduct.image}}"
                                                     alt="">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{newProduct.name}}
@@ -168,10 +168,10 @@
                                     </div>
                                     <div class="tab__artcle--right">
                                         <div class="artcle__cart" *ngFor="let item of listProductsNew">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(item.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
                                                     alt="https://localhost:7041/api/Images/images-detal/{{item.image}}">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{item.name}}
@@ -197,10 +197,10 @@
                                 <div class="tab__article--main">
                                     <div class="tab__artcle--left">
                                         <div class="artcle__cart">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(voucherItem.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{voucherItem.image}}"
                                                     alt="">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{voucherItem.name}}
@@ -224,10 +224,10 @@
                                     </div>
                                     <div class="tab__artcle--right">
                                         <div class="artcle__cart" *ngFor="let item of listVoucher">
-                                            <div class="artcle__cart--img">
+                                            <button (click)="ProductHome(item.id)" class="artcle__cart--img">
                                                 <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
                                                     alt="">
-                                            </div>
+                                            </button>
                                             <div class="artcle__cart--body">
                                                 <h3 class="name__product text-center">
                                                     {{item.name}}
@@ -264,13 +264,15 @@
             <div class="main__suggest--product">
                 <div class="product__cart" *ngFor="let item of listProduct">
                     <div class="product__cart--top">
-                        <a href="">
+                        <button (click)="ProductHome(item.id)">
                             <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
-                        </a>
+                        </button>
                     </div>
                     <div class="product__cart--body">
                         <div class="name__product">
-                            <p class="text-center fw-bold mt-2"> {{item.name}} </p>
+                            <button (click)="ProductHome(item.id)">
+                                {{item.name}}
+                            </button>
                         </div>
                         <div class="price__product">
                             <p class="text-center fw-bold">
@@ -286,8 +288,8 @@
                     <div class="product__cart--bottom"></div>
                 </div>
             </div>
-            <div class="main__suggest--bottom">
-                <button class="btn__more mt-5">
+            <div class="main__suggest--bottom" *ngIf="isBtnSeeMore">
+                <button class="btn__more mt-5" (click)="LoadPage(page)">
                     Xem thêm
                 </button>
             </div>

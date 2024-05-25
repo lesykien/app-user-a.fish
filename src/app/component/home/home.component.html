@@ -1,4 +1,4 @@
-<nav>
+<nav class="flex--none">
     <div class="container__home main">
         <div class="main__left">
             <div class="main__left--logo">
@@ -10,8 +10,8 @@
                 <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
                     chủ</button>
                 <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
-                <button routerLinkActive="active">Danh mục sản phẩm</button>
-                <button href="" routerLinkActive="active">Bài viết</button>
+                <button [routerLink]="['categorys']" routerLinkActive="active">Danh mục sản phẩm</button>
+                <button [routerLink]="['blogs']" routerLinkActive="active">Bài viết</button>
                 <button href="" routerLinkActive="active">Liên hệ</button>
             </div>
         </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="btn__cart">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                        class="fa-solid fa-cart-shopping" (click)="ClosePopup(1)"></i>
+                        class="fa-solid fa-cart-shopping" (click)="openCart = true"></i>
                 </button>
                 <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>
@@ -163,7 +163,7 @@
                     Giỏ hàng của bạn <span class="fs-6">({{countItem}} sản phẩm)</span>
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    (click)="ClosePopup(2)"></button>
+                    (click)="openCart = false"></button>
             </div>
             <div class="modal-body">
                 <div class="fs-5 fw-bold" *ngIf="countItem == 0 

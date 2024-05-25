@@ -1,0 +1,116 @@
+@import "../home.component.scss";
+$colorBlack_2929: #555;
+$colorWite_f7f7: #f7f7f7;
+$colorGray: #555555;
+$colorBule_006: #006bea;
+$colorRed_ef3: #ef3434;
+* {
+    color: $colorBlack;
+}
+@mixin themeBtnAside {
+    border-radius: 50%;
+    background-color: #00000083;
+    &:hover {
+        background-color: black;
+    }
+}
+
+.main__aside {
+    position: relative;
+    &--img {
+        width: 100%;
+        height: 100%;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    & .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        @include themeBtnAside();
+    }
+    & .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
+    &--content {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        &--item {
+            width: 720px;
+            h2 {
+                font-size: 48px;
+                font-weight: 700;
+                color: white;
+            }
+            p {
+                margin-top: 24px;
+                font-size: 18px;
+                line-height: 1.5;
+                font-weight: 400;
+                color: white;
+            }
+            & .content__button {
+                margin-top: 40px;
+                button {
+                    padding: 10px 24px;
+                    color: black;
+                    background-color: white;
+                    border: 1px solid transparent;
+                    border-radius: 20px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    &:hover {
+                        background-color: $colorWite_f7f7;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.artcle--content {
+    margin-top: 48px;
+    padding: 0px 24px;
+    & h2 {
+        font-size: 28px;
+        font-family: "SamSungOne", arial, sans-serif;
+        font-weight: 700;
+    }
+    &--list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(calc(390px + 24px), 1fr));
+        grid-template-rows: 1fr;
+        width: 100%;
+        overflow-x: auto;
+        &--cart {
+            padding: 0px 12px;
+            width: calc(390px + 24px);
+            &--image {
+                width: 100%;
+                height: 290px;
+                border-radius: 20px;
+                overflow: hidden;
+                margin-bottom: 24px;
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 20px;
+                }
+            }
+            & h3 {
+                font-size: 22px;
+                text-align: justify;
+                padding: 0px 4px;
+            }
+        }
+    }
+}

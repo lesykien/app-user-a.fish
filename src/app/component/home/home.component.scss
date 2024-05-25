@@ -32,23 +32,24 @@ $border_dashed: 2px dashed $colorBlack;
         & button {
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 700;
             background-color: transparent;
             border: none;
             padding: 0px 8px;
             border: 2px dashed transparent;
             border-radius: 20px;
             color: $colorBlack;
+            font-family: "Samsung Sharp Sans", arial, sans-serif;
             &:focus {
                 outline: none;
             }
             &:hover {
-                font-weight: bolder;
-                border: 2px dashed $colorBlack;
+                background-color: black;
+                color: white;
             }
             &.active {
-                font-weight: bolder;
-                border: 2px dashed $colorBlack;
+                background-color: black;
+                color: white;
             }
         }
     }
@@ -63,7 +64,7 @@ $border_dashed: 2px dashed $colorBlack;
                 width: 175px;
                 display: none;
                 top: 32px;
-                left: -90px;
+                right: -16px;
                 z-index: 99;
                 transition: all 0.25s linear;
                 & .group__user--btn {
@@ -77,10 +78,11 @@ $border_dashed: 2px dashed $colorBlack;
                     transition: all 0.25s linear;
                     opacity: 0;
                     & button {
+                        font-family: "Samsung Sharp Sans", arial, sans-serif;
                         border-radius: 0px;
                         border: none;
                         text-align: left;
-                        font-weight: 400;
+                        font-weight: 700;
                         padding: 8px;
                         &:hover {
                             color: $colorBlack;
@@ -91,6 +93,7 @@ $border_dashed: 2px dashed $colorBlack;
                 }
             }
             & button {
+                font-family: "Samsung Sharp Sans", arial, sans-serif;
                 font-size: 14px;
                 padding: 10px 24px;
                 color: white;
@@ -143,6 +146,8 @@ $border_dashed: 2px dashed $colorBlack;
             }
         }
         & button {
+            font-family: "Samsung Sharp Sans", arial, sans-serif;
+            font-weight: 400;
             font-size: 18px;
             background-color: transparent;
             border: none;
@@ -156,6 +161,8 @@ $border_dashed: 2px dashed $colorBlack;
             }
         }
         & .button__login {
+            font-family: "Samsung Sharp Sans", arial, sans-serif;
+            font-weight: 400;
             font-size: 14px;
             border: 1px solid;
             padding: 2px 8px;
@@ -249,5 +256,14 @@ $border_dashed: 2px dashed $colorBlack;
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .container__home {
+        max-width: 100%;
+    }
+    .flex--none{
+        display: none;
     }
 }

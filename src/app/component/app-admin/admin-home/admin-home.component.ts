@@ -19,15 +19,22 @@ export class AdminHomeComponent implements OnInit {
   productResponse: product[] = [];
   id!: string;
   isTypePopup: boolean = true;
+  isCategory: boolean = false;
   titlePopup: string = 'Thêm thông tin sản phẩm';
   inputControl = new FormControl();
 
+  isPopup: boolean = false;
+
   ngOnInit(): void {
     this.id = this._router.snapshot.params['id'];
+    this.LoadPage();
+    this.ChangeSearch();
+  }
+
+  LoadPage() {
     this.productService.getData().subscribe((response) => {
       this.productResponse = response;
     });
-    this.ChangeSearch();
   }
 
   ChangeSearch() {
@@ -48,6 +55,7 @@ export class AdminHomeComponent implements OnInit {
   }
 
   openPopup(id: string) {
+    this.isPopup = true;
     if (id != 'add') {
       this.titlePopup = 'Cập nhật thông tin sản phẩm';
       this.isTypePopup = false;
@@ -59,6 +67,7 @@ export class AdminHomeComponent implements OnInit {
   }
   Isreload() {
     this.isTypePopup = true;
+    this.isPopup = false;
   }
   UpdateStatus(id: string) {
     const mes = confirm('Có chắc cập nhật sản phẩm không');

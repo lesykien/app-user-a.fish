@@ -167,7 +167,9 @@
                 (click)="GetOrderById(orderItem.id , 1)"
                 >Hủy đơn hàng</button>
 
-                <button type="button" class="btn btn-primary" (click)="IsHandleOrder(orderItem.id)">
+                <button type="button" class="btn btn-primary" 
+                *ngIf="!isVisibilityForm"
+                (click)="IsHandleOrder(orderItem.id)">
                     Xác nhận đơn hàng
                 </button>
             </div>

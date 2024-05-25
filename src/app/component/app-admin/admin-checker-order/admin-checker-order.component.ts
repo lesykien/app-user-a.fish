@@ -71,8 +71,6 @@ export class AdminCheckerOrderComponent implements OnInit {
         return;
       }
       this.isLoading = 0;
-      console.log(this.isLoading);
-      
       const request: cancelRequest = _order.ConvertCancel(id, this.CancelOrder.value.why as string);
       this.orderService.cancelOder(request).subscribe((response) => {
         if (response.code == 200) {

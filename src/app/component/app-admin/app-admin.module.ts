@@ -12,6 +12,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { CategoryComponent } from './category/category.component';
 
 const _router: Routes = [
   { 
@@ -35,7 +36,7 @@ const _router: Routes = [
     AdminCheckerOrderComponent,
     AdminShippingOrderComponent,
     AddProductComponent, 
-    EditProductComponent,
+    EditProductComponent, CategoryComponent,
   ],
   imports: [
     CommonModule,

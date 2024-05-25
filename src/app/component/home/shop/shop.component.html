@@ -77,9 +77,9 @@
                         </div>
                     </div>
                     <div class="left__content">
-                        <div class="left__content--name">
+                        <button (click)="ProductHome(item.id)" class="left__content--name">
                             <p class="text-capitalize"> {{item.name}} </p>
-                        </div>
+                        </button>
                         <div class="left__content--des" [innerHTML]="item.description">
                             <!-- {{item.description}} -->
                         </div>

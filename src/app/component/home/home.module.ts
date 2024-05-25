@@ -17,6 +17,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserComponent } from '../user/user.component';
+import { ProductHomeComponent } from './product-home/product-home.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { CategorysComponent } from './categorys/categorys.component';
 
 const _router: Routes = [
   {
@@ -28,6 +31,9 @@ const _router: Routes = [
       { path: 'shop/:search', component: ShopComponent },
       { path: 'user-order', component: UserOrderComponent },
       { path: 'my-page', component: AccountComponent },
+      { path: 'product-home/:id', component: ProductHomeComponent },
+      { path: 'blogs', component: BlogsComponent },
+      { path: 'categorys', component: CategorysComponent },
     ]
   }
 ]
@@ -38,7 +44,10 @@ const _router: Routes = [
     ShopComponent,
     UserOrderComponent,
     AccountComponent,
-    UserComponent
+    UserComponent,
+    ProductHomeComponent,
+    BlogsComponent,
+    CategorysComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +58,6 @@ const _router: Routes = [
     MatSlideToggleModule,
     MatButtonModule,
     MatStepperModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     RouterModule.forChild(_router)

@@ -113,9 +113,15 @@ $colorGray_F2: #f2f2f2;
                 height: 15rem;
                 &--name {
                     font-size: 16px;
-                    font-weight: bold;
+                    border: 2px solid transparent;
+                    background-color: transparent;
                     p {
+                        font-weight: 700;
+                        font-family: "Samsung Sharp Sans", arial, sans-serif;
                         margin: 0px;
+                    }
+                    &:hover {
+                        border: 2px dashed black;
                     }
                 }
                 &--color {

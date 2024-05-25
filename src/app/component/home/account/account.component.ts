@@ -8,6 +8,8 @@ import { itemAbout } from '../../../model/about.model';
 import { ProductService } from '../../../service/product.service';
 import { product, productAdminResponse } from '../../../model/products.model';
 import { FormBuilder, Validators } from '@angular/forms';
+import { involvement } from '../../../involvement/api.involvement';
+import { v5 as uuidv5 } from 'uuid';
 
 @Component({
   selector: 'app-account',
@@ -28,19 +30,17 @@ export class AccountComponent implements OnInit {
   countItem: number = 0;
   userId: userModel = user.Convert();
   listAbout: product[] = [];
-  firstFormGroup = this.form.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this.form.group({
-    secondCtrl: ['', Validators.required],
-  });
-  isLinear = false;
+  isPopup = false;
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       this.LoadPage();
       this.GetAbout();
     }
+  }
+
+  openPopup(){
+    this.isPopup = true;
   }
 
   LoadPage() {
@@ -89,4 +89,16 @@ export class AccountComponent implements OnInit {
       }
     });
   }
+
+    // router -> product detal
+    generateUuidFromString(id: string): string {
+      return uuidv5(id, involvement.namespace);
+    }
+    ProductHome(id: string) {
+      let encodingid: string = this.generateUuidFromString(id);
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        sessionStorage.setItem(encodingid , id);
+        this.router.navigate([`product-home/${encodingid}`])
+      }
+    }
 }

@@ -1,6 +1,6 @@
 .privew__image {
     width: 100%;
-    height: 329px;
+    height: 230px;
     overflow: hidden;
     overflow-y: auto;
     padding: 24px;
@@ -21,4 +21,9 @@
             padding: 2px 7px;
         }
     }
+}
+
+.form--description{
+    width: 100% !important;
+    height: 719px !important;
 }

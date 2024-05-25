@@ -5,6 +5,8 @@ import { CartService } from '../../../service/cart.service';
 import { cartRequest } from '../../../model/cart.model';
 import { _cart } from '../../../involvement/cart.involvement';
 import { productGeneral } from '../../../involvement/product.involvement';
+import { v5 as uuidv5 } from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-home',
@@ -14,10 +16,11 @@ import { productGeneral } from '../../../involvement/product.involvement';
 export class MainHomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
-  listProduct!: product[];
+  listProduct: product[] = [];
 
   listProductsNew: product[] = [];
   newProduct: product = productGeneral.HandleStar();
@@ -27,18 +30,33 @@ export class MainHomeComponent implements OnInit {
 
   listHot: product[] = [];
   hotItem: product = productGeneral.HandleStar();
+  namespace: string = 'e7f63e04-3851-47f4-9ac8-13e7dbbde914';
+
+  page: number = 1;
+  isBtnSeeMore: boolean = true;
 
   ngOnInit(): void {
-    this.LoadPage();
+    this.LoadPage(this.page);
     this.GetProductUsingHome();
     this.GetWithVoucher();
     this.GetProductHot();
   }
 
-  LoadPage() {
-    this.productService.getData().subscribe((response: product[]) => {
-      this.listProduct = response;
+  LoadPage(page: number) {
+    this.page = page + 1;
+    this.productService.seeMoreItem(page).subscribe((response: product[]) => {
+      if (response.length > 0) {
+        this.PushArray(response);
+        return;
+      }
+      this.isBtnSeeMore = false;
     });
+  }
+
+  PushArray(response: product[]) {
+    for (let item of response) {
+      this.listProduct.push(item);
+    }
   }
   // thêm sản phẩm vào giỏ hàng khi chưa đăng nhập
   AddToCartWhenNotLogin(item: product) {
@@ -74,5 +92,17 @@ export class MainHomeComponent implements OnInit {
       this.hotItem = response[0];
       this.listHot = productGeneral.RemoveFistItme(response);
     });
+  }
+
+  // router -> product detal
+  generateUuidFromString(id: string): string {
+    return uuidv5(id, this.namespace);
+  }
+  ProductHome(id: string) {
+    let encodingid: string = this.generateUuidFromString(id);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(encodingid, id);
+      this.router.navigate([`product-home/${encodingid}`]);
+    }
   }
 }
