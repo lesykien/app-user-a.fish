@@ -6,7 +6,7 @@ import { cartLocal } from '../../model/cart.model';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ProductService } from '../../service/product.service';
-import { product } from '../../model/products.model';
+import { product, productsUserShop } from '../../model/products.model';
 import { NavigationEnd, Router } from '@angular/router';
 import { _cart } from '../../involvement/cart.involvement';
 import { v5 as uuidv5 } from 'uuid';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   nameUser: string = '';
   countItem: number = 0;
   infomation: any = null;
-  listProduct: product[] = [];
+  listProduct: productsUserShop[] = [];
   inputControl = new FormControl();
   isVisilible: boolean = false;
 
@@ -47,34 +47,34 @@ export class HomeComponent implements OnInit {
   }
 
   ChangeSearch() {
-    this.productService.getData().subscribe((response) => {
-      this.inputControl.valueChanges
-        .pipe(debounceTime(200))
-        .subscribe((value) => {
-          if (value.trim() == '') {
-            this.isVisilible = false;
-          } else {
-            this.isVisilible = true;
-          }
-          const searchTerm = value.trim().toUpperCase();
-          const list: product[] = response.filter((product) => {
-            const nameUpper = product.name.trim().toUpperCase();
-            return (
-              nameUpper.includes(searchTerm) ||
-              product.id.toUpperCase().includes(searchTerm) ||
-              !searchTerm
-            );
-          });
-          this.listProduct = list;
-        });
+    this.inputControl.valueChanges
+      .pipe(debounceTime(200))
+      .subscribe((value) => {
+        if (value.trim() == '') {
+          this.isVisilible = false;
+        } else {
+          this.isVisilible = true;
+        }
+        this.CallBackSerch(value);
+      });
+  }
+  CallBackSerch(value: string) {
+    let form = new FormData();
+    form.append('name', value);
+    this.productService.getProductSearch(form).subscribe((response) => {
+      if (response.length == 0) {
+        this.isVisilible = false;
+        return;
+      }
+      this.listProduct = response;
     });
   }
-
   generateUuidFromString(text: string): string {
     return uuidv5(text, this.namespace);
   }
 
   Search() {
+    this.isVisilible = false;
     this.IsChange();
   }
 
@@ -86,10 +86,6 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('keySearch', JSON.stringify(this.uuidMap));
     this.router.navigate([`/shop/${urlSearch}`]);
   }
-  onBlur(event: FocusEvent) {
-    this.isVisilible = false;
-  }
-
   CountItemInCart() {
     try {
       let idUser: number | null = Number(localStorage.getItem('idUser'));
@@ -167,5 +163,14 @@ export class HomeComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  ProductHome(id: string) {
+    this.isVisilible = false;
+    let encodingid: string = this.generateUuidFromString(id);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(encodingid, id);
+      this.router.navigate([`product-home/${encodingid}`]);
+    }
   }
 }

@@ -10,7 +10,6 @@
                 <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
                     chủ</button>
                 <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
-                <button [routerLink]="['categorys']" routerLinkActive="active">Danh mục sản phẩm</button>
                 <button [routerLink]="['blogs']" routerLinkActive="active">Bài viết</button>
                 <button href="" routerLinkActive="active">Liên hệ</button>
             </div>
@@ -18,9 +17,22 @@
         <div class="main__right">
             <div class="input__search">
                 <form class="d-flex align-items-center justify-content-between">
-                    <input type="text" placeholder="Tìm kiếm...." [formControl]="inputControl" (blur)="onBlur($event)">
-                    <div class="list__search" *ngIf=" 0 > 1">
-                        kiên
+                    <input type="text" placeholder="Tìm kiếm...." [formControl]="inputControl"
+                        (keydown.enter)="Search()">
+                    <div class="list__search" *ngIf="isVisilible">
+                        <button class="list__search--item" *ngFor="let item of listProduct"
+                            (click)="ProductHome(item.id)">
+                            <div class="image">
+                                <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                            </div>
+                            <div class="name text-capitalize">
+                                <h6> {{item.name}} </h6>
+                                <div class="pice text-lowercase">
+                                    <p> {{item.price - item.voucher | currency:' ':'symbol':'1.0-0'}}.000đ</p>
+                                    <span> {{item.price | currency:' ':'symbol':'1.0-0'}}.000đ</span>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                     <button id="buttonSearch" (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i>
                     </button>

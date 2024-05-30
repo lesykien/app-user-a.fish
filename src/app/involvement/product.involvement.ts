@@ -68,7 +68,7 @@ export class productGeneral {
       id: '',
       name: '',
       price: 0,
-      images: [],
+      images: [{ id: 0, image: '', avatar: false }],
       status: false,
       vourcher: 0,
       description: '',

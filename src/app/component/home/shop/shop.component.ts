@@ -80,7 +80,6 @@ export class ShopComponent implements OnInit {
   LoadingSearch(search: string) {
     let form = new FormData();
     form.append('name', search);
-
     this.productService.getProductSearch(form).subscribe((response) => {
       this.listProduct = response;
     });
@@ -127,6 +126,15 @@ export class ShopComponent implements OnInit {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       sessionStorage.setItem(encodingid, id);
       this.router.navigate([`product-home/${encodingid}`]);
+    }
+  }
+
+  ByNow(id : string){
+    let encoding = this.generateUuidFromString(id);
+
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(encoding, id);
+      this.router.navigate([`by-now/${encoding}`]);
     }
   }
 }

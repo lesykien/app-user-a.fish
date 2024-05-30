@@ -328,6 +328,8 @@ $colorRed_ef3: #ef3434;
         align-items: stretch;
         gap: 24px;
         flex-wrap: wrap;
+        max-width: 79%;
+        margin: 0 auto;
     }
     .product__cart {
         background-color: $colorWite_f7f7;

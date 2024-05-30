@@ -19,8 +19,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserComponent } from '../user/user.component';
 import { ProductHomeComponent } from './product-home/product-home.component';
 import { BlogsComponent } from './blogs/blogs.component';
-import { CategorysComponent } from './categorys/categorys.component';
-
+import { BlogDetalComponent } from './blog-detal/blog-detal.component';
+import { ByNowComponent } from './by-now/by-now.component';
 const _router: Routes = [
   {
     path: '',
@@ -33,7 +33,8 @@ const _router: Routes = [
       { path: 'my-page', component: AccountComponent },
       { path: 'product-home/:id', component: ProductHomeComponent },
       { path: 'blogs', component: BlogsComponent },
-      { path: 'categorys', component: CategorysComponent },
+      { path: 'blog-detal/:id', component: BlogDetalComponent },
+      { path: 'by-now/:id', component: ByNowComponent },
     ]
   }
 ]
@@ -47,7 +48,8 @@ const _router: Routes = [
     UserComponent,
     ProductHomeComponent,
     BlogsComponent,
-    CategorysComponent
+    BlogDetalComponent,
+    ByNowComponent
   ],
   imports: [
     CommonModule,

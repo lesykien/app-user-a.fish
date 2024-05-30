@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="right__bottom">
-                        <button>Mua ngay</button>
+                        <button (click)="ByNow(item.id)">Mua ngay</button>
                         <button class="btn__add--cart" (click)="AddToCart(item.id)">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
@@ -199,7 +199,10 @@
                                 <div class="content__right--bottom">
                                     <button class="btn__add--cart" (click)="AddToCart(detalProduct.id)">Thêm vào giỏ
                                         hàng</button>
-                                    <button>Mua ngay</button>
+                                    <button 
+                                    (click)="ByNow(detalProduct.id)"
+                                    data-bs-dismiss="modal" aria-label="Close"
+                                    >Mua ngay</button>
                                 </div>
                             </div>
                         </div>

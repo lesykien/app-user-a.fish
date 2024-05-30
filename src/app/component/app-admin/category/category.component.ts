@@ -40,17 +40,17 @@ export class CategoryComponent implements OnInit {
   }
 
   RemoveItem(id: number) {
-    let isChecker = confirm('Bạn có muốn xóa danh mục này không');
-    if (isChecker) {
-      this._category.getProductsByCategory(id).subscribe((response) => {
-        if (response.length == 0) {
+    this._category.getProductsByCategory(id).subscribe((response) => {
+      if (response.length == 0) {
+        let isChecker = confirm('Bạn có muốn xóa danh mục này không');
+        if (isChecker) {
           this.RemoveInDatadase(id);
-          return;
-        } else {
-          alert('Không thể xóa danh mục sản phẩm này');
         }
-      });
-    }
+        return;
+      } else {
+        alert('Không thể xóa danh mục sản phẩm này');
+      }
+    });
   }
 
   RemoveInDatadase(id: number) {

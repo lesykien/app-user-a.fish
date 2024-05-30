@@ -64,17 +64,23 @@
             </button>
         </div>
     </aside>
+    <section class="group--button">
+        <button [class.btn--active]="isActive == 0" (click)="isActive = 0; LoadBlogs(isActive)">Tất cả</button>
+        <button *ngFor="let item of listCategory" [class.btn--active]="isActive == item.id"
+            (click)="isActive = item.id; LoadBlogs(item.id)">{{item.name}}</button>
+    </section>
     <article class="artcle--content">
-        <h2>Thương hiệu</h2>
-        <section class="artcle--content--list"
-        style.grid-template-columns="repeat({{list.length}}, 414px)">
-            <div class="artcle--content--list--cart" *ngFor="let item of list">
-                <div class="artcle--content--list--cart--image">
-                    <img src="https://images.samsung.com/is/image/samsung/assets/vn/p6_initial_explore_detail/brand/open-the-samsung-ai-tv-era-with-an-all-powerful-comprehensively-promoted-ai-tv-product-line/390x260.jpg"
-                        alt="">
+        <section class="main--article">
+            <section class="artcle--content--list">
+                <div class="artcle--content--list--cart" *ngFor="let item of listBlogs">
+                    <button (click)="ChangeUrl(item.id)"
+                    class="artcle--content--list--cart--image">
+                        <img src="https://localhost:7041/api/Images/images-blogs/{{item.image}}" alt="">
+                    </button>
+                    <p> {{item.category}} </p>
+                    <h3> {{item.title}} </h3>
                 </div>
-                <h3>Khai mở kỷ nguyên Samsung AI TV với dòng sản phẩm TV AI toàn năng, thăng hạng toàn diện</h3>
-            </div>
+            </section>
         </section>
     </article>
 </div>

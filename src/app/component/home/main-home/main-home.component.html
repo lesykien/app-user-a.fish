@@ -60,8 +60,6 @@
             </button>
         </div>
     </aside>
-
-
     <article class="mt-5">
         <section class="article__main">
             <h1 class="text-center text-dark fw-bold">Sản phẩm nổi bật</h1>
@@ -124,7 +122,7 @@
                                                     alt="">
                                             </button>
                                             <div class="artcle__cart--body">
-                                                <h3 class="name__product text-center">
+                                                <h3 class="name__product text-center text-capitalize">
                                                     {{item.name}}
                                                 </h3>
                                                 <h4 class="price__product text-center">{{item.price -
@@ -256,7 +254,6 @@
                 </div>
             </div>
         </section>
-
         <section class="main__suggest mt-5">
             <h1 class="text-center fw-bold">
                 Sản phẩm
@@ -270,7 +267,7 @@
                     </div>
                     <div class="product__cart--body">
                         <div class="name__product">
-                            <button (click)="ProductHome(item.id)">
+                            <button class="text-capitalize" (click)="ProductHome(item.id)">
                                 {{item.name}}
                             </button>
                         </div>

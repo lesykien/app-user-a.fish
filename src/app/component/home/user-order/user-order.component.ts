@@ -47,6 +47,8 @@ export class UserOrderComponent implements OnInit {
 
   title: string = '';
 
+  isLoading: number = 1;
+
   ngOnInit(): void {
     this.LoadingPage(1);
   }
@@ -78,6 +80,7 @@ export class UserOrderComponent implements OnInit {
   }
 
   CancelClick(id: string) {
+    this.isLoading = 0;
     const request: cancelRequest = _order.ConvertCancel(
       id,
       this.CancelOrder.value.why as string
@@ -85,6 +88,7 @@ export class UserOrderComponent implements OnInit {
 
     this.oderService.cancelOder(request).subscribe((response) => {
       if (response.code == 200) {
+        this.isLoading = 1;
         alert('Hủy đơn hàng thành công');
         this.LoadingPage(1);
         window.location.reload();

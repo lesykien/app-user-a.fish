@@ -10,6 +10,9 @@ export class admin {
     } else if (router == '/admin/history') {
       title = 'Lịch sử đơn hàng';
     }
+    else if( router == '/admin/blog'){
+      title = 'Quản lý bài viết';
+    }
     return title;
   }
 }

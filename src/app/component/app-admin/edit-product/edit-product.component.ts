@@ -78,7 +78,6 @@ export class EditProductComponent implements OnInit {
   GetDataCategory() {
     this.categoryService.getData().subscribe((response) => {
       this.options = response;
-      this.updateItem.get('category')!.setValue(this.options[0]?.id.toString());
     });
   }
 
@@ -95,6 +94,7 @@ export class EditProductComponent implements OnInit {
       this.updateItem
         .get('description')!
         .setValue(response.description.toString());
+      this.updateItem.get('category')!.setValue(response.idCategory.toString());
     });
   }
 

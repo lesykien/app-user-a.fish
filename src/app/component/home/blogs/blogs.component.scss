@@ -80,37 +80,126 @@ $colorRed_ef3: #ef3434;
     margin-top: 48px;
     padding: 0px 24px;
     & h2 {
-        font-size: 28px;
+        font-size: 20px;
         font-family: "SamSungOne", arial, sans-serif;
-        font-weight: 700;
+        font-weight: bold;
     }
-    &--list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(calc(390px + 24px), 1fr));
-        grid-template-rows: 1fr;
+    .main--article {
+        overflow: hidden;
         width: 100%;
-        overflow-x: auto;
-        &--cart {
-            padding: 0px 12px;
-            width: calc(390px + 24px);
-            &--image {
-                width: 100%;
-                height: 290px;
-                border-radius: 20px;
-                overflow: hidden;
-                margin-bottom: 24px;
-                & img {
+        position: relative;
+        & .btn--tranform {
+            position: absolute;
+            top: 30%;
+            @include themeBtnAside();
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.45);
+            border: 2px dashed transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            z-index: 999;
+            &:hover {
+                border: 2px dashed white;
+            }
+            & i {
+                color: white;
+            }
+            &:first-child {
+                left: 25px;
+            }
+            &:last-child {
+                right: 25px;
+            }
+        }
+        & .artcle--content--list {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 24px;
+            transition: all 0.25s linear;
+            &--cart {
+                width: calc(100% / 3 - 24px);
+                &--image {
                     width: 100%;
-                    height: 100%;
-                    object-fit: cover;
+                    height: 290px;
                     border-radius: 20px;
+                    overflow: hidden;
+                    margin-bottom: 24px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: transparent;
+                    &:hover {
+                        & img {
+                            transition: all 0.25s linear;
+                            transform: scale(1.1);
+                        }
+                    }
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 20px;
+                    }
+                }
+                & p {
+                    font-size: 12px;
+                    font-weight: 400;
+                    margin: 0px 0px 8px 0px;
+                    padding: 0px 24px;
+                }
+                & h3 {
+                    font-size: 22px;
+                    text-align: justify;
+                    padding: 0px 4px;
+                    padding: 0px 24px;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
-            & h3 {
-                font-size: 22px;
-                text-align: justify;
-                padding: 0px 4px;
-            }
+        }
+    }
+}
+.group--button{
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    & button{
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background-color: transparent;
+        font-size: 12px;
+        position: relative;
+        &::after{
+            content: " ";
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            border-radius: 20px;
+            border: 1px dashed transparent;
+            height: 100%;
+            width: 100%;
+        }
+        &:hover{
+            background-color: #E4E4E4;
+        }
+    }
+    & .btn--active{
+        &::after{
+            content: " ";
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            border-radius: 20px;
+            border: 1px dashed;
+            height: 100%;
+            width: 100%;
         }
     }
 }

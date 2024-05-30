@@ -20,6 +20,18 @@ $c007: #007aff;
         background-color: $c007;
     }
 }
+@mixin themeButton {
+    padding: 10px 24px;
+    color: white;
+    background-color: $colorBlack;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    &:hover {
+        background-color: $colorBlack_2929;
+    }
+}
 header {
     position: sticky;
     top: 0px;
@@ -90,6 +102,7 @@ header {
         & .name {
             font-size: 54px;
             font-weight: 700;
+            width: 35rem;
         }
         & .price {
             font-size: 27px;
@@ -158,7 +171,117 @@ header {
 
 .description--item {
     text-align: center;
-    & .highlights-design-display__image-inner{
+    & .highlights-design-display__image-inner {
         text-align: justify;
+    }
+}
+
+@mixin cartItem {
+    background-color: white;
+    border: 1px solid #aaaaaa;
+    padding: 24px 23px;
+    border-radius: 20px;
+    width: 330px;
+    & .name {
+        text-align: center;
+        & h5 {
+            height: 34px;
+            margin: 0px;
+            font-size: 16px;
+        }
+        & p {
+            font-size: 12px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            color: #aaaaaa;
+        }
+    }
+    & .image {
+        margin-top: 20px;
+        width: 100%;
+        height: calc(18rem - 20px);
+        overflow: hidden;
+        & img {
+            transform: scale(1.2);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    & .price {
+        margin-top: 3rem;
+        position: relative;
+        & p {
+            margin: 0px;
+            text-align: center;
+            transition: all 0.2s linear;
+            &:nth-child(1) {
+                font-size: 16px;
+                font-weight: 700;
+            }
+            &:nth-child(2) {
+                font-size: 12px;
+                font-weight: 700;
+                color: #007aff;
+                text-decoration: line-through;
+            }
+        }
+        &:hover{
+            & p{
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            & .button{
+                transform: translate(-50%, -40px);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    & .button{
+        position: absolute;
+        left: 50%;
+        transition: all 0.2s linear;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, 0px);
+        & button{
+            @include themeButton();
+        }
+    }
+}
+.product--alike {
+    background-color: $colorGray_F2;
+    padding: 48px 24px;
+    margin-top: 50px;
+    &--main {
+        margin-top: 4rem;
+        display: flex;
+        align-items: self-start;
+        gap: 24px;
+        width: 100%;
+        &--left {
+            width: 330px;
+            &--cart {
+                @include cartItem();
+            }
+        }
+        & .list--alike{
+            width: 100%;
+            flex-shrink: 1;
+            overflow: hidden;
+        }
+        &--right {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+            gap: 24px;
+            padding: 0px 0px 3rem 0px;
+            &--cart {
+                @include cartItem();
+                border: 1px solid transparent;
+            }
+        }
     }
 }

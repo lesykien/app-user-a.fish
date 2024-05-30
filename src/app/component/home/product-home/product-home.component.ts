@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
-import { ActivatedRoute } from '@angular/router';
-import { product, productAdminResponse } from '../../../model/products.model';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  product,
+  productAdminResponse,
+  productsUserShop,
+} from '../../../model/products.model';
 import { productGeneral } from '../../../involvement/product.involvement';
 import { _cart } from '../../../involvement/cart.involvement';
+import { involvement } from '../../../involvement/api.involvement';
+import { v5 as uuidv5 } from 'uuid';
+import { CategoryService } from '../../../service/category.service';
 
 @Component({
   selector: 'app-product-home',
@@ -13,24 +20,32 @@ import { _cart } from '../../../involvement/cart.involvement';
 export class ProductHomeComponent implements OnInit {
   constructor(
     private _product: ProductService,
-    private pramaster: ActivatedRoute
+    private pramaster: ActivatedRoute,
+    private router: Router,
+    private _catrgorys: CategoryService
   ) {}
 
   items: productAdminResponse = productGeneral.ConvertProductResponse();
+  listProduct: productsUserShop[] = [];
   ngOnInit(): void {
+    this.router.events.subscribe((envent) => {
+      if (envent instanceof NavigationEnd) {
+        this.LoadPage();
+      }
+    });
     this.LoadPage();
   }
 
   LoadPage() {
     let encodingid: string = this.pramaster.snapshot.params['id'];
     let id: string = sessionStorage.getItem(encodingid) as string;
-    console.log(id);
     this.GetInformationItem(id);
   }
 
   GetInformationItem(id: string) {
     this._product.getDataByIdAdmin(id).subscribe((response) => {
       this.items = response;
+      this.LoadAlikeProduct(response.idCategory, response.id);
     });
   }
 
@@ -43,5 +58,24 @@ export class ProductHomeComponent implements OnInit {
       return;
     }
     _cart.SetCartLocal(item, `cart${idUser}`);
+  }
+  generateUuidFromString(id: string): string {
+    return uuidv5(id, involvement.namespace);
+  }
+  ByNow(id: string) {
+    let encoding = this.generateUuidFromString(id);
+
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(encoding, id);
+      this.router.navigate([`by-now/${encoding}`]);
+    }
+  }
+
+  LoadAlikeProduct(id: number, idProduct: string) {
+    this._catrgorys.getProductsByCategory(id).subscribe((response) => {
+      let list = response.filter((a) => a.id != idProduct);
+      this.listProduct =
+        list.length >= 5 ? list.slice(0, 3) : list.slice(0, list.length);
+    });
   }
 }

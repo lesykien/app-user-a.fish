@@ -5,35 +5,129 @@
             aria-describedby="basic-addon-search31">
     </div>
     <div class="table-responsive text-nowrap mt-4">
-        <!-- <button *ngFor="let item of arrayColor" class="btn m-5"
-        [style.background-color]="'#' + item.color"
-        >Đăng xuất</button> -->
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th class="text-light">Hình ảnh</th>
-                    <th class="text-light">Tiêu đề</th>
-                    <th class="text-light">Ngày đăng</th>
-                    <th class="text-light">Trạng thái</th>
-                    <th class="text-light">Giảm giá</th>
-                    <th class="text-light">
-                        <button class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i></button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                <tr>
-                    <td><img src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-s711bzabxxv/gallery/vn-galaxy-s23-fe-s711-sm-s711bzabxxv-thumb-538357410?$216_216_PNG$"
-                            alt="" class="avatar"></td>
-                    <td>Galaxy S24 Ultra</td>
-                    <td> 20/02/2023</td>
-                    <td>còn hàng</td>
-                    <td>100.000 đ</td>
-                    <td>
-                        <button class="btn btn-sm btn-secondary"><i class="fa-regular fa-pen-to-square"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="">
+                <button class="btn" [class.btn-primary]="isActiveBtn == 0" (click)="isActiveBtn = 0; LoadPage(0)">Tất
+                    cả</button>
+                <button class="btn ms-1" [class.btn-primary]="isActiveBtn == item.id" *ngFor="let item of listCategorys"
+                    (click)="isActiveBtn = item.id; LoadPage(item.id)"> {{item.name}} </button>
+                <button class="btn" (click)="isCategory = true">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="">
+                <button class="btn btn-sm btn-primary" (click)="isPopup = true; isFormOpen = 1"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
     </div>
 </div>
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5 mt-2">
+    <div class="col main--cart" *ngFor="let item of listBlogs; let i = index">
+        <div class="card h-100 cart--image">
+            <img class="card-img-top" src="https://localhost:7041/api/Images/images-blogs/{{item.image}}"
+                alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title cart--title">
+                    {{item.title}}
+                </h5>
+                <div class="row">
+                    <div class="col-6">
+                        <p> {{item.data}} </p>
+                        <strong class="category"> {{item.category}} </strong>
+                    </div>
+                    <div class="col-6 d-flex align-items-center justify-content-end">
+                        <button class="btn btn-outline-primary"
+                            (click)="isPopup = true; isFormOpen = 2; EditFormBlog(item.id)">
+                            <i class="fa-regular fa-pen-to-square"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="remove--blogs btn btn-danger btn-sm" (click)="Remove(item.id)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <h2 *ngIf="listBlogs.length == 0">Không có bài viết nào</h2>
+</div>
+
+<!-- model -->
+<section class="main--popup" [class.open--popup]="isPopup">
+    <div class="main--popup--cart">
+        <div class="main--popup--header">
+            <h3>
+                {{isAdd ? 'Thêm bài biết': 'Cập nhật bài viết' }}
+            </h3>
+            <button class="btn btn-danger btn-sm" (click)="isPopup = false; isFormOpen = 0">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="main--popup--body">
+            <app-add-blog *ngIf="isFormOpen == 1"></app-add-blog>
+            <app-edit-blog *ngIf="isFormOpen == 2"></app-edit-blog>
+        </div>
+    </div>
+</section>
+<!-- model -->
+
+<!-- model -->
+<section class="main--popup" [class.open--popup]="isCategory">
+    <div class="main--popup--cart" style="width: 900px; height: auto;">
+        <div class="main--popup--header">
+            <h3> Danh mục bài biết </h3>
+            <button class="btn btn-danger btn-sm" (click)="isCategory = false;ngOnInit()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="main--popup--body" style="height: auto;">
+            <div class="table-responsive text-nowrap mt-4">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-light">STT</th>
+                            <th class="text-light">Mã</th>
+                            <th class="text-light">Tên sản phẩm</th>
+                            <th class="text-light">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-sm btn-primary"
+                                        (click)="isForm = true; isBtn = true; name = ''">
+                                        <i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr *ngFor="let item of listCategorys; let i = index">
+                            <td class="text-uppercase"> {{i + 1}} </td>
+                            <td class="text-uppercase"> {{item.id}} </td>
+                            <td class="text-capitalize"> {{item.name}} </td>
+                            <td style="width: 2rem;">
+                                <div class="d-flex gap-3">
+                                    <button class="btn btn-sm btn-outline-danger" (click)="RemoveItem(item.id)">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning"
+                                        (click)="isBtn = false; name = item.name; isForm = true; id = item.id">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <section class="form--categopry py-4" *ngIf="isForm">
+                <label for="nameproduct" class="form-label">Tên danh mục bài viết</label>
+                <input type="email" class="form-control" id="nameproduct" placeholder="Tên danh mục" [(ngModel)]="name">
+                <div class="mt-4 d-flex justify-content-end">
+                    <button class="btn btn-primary" *ngIf="isBtn" (click)="AddNewItem(name)">Thêm danh mục bài
+                        viết</button>
+                    <button class="btn btn-outline-warning" *ngIf="!isBtn;" (click)="UpdateItem()">Sửa danh mục bài
+                        viết</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<!-- model -->

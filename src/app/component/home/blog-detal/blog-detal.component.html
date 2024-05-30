@@ -1,0 +1,17 @@
+<div class="container__home">
+    <header class="main--header">
+        <button [routerLink]="['/blogs']" >Khám phá</button>
+    </header>
+
+    <article class="main--content">
+        <p class="text-center text-uppercase fw-bold"> {{category}} </p>
+        <h1 class="text-center"> {{blog.title}} </h1>
+        <div class="main--content--image">
+            <img src="https://localhost:7041/api/Images/images-blogs/{{blog.image}}" alt="">
+        </div>
+
+        <section class="main--content--render" [innerHTML]="blog.content">
+
+        </section>
+    </article>
+</div>
