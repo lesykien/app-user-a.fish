@@ -15,7 +15,9 @@ export class BlogsComponent implements OnInit {
   transForm: number = 0;
   listCategory: CategorisBlog[] = [];
   listBlogs: BlogsResponse[] = [];
+  IsSlider: BlogsResponse[] = [];
   isActive: number = 0;
+  activeSlider: number = 0;
   ngOnInit(): void {
     this.LoadCategory();
     this.LoadBlogs(this.isActive);
@@ -23,6 +25,16 @@ export class BlogsComponent implements OnInit {
   LoadBlogs(id: number) {
     this._blogs.getAllBlogs(id).subscribe((response) => {
       this.listBlogs = response;
+    });
+    this.LoadSlider(id)
+  }
+  LoadSlider(id: number) {
+    this._blogs.getAllBlogs(id).subscribe((response) => {
+      this.IsSlider =
+        response.length >= 3
+          ? response.slice(0, 4)
+          : response.slice(0, response.length);
+      this.activeSlider = this.IsSlider[0].id;
     });
   }
 
@@ -33,8 +45,10 @@ export class BlogsComponent implements OnInit {
   }
   ChangeUrl(id: number) {
     let url: string = this.generateUuidFromString(id);
-    sessionStorage.setItem(url, String(id));
-    this.router.navigate([`blog-detal/${url}`]);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem(url, String(id));
+      this.router.navigate([`blog-detal/${url}`]);
+    }
   }
   generateUuidFromString(id: number): string {
     return uuidv5(String(id), involvement.namespace);

@@ -1,109 +1,122 @@
-<header>
-    <div class="main--header">
-        <div class="main--header--top container__home">
-            <div class="main--header--top--name">
-                <h1> {{items.name}} </h1>
+<div class="position-relative">
+    <header>
+        <div class="main--header">
+            <div class="main--header--top container__home">
+                <div class="main--header--top--name">
+                    <h1> {{items.name}} </h1>
+                </div>
+                <div class="main--header--top--price">
+                    <p>200.000đ</p>
+                    <button (click)="AddToCart(items)">Thêm vào giỏ hàng</button>
+                </div>
             </div>
-            <div class="main--header--top--price">
-                <p>200.000đ</p>
-                <button (click)="AddToCart(items)">Thêm vào giỏ hàng</button>
+        </div>
+        <div class="main--header-bottom">
+            <div class="container__home">
+                <button>Giao hàng nhanh</button>
+                <button>Giá cả hợp lý</button>
+                <button>An tâm khi mua sắm</button>
             </div>
         </div>
-    </div>
-    <div class="main--header-bottom">
-        <div class="container__home">
-            <button>Giao hàng nhanh</button>
-            <button>Giá cả hợp lý</button>
-            <button>An tâm khi mua sắm</button>
+    </header>
+    <section class="body--page">
+        <div class="body--page--information">
+            <h1 class="name text-capitalize">
+                {{items.name}}
+            </h1>
+            <h3 class="price">
+                <span>Chiết khấu từ <br>({{items.price |
+                    currency:' ':'symbol':'1.0-0'}}.000đ)</span>
+                {{items.price - items.vourcher | currency:' ':'symbol':'1.0-0'}}.000 đ
+            </h3>
+            <div class="body--page--information--button">
+                <button (click)="ByNow(items.id)">Mua ngay</button>
+            </div>
         </div>
-    </div>
-</header>
-<section class="body--page">
-    <div class="body--page--information">
-        <h1 class="name text-capitalize">
-            {{items.name}}
-        </h1>
-        <h3 class="price">
-            <span>Chiết khấu từ <br>({{items.price |
-                currency:' ':'symbol':'1.0-0'}}.000đ)</span>
-            {{items.price - items.vourcher | currency:' ':'symbol':'1.0-0'}}.000 đ
-        </h3>
-        <div class="body--page--information--button">
-            <button (click)="ByNow(items.id)">Mua ngay</button>
-        </div>
-    </div>
-    <div class="body--page--images">
-        <div class="body--page--images--item">
-            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item" *ngFor="let item of items.images" [ngClass]="{'active':item.avatar}">
-                        <img class="d-block w-100" src="https://localhost:7041/api/Images/images-detal/{{item.image}}"
-                            alt="Second slide">
+        <div class="body--page--images">
+            <div class="body--page--images--item">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item" *ngFor="let item of items.images" [ngClass]="{'active':item.avatar}">
+                            <img class="d-block w-100"
+                                src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="Second slide">
+                        </div>
                     </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-                    <button class="text-center">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                </a>
-                <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-                    <button class="text-center">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<h2 class=" text-center mt-5">Chi tiết sản phẩm</h2>
-<section [innerHTML]="items.description" class="description--item container__home">
-
-</section>
-
-<section class="container__home product--alike">
-    <h1 class=" text-center">So sánh các sản phẩm</h1>
-    <p class="text-center">So sánh với các sản phẩm tương tự</p>
-    <div class="product--alike--main">
-        <div class="product--alike--main--left">
-            <div class="product--alike--main--left--cart">
-                <div class="name">
-                    <h5 class="text-capitalize"> {{items.name}}</h5>
-                    <p>SP-{{items.id}}</p>
-                </div>
-                <div class="image">
-                    <img src="https://localhost:7041/api/Images/images-detal/{{items.images[0].image}}" alt="">
-                </div>
-                <div class="price">
-                    <p> {{items.price - items.vourcher|
-                        currency:' ':'symbol':'1.0-0'}}.000đ </p>
-                    <p> {{items.price |
-                        currency:' ':'symbol':'1.0-0'}}.000đ </p>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                        <button class="text-center">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                        <button class="text-center">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="list--alike">
-            <div class="product--alike--main--right">
-                <div class="product--alike--main--right--cart" *ngFor="let item of 
-                listProduct">
+    </section>
+
+    <h2 class=" text-center mt-5">Chi tiết sản phẩm</h2>
+    <section [innerHTML]="items.description" class="description--item container__home">
+
+    </section>
+
+    <section class="container__home product--alike" *ngIf="listProduct.length > 0">
+        <h1 class=" text-center">So sánh các sản phẩm</h1>
+        <p class="text-center">So sánh với các sản phẩm tương tự</p>
+        <div class="product--alike--main">
+            <div class="product--alike--main--left">
+                <div class="product--alike--main--left--cart">
                     <div class="name">
-                        <h5 class="text-capitalize"> {{item.name}}</h5>
-                        <p>SP-{{item.id}}</p>
+                        <h5 class="text-capitalize"> {{items.name}}</h5>
+                        <p>SP-{{items.id}}</p>
                     </div>
                     <div class="image">
-                        <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                        <img src="https://localhost:7041/api/Images/images-detal/{{items.images[0].image}}" alt="">
                     </div>
                     <div class="price">
-                        <p> {{item.price - item.voucher|
+                        <p> {{items.price - items.vourcher|
                             currency:' ':'symbol':'1.0-0'}}.000đ </p>
-                        <p> {{item.price |
+                        <p> {{items.price |
                             currency:' ':'symbol':'1.0-0'}}.000đ </p>
                         <div class="button">
-                            <button (click)="ByNow(item.id)">Mua ngay</button>
+                            <button (click)="ByNow(items.id)">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list--alike">
+                <div class="product--alike--main--right">
+                    <div class="product--alike--main--right--cart" *ngFor="let item of 
+                listProduct">
+                        <div class="name">
+                            <h5 class="text-capitalize"> {{item.name}}</h5>
+                            <p>SP-{{item.id}}</p>
+                        </div>
+                        <button class="button--images" (click)="ProductHome(item.id)">
+                            <div class="image">
+                                <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                            </div>
+                        </button>
+                        <div class="price">
+                            <p> {{item.price - item.voucher|
+                                currency:' ':'symbol':'1.0-0'}}.000đ </p>
+                            <p> {{item.price |
+                                currency:' ':'symbol':'1.0-0'}}.000đ </p>
+                            <div class="button">
+                                <button (click)="ByNow(item.id)">Mua ngay</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <div class="btn--scroll--top" [class.show]="isBtnTop">
+        <button class="" (click)="scrollToTop()">
+            <i class="fa-solid fa-chevron-up"></i>
+        </button>
     </div>
-</section>
+</div>

@@ -9,6 +9,7 @@ import {
   oderUser,
   orderAdminDTOs,
   orderAdminResponse,
+  payRequest,
 } from '../model/order.model';
 
 @Injectable({
@@ -66,6 +67,13 @@ export class OrderService {
   updateAddress(request: cancelRequest) {
     return this.http.put<singleResponse>(
       `${involvement.api}/api/Order/update-address`,
+      request
+    );
+  }
+
+  payLoad(request: payRequest): Observable<singleResponse> {
+    return this.http.post<singleResponse>(
+      `${involvement.api}/api/Order/vnpay-payment-url`,
       request
     );
   }

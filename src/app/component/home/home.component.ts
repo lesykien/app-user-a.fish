@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { involvement } from '../../involvement/api.involvement';
 import { CartService } from '../../service/cart.service';
 import { AccountService } from '../../service/account.service';
@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
   uuidMap: { [key: string]: string } = {};
 
   namespace: string = 'e7f63e04-3851-47f4-9ac8-13e7dbbde914';
+
+  isSticky: boolean = false;
 
   constructor(
     private cartService: CartService,
@@ -74,6 +76,10 @@ export class HomeComponent implements OnInit {
   }
 
   Search() {
+    if (this.inputControl.value.trim() == '') {
+      this.router.navigate(['/shop']);
+      return;
+    }
     this.isVisilible = false;
     this.IsChange();
   }
@@ -171,6 +177,16 @@ export class HomeComponent implements OnInit {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       sessionStorage.setItem(encodingid, id);
       this.router.navigate([`product-home/${encodingid}`]);
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event: Event): void {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition > 400) {
+      this.isSticky = true;
+    } else {
+      this.isSticky = false;
     }
   }
 }

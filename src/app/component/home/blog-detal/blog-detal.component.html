@@ -1,6 +1,6 @@
 <div class="container__home">
     <header class="main--header">
-        <button [routerLink]="['/blogs']" >Khám phá</button>
+        <button [routerLink]="['/blogs']">Khám phá</button>
     </header>
 
     <article class="main--content">
@@ -14,4 +14,28 @@
 
         </section>
     </article>
+
+    <div class="relate--to" *ngIf="listBlogs.length > 0">
+        <h1 class="text-center">Tiếp theo, hãy đọc những câu chuyện này</h1>
+        <div class="relate--to--blogs">
+            <div class="relate--to--blogs--item" *ngFor="let item of listBlogs">
+                <button class="button--image" (click)="ChangeUrl(item.id)">
+                    <div class="item--image">
+                        <img src="https://localhost:7041/api/Images/images-blogs/{{item.image}}" alt="">
+                    </div>
+                </button>
+                <div class="item--category text-uppercase">
+                    <strong> {{item.category}} </strong>
+                </div>
+                <button class="button--name" (click)="ChangeUrl(item.id)">
+                    <h2>
+                        {{item.title}}
+                    </h2>
+                </button>
+            </div>
+        </div>
+    </div>
+    <button class="btn--scroll--top" (click)="scrollToTop()" [class.show]="isBtnTop">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 </div>

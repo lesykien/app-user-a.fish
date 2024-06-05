@@ -97,4 +97,10 @@ export class ProductService {
       `${involvement.api}/api/Product/more-item-${page}`
     );
   }
+
+  getHotSale(id : number): Observable<productsUserShop[]> {
+    return this.http.get<productsUserShop[]>(
+      `${involvement.api}/api/Product/filter-hot-sale-${id}`
+    );
+  }
 }

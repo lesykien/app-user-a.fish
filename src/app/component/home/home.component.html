@@ -1,4 +1,75 @@
-<nav class="flex--none">
+<nav>
+    <div class="container__home main">
+        <div class="main__left">
+            <div class="main__left--logo">
+                <a [routerLink]="['/']">
+                    <img [src]="ImageLogo" alt="">
+                </a>
+            </div>
+            <div class="main__left--menu">
+                <button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang
+                    chủ</button>
+                <button [routerLink]="['shop']" routerLinkActive="active">Cửa hàng</button>
+                <button [routerLink]="['blogs']" routerLinkActive="active">Bài viết</button>
+                <button href="" routerLinkActive="active">Liên hệ</button>
+            </div>
+        </div>
+        <div class="main__right">
+            <div class="input__search">
+                <form class="d-flex align-items-center justify-content-between">
+                    <input type="text" placeholder="Tìm kiếm...." [formControl]="inputControl"
+                        (keydown.enter)="Search()">
+                    <div class="list__search" *ngIf="isVisilible">
+                        <button class="list__search--item" *ngFor="let item of listProduct"
+                            (click)="ProductHome(item.id)">
+                            <div class="image">
+                                <img src="https://localhost:7041/api/Images/images-detal/{{item.image}}" alt="">
+                            </div>
+                            <div class="name text-capitalize">
+                                <h6> {{item.name}} </h6>
+                                <div class="pice text-lowercase">
+                                    <p> {{item.price - item.voucher | currency:' ':'symbol':'1.0-0'}}.000đ</p>
+                                    <span> {{item.price | currency:' ':'symbol':'1.0-0'}}.000đ</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <button id="buttonSearch" (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="btn__cart">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                        class="fa-solid fa-cart-shopping" (click)="openCart = true"></i>
+                </button>
+                <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
+            </div>
+            <!-- Example single danger button -->
+            <div class="btn__infomation">
+                <button *ngIf="infomation">
+                    {{infomation.fullName}}
+                </button>
+                <div class="group__user">
+                    <div class="group__user--btn">
+                        <button [routerLink]="['my-page']">Thông tin tài khoản</button>
+                        <button [routerLink]="['user-order']">Đơn hàng</button>
+                        <button (click)="Logout()">Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+            <div class="" *ngIf="!infomation">
+                <!-- button open model form login  -->
+                <button class="button__login" data-bs-toggle="modal" data-bs-target="#basicModal">Đăng nhập</button>
+                <!-- button open model form login  -->
+                <a href="sign-up">
+                    <button class="button__login sigun_up">Đăng kí</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- sticky -->
+<nav class="nav--sticky" *ngIf="isSticky">
     <div class="container__home main">
         <div class="main__left">
             <div class="main__left--logo">
@@ -69,7 +140,6 @@
     </div>
 </nav>
 <router-outlet></router-outlet>
-
 <footer>
     <section class="main__footer container__home">
         <div class="main__footer--top">
@@ -164,7 +234,6 @@
 
     </section>
 </footer>
-
 <!-- Modal open list cart -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">

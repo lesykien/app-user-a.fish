@@ -9,6 +9,7 @@ import { product } from '../../model/products.model';
 import { _cart } from '../../involvement/cart.involvement';
 import { OrderService } from '../../service/order.service';
 import { JsonPipe } from '@angular/common';
+import { payRequest } from '../../model/order.model';
 
 @Component({
   selector: 'app-cart',
@@ -153,10 +154,19 @@ export class CartComponent implements OnInit {
     let informationOrder = _cart.HadleOder(id, listItem, valueForm);
 
     this.orderService.create(informationOrder).subscribe((response) => {
-      if (response.code == 200) {
-        alert('Đăng hàng thành công');
-        localStorage.removeItem(`cart${id}`);
-        window.location.reload();
+      if (response.code != 500) {
+        let isCheck = confirm('Bạn có muốn thanh toán không');
+        if (isCheck) {
+          let request: payRequest = {
+            id: response.message,
+            amount: response.code,
+          };
+          this.orderService.payLoad(request).subscribe((response1) => {
+            if (response1.code == 200) {
+              window.location.href = response1.message;
+            }
+          });
+        }
       }
     });
   }

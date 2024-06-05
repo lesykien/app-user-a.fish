@@ -26,6 +26,24 @@ $colorRed_ef3: #ef3434;
             object-fit: cover;
         }
     }
+    & .carousel-item {
+        width: 100%;
+        height: 640px;
+        position: relative;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        & .above--item {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: #0000004d;
+        }
+    }
     & .carousel-control-next-icon,
     .carousel-control-prev-icon {
         @include themeBtnAside();
@@ -43,12 +61,21 @@ $colorRed_ef3: #ef3434;
         align-items: center;
         width: 100%;
         height: 100%;
+        z-index: 1;
         &--item {
             width: 720px;
             h2 {
                 font-size: 48px;
                 font-weight: 700;
+                height: 7.3rem;
+                line-height: 1.22;
+                text-shadow: 0 0 2px black;
                 color: white;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             p {
                 margin-top: 24px;
@@ -163,20 +190,20 @@ $colorRed_ef3: #ef3434;
         }
     }
 }
-.group--button{
+.group--button {
     margin-top: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
-    & button{
+    & button {
         padding: 8px 16px;
         border-radius: 20px;
         border: 1px solid rgba(0, 0, 0, 0.15);
         background-color: transparent;
         font-size: 12px;
         position: relative;
-        &::after{
+        &::after {
             content: " ";
             position: absolute;
             top: 0px;
@@ -186,12 +213,12 @@ $colorRed_ef3: #ef3434;
             height: 100%;
             width: 100%;
         }
-        &:hover{
-            background-color: #E4E4E4;
+        &:hover {
+            background-color: #e4e4e4;
         }
     }
-    & .btn--active{
-        &::after{
+    & .btn--active {
+        &::after {
             content: " ";
             position: absolute;
             top: 0px;
