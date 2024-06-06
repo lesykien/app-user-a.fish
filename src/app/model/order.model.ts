@@ -4,6 +4,7 @@ interface orderAdminDTOs {
   data: string;
   phone: string;
   delivery: number;
+  pay: boolean;
 }
 interface productByOrder {
   id: string;
@@ -23,6 +24,7 @@ interface orderAdminResponse {
   tatol: number;
   fullName: string;
   note: string;
+  pay: boolean;
 }
 
 interface oderUser {

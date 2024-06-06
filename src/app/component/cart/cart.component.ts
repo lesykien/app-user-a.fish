@@ -10,6 +10,7 @@ import { _cart } from '../../involvement/cart.involvement';
 import { OrderService } from '../../service/order.service';
 import { JsonPipe } from '@angular/common';
 import { payRequest } from '../../model/order.model';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-cart',
@@ -156,6 +157,7 @@ export class CartComponent implements OnInit {
     this.orderService.create(informationOrder).subscribe((response) => {
       if (response.code != 500) {
         let isCheck = confirm('Bạn có muốn thanh toán không');
+        localStorage.removeItem(`cart${id}`);
         if (isCheck) {
           let request: payRequest = {
             id: response.message,
@@ -166,6 +168,8 @@ export class CartComponent implements OnInit {
               window.location.href = response1.message;
             }
           });
+        } else {
+          window.location.reload();
         }
       }
     });

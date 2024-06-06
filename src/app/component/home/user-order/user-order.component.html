@@ -18,8 +18,11 @@
             <button class="order__list--item mb-3" [class.active_item]="id == item.id" *ngFor="let item of listOder"
                 (click)="GetDataId(item.id, item.delivery)">
                 <h4>Mã đơn hàng: {{item.id}} </h4>
-                <p class="small__text"> {{item.data}} </p>
-                <p class="amount">Tổng tiền: <strong>{{item.tatol | currency:'
+                <div class="">
+                    <p class="small__text"> {{item.data}} </p>
+                    <p class="small__text fw-bold"> {{item.pay ? 'Đã thanh toán' : 'Thanh toán sau khi nhận hàng'}} </p>
+                </div>
+                <p class="amount mt-2">Tổng tiền: <strong>{{item.tatol | currency:'
                         ':'symbol':'1.0-0'}}.000đ</strong></p>
 
                 <p class="btn btn-sm btn-primary mt-4 text-capitalize"
@@ -46,7 +49,10 @@
                     {{title}}
                 </span>
             </div>
-            <p class="date">Ngày: {{itemOder.date}}</p>
+            <div class="d-flex align-items-center gap-4">
+                <p class="date">Ngày: {{itemOder.date}}</p>
+                <p class="date">{{itemOder.pay ? 'Đơn hàng đã thanh toán' : 'Thanh toán sau khi nhận hàng'}}</p>
+            </div>
 
             <div class="list__item">
                 <div class="list__item--product justify-content-between" *ngFor="let item of itemOder.products">
@@ -316,9 +322,7 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-primary mt-5 btn--update--address"
-                                    [disabled]="UpdateOrder.invalid"
-                                    (click)="UpdateAddress(itemOder.id)"
-                                    >
+                                    [disabled]="UpdateOrder.invalid" (click)="UpdateAddress(itemOder.id)">
                                     Lưu thay đổi
                                 </button>
                             </div>

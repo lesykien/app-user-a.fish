@@ -16,6 +16,7 @@ export class _order {
       tatol: 0,
       fullName: '',
       note: '',
+      pay: false,
     };
   }
 
@@ -58,15 +59,15 @@ export class _order {
   }
 
   static MathAmount(list: orderAdminResponse): any {
-    let amountPridce :  number = 0;
-    let amountVoucher :  number = 0;
-    for( var item of list.products){
-        amountPridce += item.price * item.quantity;
-        amountVoucher += item.voucher * item.quantity
+    let amountPridce: number = 0;
+    let amountVoucher: number = 0;
+    for (var item of list.products) {
+      amountPridce += item.price * item.quantity;
+      amountVoucher += item.voucher * item.quantity;
     }
     return {
-        amountPridce, 
-        amountVoucher
-    }
+      amountPridce,
+      amountVoucher,
+    };
   }
 }

@@ -10,7 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountComponent } from './account/account.component';
 
-
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -21,6 +20,7 @@ import { ProductHomeComponent } from './product-home/product-home.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetalComponent } from './blog-detal/blog-detal.component';
 import { ByNowComponent } from './by-now/by-now.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 const _router: Routes = [
   {
     path: '',
@@ -35,9 +35,10 @@ const _router: Routes = [
       { path: 'blogs', component: BlogsComponent },
       { path: 'blog-detal/:id', component: BlogDetalComponent },
       { path: 'by-now/:id', component: ByNowComponent },
-    ]
-  }
-]
+      { path: 'thank-you/:id', component: ThankYouComponent },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ const _router: Routes = [
     ProductHomeComponent,
     BlogsComponent,
     BlogDetalComponent,
-    ByNowComponent
+    ByNowComponent,
+    ThankYouComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,7 @@ const _router: Routes = [
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule.forChild(_router)
-  ]
+    RouterModule.forChild(_router),
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

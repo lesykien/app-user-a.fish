@@ -16,6 +16,7 @@
                     <th class="text-light">Ngày tháng</th>
                     <th class="text-light">Số điện thoại</th>
                     <th class="text-light">Tổng tiền</th>
+                    <th class="text-light">Thanh toán</th>
                     <th class="text-light"></th>
                 </tr>
             </thead>
@@ -28,13 +29,17 @@
                     <td>
                         {{item.tatol | currency :' ':'symbol':'1.0-0'}}.000 đ
                     </td>
+                    <td>
+                        <button data-bs-toggle="modal" (click)="GetOrderById(item.id , 2)"
+                            data-bs-target="#staticBackdrop" class="btn btn-sm" [class.btn-primary]="item.pay"
+                            [class.btn-warning]="!item.pay">
+                            {{item.pay ? 'Đã thanh toán' : 'Chưa thanh toán'}}
+                        </button>
+                    </td>
                     <td class="d-flex gap-3" style="width: 100px;">
                         <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" (click)="GetOrderById(item.id , 1)"><i
                                 class="fa-solid fa-xmark"></i></button>
-                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                            (click)="GetOrderById(item.id , 2)" data-bs-target="#staticBackdrop"><i
-                                class="fa-solid fa-list"></i></button>
                         <button class="btn btn-sm btn-primary" (click)="IsHandleOrder(item.id)"><i
                                 class="fa-solid fa-check"></i></button>
                     </td>
@@ -61,7 +66,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">
-                    Chi tiết đơn hàng
+                    <span class="btn btn-sm" [class.btn-primary]="orderItem.pay" [class.btn-warning]="!orderItem.pay">
+                        {{orderItem.pay ? 'Đơn hàng đã thanh toán' : 'Thanh toán sau khi nhận hàng'}} </span>
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -116,7 +122,8 @@
                                         <input type="text" class="form-control" id="fullname" formControlName="why"
                                             placeholder="Nhập lý do hủy">
                                     </div>
-                                    <p class="m-0 mt-1 text-danger" *ngIf="CancelOrder.get('why')?.errors?.['required']">
+                                    <p class="m-0 mt-1 text-danger"
+                                        *ngIf="CancelOrder.get('why')?.errors?.['required']">
                                         Bạn chưa nhập lý do hủy đơn hàng</p>
                                 </div>
                             </form>
@@ -161,17 +168,15 @@
                 </section>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" *ngIf="isVisibilityForm" (click)="CancelClick(orderItem.id)"> 
+                <button type="button" class="btn btn-outline-danger" *ngIf="isVisibilityForm"
+                    (click)="CancelClick(orderItem.id)">
                     Xác nhân hủy đơn hàng</button>
 
-                <button type="button" class="btn btn-outline-danger"
-                *ngIf="!isVisibilityForm"
-                (click)="GetOrderById(orderItem.id , 1)"
-                >Hủy đơn hàng</button>
+                <button type="button" class="btn btn-outline-danger" *ngIf="!isVisibilityForm"
+                    (click)="GetOrderById(orderItem.id , 1)">Hủy đơn hàng</button>
 
-                <button type="button" class="btn btn-primary"
-                *ngIf="!isVisibilityForm"
-                (click)="IsHandleOrder(orderItem.id)">
+                <button type="button" class="btn btn-primary" *ngIf="!isVisibilityForm"
+                    (click)="IsHandleOrder(orderItem.id)">
                     Xác nhận đơn hàng
                 </button>
             </div>

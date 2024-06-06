@@ -9,6 +9,7 @@ import { AccountService } from '../../../service/account.service';
 import { oderITem, order, valueFormCart } from '../../../model/cart.model';
 import { _cart } from '../../../involvement/cart.involvement';
 import { OrderService } from '../../../service/order.service';
+import { payRequest } from '../../../model/order.model';
 
 @Component({
   selector: 'app-by-now',
@@ -98,9 +99,22 @@ export class ByNowComponent implements OnInit {
     let informationOrder = _cart.HadleOder(id, listItem, valueForm);
 
     this._order.create(informationOrder).subscribe((response) => {
-      if (response.code == 200) {
-        alert('Đặt hàng thành công');
-        this.router.navigate(['user-order']);
+      if (response.code != 500) {
+        let isOrder = confirm('Bạn có muốn thanh toán cho sản phẩm này khong');
+        if (isOrder) {
+          let request: payRequest = {
+            id: response.message,
+            amount: response.code,
+          };
+          this._order.payLoad(request).subscribe((response1) => {
+            if (response1.code == 200) {
+              window.location.href = response1.message;
+            }
+          });
+        } else {
+          alert('Đặt hàng thành công');
+          this.router.navigate(['user-order']);
+        }
       }
     });
   }
