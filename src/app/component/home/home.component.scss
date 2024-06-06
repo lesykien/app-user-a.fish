@@ -66,7 +66,7 @@ $colorWite_f7f7: #f7f7f7;
                 display: none;
                 top: 32px;
                 right: -16px;
-                z-index: 99;
+                z-index: 99999;
                 transition: all 0.25s linear;
                 & .group__user--btn {
                     margin-top: 10px;
@@ -321,10 +321,10 @@ $colorWite_f7f7: #f7f7f7;
     z-index: 999;
     background-color: white;
     transition: all 0.25s linear;
-    animation: sticky 0.25s linear ;
+    animation: sticky 0.25s linear;
     height: 74px;
     border-bottom: 1px solid #f2f2f2;
-    & .main{
+    & .main {
         height: 74px;
     }
 }
