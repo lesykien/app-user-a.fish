@@ -29,13 +29,13 @@
                         {{item.tatol | currency :' ':'symbol':'1.0-0'}}.000 đ
                     </td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm" *ngIf="item.delivery == 3" data-bs-toggle="modal"
+                        <button class="btn btn-primary btn-sm" *ngIf="item.delivery == 3" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" (click)="GetOrderById(item.id)">
                             Giao hàng thành công</button>
-                        <button class="btn btn-outline-danger btn-sm" *ngIf="item.delivery == 4" data-bs-toggle="modal"
+                        <button class="btn btn-danger btn-sm" *ngIf="item.delivery == 4" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" (click)="GetOrderById(item.id)">
                             Xác nhận không thành công</button>
-                        <button class="btn btn-outline-warning btn-sm" *ngIf="item.delivery == 5" data-bs-toggle="modal"
+                        <button class="btn btn-warning btn-sm" *ngIf="item.delivery == 5" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" (click)="GetOrderById(item.id)">
                             Giao hàng không thành công</button>
                     </td>
