@@ -28,8 +28,8 @@
                     </td>
                     <td>
                         <button data-bs-toggle="modal" (click)="GetOrderById(item.id , 2)"
-                            data-bs-target="#staticBackdrop" class="btn btn-sm" [class.btn-primary]="item.pay"
-                            [class.btn-warning]="!item.pay">
+                            data-bs-target="#staticBackdrop" class="btn btn-sm" style="width: 7rem;"
+                            [class.btn-primary]="item.pay" [class.btn-warning]="!item.pay">
                             {{item.pay ? 'Đã thanh toán' : 'Chưa thanh toán'}}
                         </button>
                     </td>
