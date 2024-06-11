@@ -72,9 +72,12 @@
                         <h5 class="text-capitalize"> {{items.name}}</h5>
                         <p>SP-{{items.id}}</p>
                     </div>
-                    <div class="image">
-                        <img src="https://localhost:7041/api/Images/images-detal/{{items.images[0].image}}" alt="">
-                    </div>
+
+                    <button class="button--images">
+                        <div class="image">
+                            <img src="https://localhost:7041/api/Images/images-detal/{{items.images[0].image}}" alt="">
+                        </div>
+                    </button>
                     <div class="price">
                         <p> {{items.price - items.vourcher|
                             currency:' ':'symbol':'1.0-0'}}.000đ </p>
