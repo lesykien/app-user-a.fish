@@ -23,7 +23,7 @@ export class ProductHomeComponent implements OnInit {
     private pramaster: ActivatedRoute,
     private router: Router,
     private _catrgorys: CategoryService
-  ) {}
+  ) { }
 
   items: productAdminResponse = productGeneral.ConvertProductResponse();
   listProduct: productsUserShop[] = [];

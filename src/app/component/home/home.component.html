@@ -110,8 +110,8 @@
                 </form>
             </div>
             <div class="btn__cart">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                        class="fa-solid fa-cart-shopping" (click)="openCart = true"></i>
+                <button type="button" data-bs-toggle="modal" (click)="openCart = true"
+                    data-bs-target="#staticBackdrop"><i class="fa-solid fa-cart-shopping"></i>
                 </button>
                 <span class="text-center" *ngIf="countItem > 0"> {{countItem}} </span>
             </div>

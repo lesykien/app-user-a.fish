@@ -85,7 +85,6 @@ export class EditProductComponent implements OnInit {
     const id: string | null = sessionStorage.getItem('keyId');
     this.productService.getDataByIdAdmin(id).subscribe((response) => {
       this.images = response.images;
-
       this.updateItem.get('id')!.setValue(response.id.toString());
       this.updateItem.get('category')!.setValue(response.idCategory.toString());
       this.updateItem.get('name')!.setValue(response.name.toString());

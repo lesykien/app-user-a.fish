@@ -21,6 +21,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { BlogDetalComponent } from './blog-detal/blog-detal.component';
 import { ByNowComponent } from './by-now/by-now.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+
 const _router: Routes = [
   {
     path: '',

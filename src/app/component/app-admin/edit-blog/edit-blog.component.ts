@@ -8,7 +8,6 @@ import {
   _blogsGender,
   BlogsRequest,
 } from '../../../model/blogs.model';
-import { response } from 'express';
 
 @Component({
   selector: 'app-edit-blog',

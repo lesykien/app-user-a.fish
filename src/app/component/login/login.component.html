@@ -34,7 +34,8 @@
                 </div>
                 <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['required']">Bạn chưa nhập
                     mật khẩu</p>
-                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['maxlength']">Mật khẩu không hợp lệ</p>
+                <p class="mt-1 text-danger" *ngIf="LoginByUserName.get('password')?.errors?.['maxlength']">Mật khẩu
+                    không hợp lệ</p>
                 <p class="mt-1 text-danger" *ngIf="isPassword">
                     Kiểm tra lại mật khẩu
                 </p>

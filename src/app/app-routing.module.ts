@@ -7,15 +7,15 @@ import { AppAdminComponent } from './component/app-admin/app-admin.component';
 import { HomeComponent } from './component/home/home.component';
 
 const routes: Routes = [
-  {  path : '' , component : HomeComponent},
-  {  path : 'admin' , component : AppAdminComponent},
-  {  path : 'login/:type' , component : LoginComponent},
-  {  path : 'sign-up' , component : SignUpComponent},
-  {  path : 'forget-password' , component : ForgetPasswordComponent},
+  { path: '', component: HomeComponent },
+  { path: 'admin', component: AppAdminComponent },
+  { path: 'login/:type', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'forget-password', component: ForgetPasswordComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
